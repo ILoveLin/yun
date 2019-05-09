@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">尚城云</string>
+
+
+    <string name="error_net">当前网络不可用，请检查您的网络设置</string>
+    <string name="error_net_toast">网络不给力</string>
+    <string name="determine">确定</string>
+    <string name="determine2">确认</string>
+    <string name="cancel">取消</string>
+    <string name="empty_error_net_server">数据加载失败，请返回重试!</string>
+
+    <string name="main_tab_homepage">财务数据</string>
+    <string name="main_tab_yidi">账户管理</string>
+    <string name="main_tab_drug_search">账户管理</string>
+    <string name="main_tab_yun">"尚城云"</string>
+    <string name="main_tab_recomment">功能</string>
+    <string name="main_tab_mine">我的</string>
+    <string name="main_tab_biyao">比药</string>
+
+
+    <string name="title_activity_style_classics">ClassicsHeader</string>
+
+
+</resources>
