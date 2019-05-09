@@ -1,16 +1,21 @@
 package com.company.yun.activity;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import com.company.yun.R;
 import com.company.yun.base.BaseActivity;
+import com.company.yun.base.Constants;
+import com.yun.common.utils.SharePreferenceUtil;
 import com.yun.common.utils.StatusBarUtil;
 import com.yun.common.utils.StatusBarUtils;
 import com.yun.common.viewpagerlib.bean.PageBean;
 import com.yun.common.viewpagerlib.callback.PageHelperListener;
 import com.yun.common.viewpagerlib.indicator.TransIndicator;
 import com.yun.common.viewpagerlib.view.GlideViewPager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +27,7 @@ import java.util.List;
 public class GuideActivity extends BaseActivity {
     private static final Integer[] RES = {R.mipmap.guide1, R.mipmap.guide2, R.mipmap.guide3,
             R.mipmap.guide4};
+    private Boolean isLogined;
 
     @Override
     public int getContentViewId() {
@@ -38,10 +44,12 @@ public class GuideActivity extends BaseActivity {
 //        StatusBarUtils.setColor(this, getResources().getColor(R.color.transparent), 0);
 //        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
         setTitleBarVisibility(View.GONE);
+
         GlideViewPager viewPager = (GlideViewPager) findViewById(R.id.splase_viewpager);
         TransIndicator linearLayout = (TransIndicator) findViewById(R.id.splase_bottom_layout);
         //点击跳转的按钮
         Button button = (Button) findViewById(R.id.splase_start_btn);
+        isLogined = (Boolean) SharePreferenceUtil.get(this, Constants.Is_Logined, false);
 
 
         //先把本地的图片 id 装进 list 容器中
@@ -72,8 +80,18 @@ public class GuideActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GuideActivity.this, MainActivity.class));
-                finish();
+
+                if (!isLogined) {  //登入成功
+                    Intent intent = new Intent();
+                    intent.setClass(GuideActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    startActivity(new Intent(GuideActivity.this, MainActivity.class));
+                    finish();
+                }
+
+
             }
         });
     }

@@ -166,6 +166,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="button_round_size">5dp</dimen>
+
+
     <dimen name="default_collapsed_padding">72dp</dimen>
     <dimen name="default_expanded_padding">16dp</dimen>
     <dimen name="default_collapsed_image_size">40dp</dimen>

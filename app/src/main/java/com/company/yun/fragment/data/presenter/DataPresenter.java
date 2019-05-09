@@ -41,7 +41,7 @@ public class DataPresenter {
                     @Override
                     public void onResponse(String response, int id) {
                         try {
-                            Log.e("Net", "login==response===" + response);
+//                            Log.e("Net", "login==response===" + response);
                             mView.showContentView();
                             refreshData(response);
                         } catch (Exception e) {

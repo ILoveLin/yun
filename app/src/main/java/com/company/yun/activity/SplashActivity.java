@@ -3,6 +3,7 @@ package com.company.yun.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -25,6 +26,7 @@ public class SplashActivity extends BaseActivity {
 
     private Boolean isFirstIn;
     private ImageView ivSplash;
+    private Boolean isLogined;
 
 
     private void initView() {
@@ -32,8 +34,11 @@ public class SplashActivity extends BaseActivity {
         ivSplash = findViewById(R.id.iv_splash);
         StatusBarUtils.setColor(this, getResources().getColor(R.color.wheel_timebtn_nor), 0);
         StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+        //是否第一次进入app
         isFirstIn = (Boolean) SharePreferenceUtil.get(this, Constants.SP_IS_FIRST_IN,
                 true);
+        //是否登入
+        isLogined = (Boolean) SharePreferenceUtil.get(this, Constants.Is_Logined, false);
 
         // 从浅到深,从百分之10到百分之百
         AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
@@ -73,18 +78,27 @@ public class SplashActivity extends BaseActivity {
     private void switchGoing() {
         if (isFirstIn) {
 //            第一次进入-- 走引导页，否则进入MainActivity
+            SharePreferenceUtil.put(SplashActivity.this, Constants.SP_IS_FIRST_IN,
+                    false);
             Intent intent = new Intent();
             intent.setClass(SplashActivity.this, GuideActivity.class);
             startActivity(intent);
-            SharePreferenceUtil.put(SplashActivity.this, Constants.SP_IS_FIRST_IN,
-                    false);
+
             finish();
 
         } else {
-            Intent intent = new Intent();
-            intent.setClass(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            if(!isLogined){  //登入成功
+                Intent intent = new Intent();
+                intent.setClass(SplashActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent();
+                intent.setClass(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
     }
 }

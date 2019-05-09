@@ -21,10 +21,13 @@
     <color name="light_gray">#bfbfbf</color>
     <color name="tab_main_nor">#7c7c7c</color>
     <color name="tab_main_pre">#1aa98c</color>
-
+    <color name="colorLine">#ECECEC</color>
     <color name="toggle_color_slelected">#1aa98d</color>
 
-
+    <!-- 按钮按压时的颜色 -->
+    <color name="colorButtonPressed">#1976d2</color>
+    <!-- 按钮禁用时的颜色 -->
+    <color name="colorButtonDisable">#DDDDDD</color>
     <color name="bg_item_results_left">#5d4a99</color>
     <color name="bg_item_results_left_current">#708bff</color>
 

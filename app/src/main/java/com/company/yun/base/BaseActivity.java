@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -88,6 +89,50 @@ public abstract class BaseActivity extends AppCompatActivity {
     //----------------------------生命周期方法------------------------
     //----------------------------生命周期方法------------------------
     //----------------------------生命周期方法------------------------
+    /**
+     * 隐藏软键盘
+     */
+    private void hideSoftKeyboard() {
+        // 隐藏软键盘，避免软键盘引发的内存泄露
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (manager != null) manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+    /**
+     * 获取当前 Activity 对象
+     */
+    @SuppressWarnings("unchecked")
+    public <A extends BaseActivity> A getActivity() {
+        return (A) this;
+    }
+
+    /**
+     * 和 setContentView 对应的方法
+     */
+    public View getContentView() {
+        return getWindow().getDecorView();
+    }
+
+    /**
+     * startActivity 方法优化
+     */
+
+    public void startActivity(Class<? extends Activity> cls) {
+        startActivity(new Intent(this, cls));
+    }
+
+    public void startActivityFinish(Class<? extends Activity> cls) {
+        startActivityFinish(new Intent(this, cls));
+    }
+
+    public void startActivityFinish(Intent intent) {
+        startActivity(intent);
+        finish();
+    }
+
+
 
     /**
      * 返回布局layout的资源
