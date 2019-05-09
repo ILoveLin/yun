@@ -56,12 +56,12 @@
                 android:text="@string/main_tab_yun" />
 
             <!--<TextView-->
-                <!--android:id="@+id/tv_tab_yun"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/padding_48"-->
-                <!--android:layout_weight="1"-->
-                <!--android:clickable="true"-->
-                <!--android:drawableTop="@drawable/selector_tab_yun" />-->
+            <!--android:id="@+id/tv_tab_yun"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/padding_48"-->
+            <!--android:layout_weight="1"-->
+            <!--android:clickable="true"-->
+            <!--android:drawableTop="@drawable/selector_tab_yun" />-->
 
             <!--<LinearLayout-->
             <!--android:layout_width="@dimen/padding_10"-->
