@@ -103,7 +103,9 @@
     <dimen name="padding_47">47.0dip</dimen>
     <dimen name="padding_48">48.0dip</dimen>
     <dimen name="padding_50">50.0dip</dimen>
+    <dimen name="padding_52">52.0dip</dimen>
     <dimen name="padding_53">53.0dip</dimen>
+    <dimen name="padding_54">54.0dip</dimen>
     <dimen name="padding_55">55.0dip</dimen>
     <dimen name="padding_56">56.0dip</dimen>
     <dimen name="padding_59">59.0dip</dimen>

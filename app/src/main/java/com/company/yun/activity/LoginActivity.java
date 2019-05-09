@@ -107,6 +107,7 @@ public class LoginActivity extends BaseActivity {
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Device, "device_android");
                             SharePreferenceUtil.put(LoginActivity.this, Constants.UserName, mBean.getData().getUsername());
                             showToast("登入成功");
+                            openActivity(MainActivity.class);
                         } else {
                             showError();
 

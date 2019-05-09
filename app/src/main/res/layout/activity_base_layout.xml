@@ -14,10 +14,12 @@
 
     <RelativeLayout
         android:id="@+id/rl_top"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/padding_50"
-        android:background="@color/color_f7f7f7"
+        android:layout_height="@dimen/padding_54"
         android:orientation="vertical">
+        <!--android:background="@color/color_f7f7f7"-->
+
 
         <ImageButton
             android:id="@+id/ib_left"

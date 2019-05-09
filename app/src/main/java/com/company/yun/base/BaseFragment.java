@@ -85,7 +85,11 @@ public abstract class BaseFragment extends Fragment {
 //        }
 //        setTitleBarVisibility(View.GONE);
         unbinder = ButterKnife.bind(this, rootView);
-        init(rootView);
+        try {
+            init(rootView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return rootView;
     }
 
@@ -100,7 +104,7 @@ public abstract class BaseFragment extends Fragment {
      * 相当于onCreate 做一些初始化操作
      * @param rootView
      */
-    protected abstract void init(ViewGroup rootView);
+    protected abstract void init(ViewGroup rootView) throws Exception;
 
     @Override
     public void onDestroyView() {

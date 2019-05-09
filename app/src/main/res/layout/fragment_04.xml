@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear_04"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-
-    <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="04"
-        android:textSize="@dimen/padding_20" />
-</RelativeLayout>
+        android:layout_height="10dp" />
+
+    <com.company.yun.view.widget.SettingBar
+        android:id="@+id/bar_current_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="当前账号"
+        app:bar_rightHint="张三"
+        app:bar_rightIcon="@mipmap/ico_go_black" />
+
+    <com.company.yun.view.widget.SettingBar
+        android:id="@+id/sb_person_data_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="清除缓存"
+        app:bar_rightHint="0.3M"
+        app:bar_rightIcon="@mipmap/ico_go_black" />
+
+
+    <Button
+        android:id="@+id/btn_exit"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_30"
+        android:layout_marginTop="@dimen/padding_30"
+        android:layout_marginRight="@dimen/padding_30"
+        android:text="退出当前账号" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

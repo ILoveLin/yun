@@ -3,7 +3,6 @@ package com.company.yun.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -87,12 +86,12 @@ public class SplashActivity extends BaseActivity {
             finish();
 
         } else {
-            if(!isLogined){  //登入成功
+            if (!isLogined) {  //登入成功
                 Intent intent = new Intent();
                 intent.setClass(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
-            }else{
+            } else {
                 Intent intent = new Intent();
                 intent.setClass(SplashActivity.this, MainActivity.class);
                 startActivity(intent);

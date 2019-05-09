@@ -38,6 +38,7 @@
     <color name="color_ffffff_00">#00ffffff</color>
     <color name="color_ffffff">#ffffff</color>
     <color name="color_transparent">#00000000</color>
+    <!--<color name="color_transparent">#00000000</color>-->
 
     <color name="color_30ffffff">#30ffffff</color>
     <color name="color_fffaf3">#fffaf3</color>
