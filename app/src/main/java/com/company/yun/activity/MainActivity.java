@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
         setTitleBarVisibility(View.GONE);
         linearBottom.setVisibility(View.VISIBLE);
         fragmentManager = getSupportFragmentManager();
-        valTab = (Integer) SharePreferenceUtil.get(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, Contants.TAB_HOME);
+        valTab = (Integer) SharePreferenceUtil.get(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, Contants.TAB_DRUGS_QUERY);
         setChoiceItem(valTab);
     }
 
@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity {
 
     private void setChoiceItem(Integer index) {
         if (index < 0) {
-            index = Contants.TAB_HOME;
+            index = Contants.TAB_DRUGS_QUERY;
         }
         SharePreferenceUtil.put(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, index);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -234,7 +234,7 @@ public class MainActivity extends BaseActivity {
                 exitTime = System.currentTimeMillis();
                 showToast("再按一次退出程序");
             } else {
-                SharePreferenceUtil.put(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, 0);
+                SharePreferenceUtil.put(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, 2);
                 ActivityCollector.removeAll();
                 System.exit(0);
 
