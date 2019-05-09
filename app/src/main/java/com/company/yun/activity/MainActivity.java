@@ -29,8 +29,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * MainActivity
+ */
 public class MainActivity extends BaseActivity {
-
     @BindView(R.id.tv_tab_homepage)
     TextView tvTabFirstPage;   //1
     @BindView(R.id.tv_tab_drug_query)
