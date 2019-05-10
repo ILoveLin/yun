@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/padding_60"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/tv_data_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="2019-02-06"
+            android:textColor="@color/color_3971be"
+            android:textSize="@dimen/padding_16" />
+
+        <TextView
+            android:id="@+id/tv_data_company_name"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"
+
+            android:text="政通信息技术有限公司"
+            android:textColor="@color/color_3971be"
+            android:textSize="@dimen/padding_16" />
+
+        <TextView
+            android:id="@+id/tv_data_company_money"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+
+            android:text="1.11亿"
+            android:textColor="@color/color_3971be"
+            android:textSize="@dimen/padding_16" />
+    </LinearLayout>
+
+    <View
+        style="@style/LineItemStyleE0E0E0"
+        android:layout_alignParentBottom="true" />
+
+
+</RelativeLayout>

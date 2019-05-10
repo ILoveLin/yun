@@ -2,6 +2,18 @@ package com.company.yun.app;
 
 import android.app.Application;
 
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.cookie.CookieJarImpl;
+import com.zhy.http.okhttp.cookie.store.MemoryCookieStore;
+import com.zhy.http.okhttp.https.HttpsUtils;
+
+import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
+import okhttp3.OkHttpClient;
+
 /**
  * Created by Lovelin on 2019/4/27
  * <p>
@@ -30,9 +42,25 @@ public class App extends Application {
         /**
          * 做一些sdk等等的init
          */
+
+        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, null);
+        OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
+                .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
+                .cookieJar(new CookieJarImpl(new MemoryCookieStore()))//内存存储cookie
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .addInterceptor(new MyInterceptor(this))
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .hostnameVerifier(new HostnameVerifier() {//允许访问https网站,并忽略证书
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                });
+
+        OkHttpUtils.initClient(okHttpClientBuilder.build());
+
+
     }
-
-
 
 
 }

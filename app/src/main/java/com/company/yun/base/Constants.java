@@ -14,7 +14,7 @@ public class Constants {
     public static final String Is_Logined = "is_logined";
 
     public static final String Token = "token";
-    public static final String Device = "device_android";
+    public static final String Device = "android";
     public static final String UserName = "username";
 
 

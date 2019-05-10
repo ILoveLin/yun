@@ -21,4 +21,15 @@
     <string name="title_activity_style_classics">ClassicsHeader</string>
 
 
+    <!--财务数据界面的string-->
+
+    <string name="data_chongzhi">充值数据</string>
+    <string name="data_chongzhi_tubiao">充值图表</string>
+    <string name="data_Top_kehu_chongzhi_data">Top客户充值数据</string>
+    <string name="data_chongzhi_zhuzhuangtu">充值柱状图</string>
+    <string name="data_chongzhi_huanbi">充值环比</string>
+    <string name="data_chongzhi_tongbi">充值同比</string>
+    <string name="data_chongzhi_list">充值列表</string>
+
+
 </resources>

@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".activity.LoginActivity">
+    tools:context=".ui.activity.LoginActivity">
 
 
     <com.company.yun.view.widget.SquareImageView
