@@ -31,7 +31,7 @@
     <style name="TextTitle">
         <item name="android:background">@color/white</item>
         <item name="android:textColor">@color/color_50b3ff</item>
-        <item name="android:textSize">@dimen/padding_15</item>
+        <item name="android:textSize">@dimen/padding_17</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/padding_45</item>
         <item name="android:gravity">center_vertical</item>

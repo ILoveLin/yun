@@ -99,9 +99,7 @@
                         android:id="@+id/chart1"
                         android:layout_width="match_parent"
                         android:layout_height="220dp"
-                        android:layout_marginLeft="@dimen/padding_20"
                         android:layout_marginTop="@dimen/padding_10"
-                        android:layout_marginRight="@dimen/padding_20"
                         android:layout_marginBottom="@dimen/padding_10"
                         android:background="#ffffff" />
 
@@ -144,9 +142,7 @@
                         android:id="@+id/chart02"
                         android:layout_width="match_parent"
                         android:layout_height="260dp"
-                        android:layout_marginLeft="@dimen/padding_20"
                         android:layout_marginTop="@dimen/padding_10"
-                        android:layout_marginRight="@dimen/padding_20"
                         android:layout_marginBottom="@dimen/padding_10"
                         android:background="@color/white" />
 
@@ -170,9 +166,7 @@
                         android:id="@+id/chart3"
                         android:layout_width="match_parent"
                         android:layout_height="220dp"
-                        android:layout_marginLeft="@dimen/padding_20"
                         android:layout_marginTop="@dimen/padding_10"
-                        android:layout_marginRight="@dimen/padding_20"
                         android:layout_marginBottom="@dimen/padding_10"
 
                         android:background="#ffffff" />
@@ -197,9 +191,7 @@
                         android:id="@+id/chart4"
                         android:layout_width="match_parent"
                         android:layout_height="220dp"
-                        android:layout_marginLeft="@dimen/padding_20"
                         android:layout_marginTop="@dimen/padding_10"
-                        android:layout_marginRight="@dimen/padding_20"
                         android:layout_marginBottom="@dimen/padding_10"
                         android:background="#ffffff" />
 

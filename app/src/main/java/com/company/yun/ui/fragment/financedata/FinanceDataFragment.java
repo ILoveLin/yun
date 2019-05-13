@@ -7,19 +7,24 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
+import com.company.yun.bean.financedata.FinanceDataBean;
 import com.company.yun.ui.fragment.financedata.adapter.TopAdapter;
 import com.company.yun.ui.fragment.financedata.adapter.UnderAdapter;
 import com.company.yun.ui.fragment.financedata.presenter.FinanceDataPresenter;
 import com.company.yun.ui.fragment.financedata.presenter.FinanceDataView;
+import com.company.yun.utils.DataUtils;
 import com.company.yun.utils.NetworkUtil;
+import com.company.yun.utils.NumberUtils;
 import com.company.yun.view.widget.DayAxisValueFormatter;
 import com.company.yun.view.widget.MyMarkerView;
+import com.company.yun.view.widget.SettingBar;
 import com.company.yun.view.widget.XYMarkerView;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -34,10 +39,13 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.model.GradientColor;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,6 +76,12 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
     LineChart chart03;
     @BindView(R.id.chart4)
     LineChart chart04;
+    @BindView(R.id.setting_bar_01)
+    SettingBar mSettingBar01;
+    @BindView(R.id.setting_bar_02)
+    SettingBar mSettingBar02;
+    @BindView(R.id.setting_bar_03)
+    SettingBar mSettingBar03;
     @BindView(R.id.recycleview_top)
     RecyclerView mTopRecycleView;
     @BindView(R.id.recycleview_under)
@@ -79,6 +93,10 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
     private LinearLayoutManager topLinearLayoutManager;
     private LinearLayoutManager underlinearLayoutManager;
     private UnderAdapter mUnderAdapter;
+    private List<FinanceDataBean.DataBean.Recharge_companys_listEntity> rechargeCompanysList;
+    private List<FinanceDataBean.DataBean.Recharge_listEntity> rechargeList;
+    private ArrayList<FinanceDataBean.DataBean.Recharge_companys_listEntity> mTopDataList;
+    private ArrayList<FinanceDataBean.DataBean.Recharge_listEntity> mUnderDataList;
 
     @Override
     public int getContentViewId() {
@@ -89,9 +107,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
     public void init(ViewGroup rootView) {
         mPresenter = new FinanceDataPresenter(getActivity(), this);
         initView();
-
     }
-
 
     @Override
     protected void onClickRetry() {
@@ -107,36 +123,91 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         setTitleLeftBtnVisibility(View.GONE);
         setPageStateView();
         responseListener();
-        initChart01();
-        initChart02();
-        initChart03();
-        initChart04();
-        initRecycleView();
     }
 
-    private void initRecycleView() {
-        ArrayList<String> stringList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            stringList.add("政通有限公司" + "==" + i);
-        }
+    //请求成功之后刷新UI数据
+    @Override
+    public void refreshUIData(FinanceDataBean.DataBean mDataBean) {
+        //Top客户充值数据
+        //recharge_companys_list
+        rechargeCompanysList = mDataBean.getRecharge_companys_list();
+
+        //充值数据
+        //recharge_list
+        rechargeList = mDataBean.getRecharge_list();
+        initRecycleView(rechargeCompanysList, rechargeList);
+
+
+        //Log.e("Net", "data==refreshUIData===" + mDataBean.toString());
+        FinanceDataBean.DataBean.Recharge_list_dataEntity bean = mDataBean.getRecharge_list_data();
+        List<String> data = bean.getDdate();
+        List<String> money = bean.getMyMoney();
+        //充值图表
+        Collections.sort(data);
+        initChart01(data, DataUtils.toFloat(money));
+        FinanceDataBean.DataBean.RatioEntity.MonthEntity month = mDataBean.getRatio().getMonth();
+
+
+        //充值柱状图
+        //ratio---month---(x---data   y-----money)
+        List<String> ddate = month.getDdate();
+        List<String> money1 = month.getMoney();
+        List<String> ratio = month.getRatio();
+        initChart02(ddate, DataUtils.toFloat(money1));
+        //环比
+        //ratio---month---(x---data   y-----ratio)
+        Collections.sort(ddate);
+
+        initChart03(ddate, DataUtils.toFloat(ratio));
+        //同比
+        //ratio---year---(x---data   y-----ratio)
+        FinanceDataBean.DataBean.RatioEntity.YearEntity year = mDataBean.getRatio().getYear();
+        List<String> ddate1 = year.getDdate();
+        List<String> ratio1 = year.getRatio();
+        Collections.sort(ddate1);
+        initChart04(ddate1, DataUtils.toFloat(ratio1));
+
+    }
+
+    @Override
+    public SettingBar getSettingBar01() {
+        return mSettingBar01;
+    }
+
+    @Override
+    public SettingBar getSettingBar02() {
+        return mSettingBar02;
+    }
+
+    @Override
+    public SettingBar getSettingBar03() {
+        return mSettingBar03;
+    }
+
+    private void initRecycleView(List<FinanceDataBean.DataBean.Recharge_companys_listEntity> rechargeCompanysList,
+                                 List<FinanceDataBean.DataBean.Recharge_listEntity> rechargeList) {
+        mTopDataList = new ArrayList<>();
+        mUnderDataList = new ArrayList<>();
+        mTopDataList.addAll(rechargeCompanysList);
+        mUnderDataList.addAll(rechargeList);
 
         topLinearLayoutManager = new LinearLayoutManager(getContext());
         topLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mTopRecycleView.setLayoutManager(topLinearLayoutManager);
-        mTopAdapter = new TopAdapter(stringList, getActivity());
+        mTopAdapter = new TopAdapter(mTopDataList, getActivity());
         mTopRecycleView.setAdapter(mTopAdapter);
 
         underlinearLayoutManager = new LinearLayoutManager(getContext());
         underlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mUnderRecycleView.setLayoutManager(underlinearLayoutManager);
-        mUnderAdapter = new UnderAdapter(stringList, getActivity());
+        mUnderAdapter = new UnderAdapter(mUnderDataList, getActivity());
         mUnderRecycleView.setAdapter(mUnderAdapter);
 
 
     }
     //初始化04-同比-曲线图
 
-    private void initChart04() {
+    private void initChart04(final List<String> data, float[] floats) {
         // background color
         chart04.setBackgroundColor(Color.WHITE);
         // disable description text
@@ -145,15 +216,17 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         chart04.setTouchEnabled(true);
         // set listeners
         chart04.setDrawGridBackground(false);
+        chart04.setTouchEnabled(true);
+        chart04.setDragEnabled(true);
+        chart04.setScaleEnabled(true);
+        chart04.setPinchZoom(true);
         // create marker to display box when values are selected
         MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
         // Set the marker to the chart
         mv.setChartView(chart04);
         chart04.setMarker(mv);
         // enable scaling and dragging
-        chart04.setDragEnabled(false);
-        chart04.setScaleEnabled(true);
-        chart04.setPinchZoom(true);
+
         XAxis xAxis = chart04.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.enableGridDashedLine(10f, 10f, 0f);
@@ -162,7 +235,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return mXDate[(int) value % mXDate.length];
+                return data.get((int) value % data.size());
             }
         });
         YAxis yAxis;
@@ -175,18 +248,19 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         yAxis.setDrawLimitLinesBehindData(true);
         // add data
 //        setChart01Data();
-        setChartLineData(chart04, myDateLineY);
+        setChartLineData(chart04, floats);
         // draw points over time
 //        chart.animateX(1500);
         // get the legend (only possible after setting data)
         Legend l = chart04.getLegend();
         // draw legend entries as lines
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
+        drawNumAndPoint(chart04);
 
     }
     //初始化03-环比-曲线图
 
-    private void initChart03() {
+    private void initChart03(final List<String> data, float[] floats) {
         // background color
         chart03.setBackgroundColor(Color.WHITE);
         // disable description text
@@ -195,15 +269,17 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         chart03.setTouchEnabled(true);
         // set listeners
         chart03.setDrawGridBackground(false);
+        // enable scaling and dragging
+        chart03.setTouchEnabled(true);
+        chart03.setDragEnabled(true);
+        chart03.setScaleEnabled(true);
+        chart03.setPinchZoom(true);
         // create marker to display box when values are selected
         MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
         // Set the marker to the chart
         mv.setChartView(chart03);
         chart03.setMarker(mv);
-        // enable scaling and dragging
-        chart03.setDragEnabled(false);
-        chart03.setScaleEnabled(true);
-        chart03.setPinchZoom(true);
+
         XAxis xAxis = chart03.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.enableGridDashedLine(10f, 10f, 0f);
@@ -212,9 +288,10 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return mXDate[(int) value % mXDate.length];
+                return data.get((int) value % data.size());
             }
         });
+
         YAxis yAxis;
         yAxis = chart03.getAxisLeft();
         // disable dual axis (only use LEFT axis)
@@ -224,19 +301,20 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         // draw limit lines behind data instead of on top
         yAxis.setDrawLimitLinesBehindData(true);
         // add data
-        setChartLineData(chart03, myDateLineY);
+        setChartLineData(chart03, floats);
         // draw points over time
 //        chart.animateX(1500);
         // get the legend (only possible after setting data)
         Legend l = chart03.getLegend();
         // draw legend entries as lines
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
+        drawNumAndPoint(chart03);
 
     }
 
     //初始化02--柱状图
 
-    private void initChart02() {
+    private void initChart02(final List<String> data, float[] floats) {
 
         chart02.setDrawBarShadow(false);
         chart02.setDrawValueAboveBar(true);
@@ -245,8 +323,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
 
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
-        chart02.setMaxVisibleValueCount(60);
-
+//        chart02.setMaxVisibleValueCount(60);
         // scaling can now only be done on x- and y-axis separately
         chart02.setPinchZoom(false);
 
@@ -264,10 +341,9 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return mXDate[(int) value % mXDate.length];
+                return data.get((int) value % data.size());
             }
         });
-
 
 //        ValueFormatter custom = new MyValueFormatter("");    设置自定义文字   Y轴上
 
@@ -283,19 +359,26 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         XYMarkerView mv = new XYMarkerView(getContext(), xAxisFormatter);    //点击柱状图显示信息
         mv.setChartView(chart02); // For bounds control
         chart02.setMarker(mv); // Set the marker to the chart
-        setChart02Data();
+        setChart02Data(floats);
         Legend l = chart02.getLegend();
         // draw legend entries as lines
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
         // chart.setDrawLegend(false);
+
+        //取消默认顶部值
+        for (IDataSet set : chart02.getData().getDataSets())
+            set.setDrawValues(!set.isDrawValuesEnabled());
+
+        chart02.invalidate();
+
     }
 
-    private void setChart02Data() {
+    private void setChart02Data(float[] floats) {
 
         float start = 1f;
         ArrayList<BarEntry> values = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            values.add(new BarEntry(i, myDateY[i]));
+        for (int i = 0; i < floats.length; i++) {
+            values.add(new BarEntry(i, floats[i]));
 
         }
 
@@ -308,7 +391,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
             chart02.notifyDataSetChanged();
 
         } else {
-            set1 = new BarDataSet(values, "柱状图");
+            set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
             int startColor1 = ContextCompat.getColor(getContext(), R.color.color_50b3ff);
             int endColor1 = ContextCompat.getColor(getContext(), R.color.color_50b3ff);
@@ -328,13 +411,17 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
     }
 
     //初始化02--充值图表
-    private void initChart01() {
+    private void initChart01(final List<String> data, float[] floats) {
         // background color
         chart01.setBackgroundColor(Color.WHITE);
         // disable description text
         chart01.getDescription().setEnabled(false);
         // enable touch gestures
         chart01.setTouchEnabled(true);
+        chart01.setDragEnabled(true);
+        chart01.setScaleEnabled(true);
+        chart01.setPinchZoom(true);
+
         // set listeners
         chart01.setDrawGridBackground(false);
         // create marker to display box when values are selected
@@ -343,9 +430,6 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         mv.setChartView(chart01);
         chart01.setMarker(mv);
         // enable scaling and dragging
-        chart01.setDragEnabled(false);
-        chart01.setScaleEnabled(true);
-        chart01.setPinchZoom(true);
         XAxis xAxis = chart01.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.enableGridDashedLine(10f, 10f, 0f);
@@ -354,7 +438,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                return mXDate[(int) value % mXDate.length];
+                return data.get((int) value % data.size());
             }
         });
         YAxis yAxis;
@@ -367,20 +451,44 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         yAxis.setDrawLimitLinesBehindData(true);
         // add data
 //        setChart01Data();
-        setChartLineData(chart01, myDateLineY);
+        setChartLineData(chart01, floats);
         // draw points over time
 //        chart.animateX(1500);
         // get the legend (only possible after setting data)
         Legend l = chart01.getLegend();
         // draw legend entries as lines
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
+        drawNumAndPoint(chart01);
+
+
+    }
+
+    private void drawNumAndPoint(LineChart chart) {
+        List<ILineDataSet> sets = chart.getData()
+                .getDataSets();
+
+        for (ILineDataSet iSet : sets) {
+
+            LineDataSet set = (LineDataSet) iSet;
+            set.setDrawValues(!set.isDrawValuesEnabled());
+        }
+        for (ILineDataSet iSet : sets) {
+
+            LineDataSet set = (LineDataSet) iSet;
+            if (set.isDrawCirclesEnabled())
+                set.setDrawCircles(false);
+            else
+                set.setDrawCircles(true);
+        }
+
+        chart.invalidate();
     }
 
 
-    public void setChartLineData(LineChart chart, float myDateLineY[]) {
+    public void setChartLineData(LineChart chart, float[] floats) {
         ArrayList<Entry> values = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            values.add(new Entry(i, myDateLineY[i]));
+        for (int i = 0; i < floats.length; i++) {
+            values.add(new Entry(i, floats[i]));
         }
         LineDataSet set1;
 
@@ -394,7 +502,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
             chart.notifyDataSetChanged();
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(values, "曲线图");
+            set1 = new LineDataSet(values, "");
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
             set1.setDrawIcons(false);
 

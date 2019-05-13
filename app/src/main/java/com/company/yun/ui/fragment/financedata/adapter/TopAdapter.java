@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 
 import com.company.yun.R;
+import com.company.yun.bean.financedata.FinanceDataBean;
+import com.company.yun.utils.DataUtils;
+import com.company.yun.utils.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,7 @@ import java.util.List;
  * Created by jianghejie on 15/11/26.
  */
 public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
-    public void setData(ArrayList<String> datas) {
+    public void setData(ArrayList<FinanceDataBean.DataBean.Recharge_companys_listEntity> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -31,12 +34,12 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
         void onItemClick(int bean);
     }
 
-    public ArrayList<String> datas = null;
+    public ArrayList<FinanceDataBean.DataBean.Recharge_companys_listEntity> datas = null;
     private ItemClickCallBack clickCallBack;
 
     private FragmentActivity activity;
 
-    public TopAdapter(ArrayList<String> datas, FragmentActivity activity) {
+    public TopAdapter(ArrayList<FinanceDataBean.DataBean.Recharge_companys_listEntity> datas, FragmentActivity activity) {
         this.datas = datas;
         this.activity = activity;
     }
@@ -51,10 +54,14 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+        FinanceDataBean.DataBean.Recharge_companys_listEntity bean = datas.get(position);
+
+
 //        viewHolder.mTextView.setText(datas.get(position));
 
-        viewHolder.tv_company_name.setText(datas.get(position));
-        viewHolder.tv_company_money.setText("1.23亿");
+        viewHolder.tv_company_name.setText(bean.getCompany_name());
+
+        viewHolder.tv_company_money.setText(NumberUtils.amountConversion(Double.parseDouble(bean.getMoney() + "")));
     }
 
 

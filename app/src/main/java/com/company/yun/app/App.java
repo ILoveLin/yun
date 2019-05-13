@@ -44,12 +44,12 @@ public class App extends Application {
          */
 
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, null);
-        OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
-                .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
-                .cookieJar(new CookieJarImpl(new MemoryCookieStore()))//内存存储cookie
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .addInterceptor(new MyInterceptor(this))   //拦截器,可以添加header 一些信息
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+            OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
+                    .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
+                    .cookieJar(new CookieJarImpl(new MemoryCookieStore()))                  //内存存储cookie
+                    .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                    .addInterceptor(new MyInterceptor(this))                      //拦截器,可以添加header 一些信息
+                    .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .hostnameVerifier(new HostnameVerifier() {//允许访问https网站,并忽略证书
                     @Override
                     public boolean verify(String hostname, SSLSession session) {

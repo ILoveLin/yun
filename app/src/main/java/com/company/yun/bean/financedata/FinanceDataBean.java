@@ -1,5 +1,7 @@
 package com.company.yun.bean.financedata;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,9 +21,26 @@ public class FinanceDataBean {
      * status : 0
      * info :
      */
-    private DataBean data;
     private String status;
     private String info;
+    private DataBean data;
+
+    public void getAllData(String response) {
+        try {
+            JSONObject object = new JSONObject(response);
+
+            setStatus(object.getString("status"));
+            setInfo(object.getString("info"));
+            DataBean dataBean = new DataBean();
+            dataBean.getData(object.getJSONObject("data"));
+            setData(dataBean);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void setData(DataBean data) {
         this.data = data;
@@ -71,10 +90,35 @@ public class FinanceDataBean {
                 setDays_money(object.getString("days_money"));
                 setLast_month_money(object.getString("last_month_money"));
                 setTotal_money(object.getString("total_money"));
-
                 JSONObject ratio = object.getJSONObject("ratio");
                 RatioEntity ratioEntity = new RatioEntity();
-                //TODO 开始解析
+                ratioEntity.getData(ratio);
+                setRatio(ratioEntity);
+
+                JSONArray recharge_companys_list = object.getJSONArray("recharge_companys_list");
+                ArrayList<Recharge_companys_listEntity> recharge_companys_listEntities = new ArrayList<>();
+                for (int i = 0; i < recharge_companys_list.length(); i++) {
+                    Recharge_companys_listEntity recharge_companys_listEntity = new Recharge_companys_listEntity();
+                    recharge_companys_listEntity.getData((JSONObject) recharge_companys_list.get(i));
+                    recharge_companys_listEntities.add(recharge_companys_listEntity);
+                    setRecharge_companys_list(recharge_companys_listEntities);
+                }
+
+
+                Recharge_list_dataEntity recharge_list_dataEntity = new Recharge_list_dataEntity();
+                recharge_list_dataEntity.getData(object.getJSONObject("recharge_list_data"));
+                setRecharge_list_data(recharge_list_dataEntity);
+
+
+                JSONArray recharge_list = object.getJSONArray("recharge_list");
+                ArrayList<Recharge_listEntity> rechargeList = new ArrayList<>();
+
+                for (int i = 0; i < recharge_list.length(); i++) {
+                    Recharge_listEntity entity = new Recharge_listEntity();
+                    entity.getData((JSONObject) recharge_list.get(i));
+                    rechargeList.add(entity);
+                    setRecharge_list(rechargeList);
+                }
 
 
             } catch (JSONException e) {
@@ -82,6 +126,18 @@ public class FinanceDataBean {
             }
         }
 
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "days_money='" + days_money + '\'' +
+                    ", last_month_money='" + last_month_money + '\'' +
+                    ", total_money='" + total_money + '\'' +
+                    ", ratio=" + ratio +
+                    ", recharge_companys_list=" + recharge_companys_list +
+                    ", recharge_list_data=" + recharge_list_data +
+                    ", recharge_list=" + recharge_list +
+                    '}';
+        }
 
         public void setDays_money(String days_money) {
             this.days_money = days_money;
@@ -193,32 +249,25 @@ public class FinanceDataBean {
             private List<String> ddate;
             private List<String> money;
 
-            public void getDataString(JSONArray array) {
+            public void getData(JSONObject object) {
                 ArrayList<String> ddateList = new ArrayList<>();
-
-                for (int i = 0; i < array.length(); i++) {
-                    try {
-                        ddateList.add((String) array.get(i));
-                        setDdate(ddateList);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            }
-
-
-            public void getMoneyString(JSONArray array) {
                 ArrayList<String> moneyList = new ArrayList<>();
-                for (int i = 0; i < array.length(); i++) {
-                    try {
-                        moneyList.add((String) array.get(i));
-                        setDdate(moneyList);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+
+                try {
+                    JSONArray ddate = object.getJSONArray("ddate");
+                    JSONArray money = object.getJSONArray("money");
+                    for (int i = 0; i < ddate.length(); i++) {
+                        ddateList.add((String) ddate.get(i));
+                        setDdate(ddateList);
                     }
+                    for (int i = 0; i < money.length(); i++) {
+                        moneyList.add((String) money.get(i));
+                        setMyMoney(moneyList);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+
             }
 
 
@@ -226,7 +275,7 @@ public class FinanceDataBean {
                 this.ddate = ddate;
             }
 
-            public void setMoney(List<String> money) {
+            public void setMyMoney(List<String> money) {
                 this.money = money;
             }
 
@@ -234,7 +283,7 @@ public class FinanceDataBean {
                 return ddate;
             }
 
-            public List<String> getMoney() {
+            public List<String> getMyMoney() {
                 return money;
             }
         }
@@ -338,9 +387,18 @@ public class FinanceDataBean {
             private MonthEntity month;
             private YearEntity year;
 
-            //TODO 这开始解析
             public void getData(JSONObject object) {
                 try {
+                    JSONObject month = object.getJSONObject("month");
+                    JSONObject year = object.getJSONObject("year");
+                    MonthEntity monthEntity = new MonthEntity();
+                    monthEntity.getData(month);
+                    setMonth(monthEntity);
+                    YearEntity yearEntity = new YearEntity();
+                    yearEntity.getData(year);
+                    setYear(yearEntity);
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -371,6 +429,37 @@ public class FinanceDataBean {
                 private List<String> ddate;
                 private List<String> money;
                 private List<String> ratio;
+
+                public void getData(JSONObject object) {
+
+                    try {
+                        JSONArray ddate = object.getJSONArray("ddate");
+                        JSONArray money = object.getJSONArray("money");
+                        JSONArray ratio = object.getJSONArray("ratio");
+
+                        ArrayList<String> ddateList = new ArrayList<>();
+                        ArrayList<String> moneyList = new ArrayList<>();
+                        ArrayList<String> ratioList = new ArrayList<>();
+                        for (int i = 0; i < ddate.length(); i++) {
+                            ddateList.add((String) ddate.get(i));
+                            setDdate(ddateList);
+                        }
+                        for (int i = 0; i < money.length(); i++) {
+                            moneyList.add((String) money.get(i));
+                            setMoney(moneyList);
+                        }
+                        for (int i = 0; i < ratio.length(); i++) {
+                            ratioList.add((String) ratio.get(i));
+                            setRatio(ratioList);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
 
                 public void setDdate(List<String> ddate) {
                     this.ddate = ddate;
@@ -406,6 +495,38 @@ public class FinanceDataBean {
                 private List<String> ddate;
                 private List<String> money;
                 private List<String> ratio;
+
+
+                public void getData(JSONObject object) {
+
+                    try {
+                        JSONArray ddate = object.getJSONArray("ddate");
+                        JSONArray money = object.getJSONArray("money");
+                        JSONArray ratio = object.getJSONArray("ratio");
+
+                        ArrayList<String> ddateList = new ArrayList<>();
+                        ArrayList<String> moneyList = new ArrayList<>();
+                        ArrayList<String> ratioList = new ArrayList<>();
+                        for (int i = 0; i < ddate.length(); i++) {
+                            ddateList.add((String) ddate.get(i));
+                            setDdate(ddateList);
+                        }
+                        for (int i = 0; i < money.length(); i++) {
+                            moneyList.add((String) money.get(i));
+                            setMoney(moneyList);
+                        }
+                        for (int i = 0; i < ratio.length(); i++) {
+                            ratioList.add((String) ratio.get(i));
+                            setRatio(ratioList);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
 
                 public void setDdate(List<String> ddate) {
                     this.ddate = ddate;

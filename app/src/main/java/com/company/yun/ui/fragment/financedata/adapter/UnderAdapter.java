@@ -9,7 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.company.yun.R;
+import com.company.yun.bean.financedata.FinanceDataBean;
+import com.company.yun.utils.DataUtils;
+import com.company.yun.utils.NumberUtils;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +21,7 @@ import java.util.List;
  * Created by jianghejie on 15/11/26.
  */
 public class UnderAdapter extends RecyclerView.Adapter<UnderAdapter.ViewHolder> {
-    public void setData(ArrayList<String> datas) {
+    public void setData(ArrayList<FinanceDataBean.DataBean.Recharge_listEntity> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
@@ -30,12 +34,12 @@ public class UnderAdapter extends RecyclerView.Adapter<UnderAdapter.ViewHolder> 
         void onItemClick(int bean);
     }
 
-    public ArrayList<String> datas = null;
+    public ArrayList<FinanceDataBean.DataBean.Recharge_listEntity> datas = null;
     private ItemClickCallBack clickCallBack;
 
     private FragmentActivity activity;
 
-    public UnderAdapter(ArrayList<String> datas, FragmentActivity activity) {
+    public UnderAdapter(ArrayList<FinanceDataBean.DataBean.Recharge_listEntity> datas, FragmentActivity activity) {
         this.datas = datas;
         this.activity = activity;
     }
@@ -50,10 +54,10 @@ public class UnderAdapter extends RecyclerView.Adapter<UnderAdapter.ViewHolder> 
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-//        viewHolder.mTextView.setText(datas.get(position));
-        viewHolder.tv_data_time.setText("2020-05-06");
-        viewHolder.tv_data_company_name.setText(datas.get(position));
-        viewHolder.tv_data_company_money.setText("1.23亿");
+        FinanceDataBean.DataBean.Recharge_listEntity bean = datas.get(position);
+        viewHolder.tv_data_time.setText(bean.getDdate());
+        viewHolder.tv_data_company_name.setText(bean.getCompany_name());
+        viewHolder.tv_data_company_money.setText( NumberUtils.amountConversion(Double.parseDouble(bean.getMoney() + "")));
 
     }
 
