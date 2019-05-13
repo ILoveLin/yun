@@ -32,16 +32,13 @@ public class FinanceDataPresenter implements OnChartValueSelectedListener {
     public FinanceDataPresenter(Context mContext, FinanceDataView mView) {
         this.mView = mView;
         this.mContext = mContext;
-        Log.e("Net", "data==token===");
         device = (String) SharePreferenceUtil.get(mContext, Constants.Device, "");
         token = (String) SharePreferenceUtil.get(mContext, Constants.Token, "");
-        Log.e("Net", "data==token===" + token);
 
     }
 
     public void sendRequest() {
         mView.showLoadingView();
-        Log.e("Net", "data==1==token===" + token);
         OkHttpUtils.post()
                 .url(HttpConstants.Data)
                 .build()
@@ -50,13 +47,11 @@ public class FinanceDataPresenter implements OnChartValueSelectedListener {
                     public void onError(Call call, Exception e, int id) {
                         mView.showErrorView();
                         mView.showToast("请求返回错误");
-                        Log.e("Net", "data==Exception===");
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         try {
-                            Log.e("Net", "data==response===" + response);
                             FinanceDataBean bean = new FinanceDataBean();
                             bean.getAllData(response);
                             if ("".equals(bean.getStatus())) {

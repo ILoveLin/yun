@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent">
     <!--android:background="@mipmap/bg_main"-->
 
@@ -28,7 +27,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/TextTitle"
+                    style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi" />
 
                 <View style="@style/LineItemStyleTransparent_10dp" />
@@ -84,7 +83,7 @@
                 <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
-                    style="@style/TextTitle"
+                    style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_tubiao" />
 
                 <View style="@style/LineItemStyleTransparent_10dp" />
@@ -110,7 +109,7 @@
                 <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
-                    style="@style/TextTitle"
+                    style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_Top_kehu_chongzhi_data" />
 
                 <View style="@style/LineItemStyleTransparent_10dp" />
@@ -127,7 +126,7 @@
                 <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
-                    style="@style/TextTitle"
+                    style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_zhuzhuangtu" />
 
                 <View style="@style/LineItemStyleTransparent_10dp" />
@@ -151,7 +150,7 @@
                 <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
-                    style="@style/TextTitle"
+                    style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_huanbi" />
 
                 <View style="@style/LineItemStyleTransparent_10dp" />
@@ -176,7 +175,7 @@
                 <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
-                    style="@style/TextTitle"
+                    style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_tongbi" />
 
                 <View style="@style/LineItemStyleTransparent_10dp" />
@@ -202,7 +201,7 @@
                 <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
-                    style="@style/TextTitle"
+                    style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_list" />
 
                 <View style="@style/LineItemStyleTransparent_10dp" />

@@ -17,5 +17,10 @@ public class HttpConstants {
     //财务数据
     public static final String Data = Common + "/api/index/record";
 
+    //尚城云
+    public static final String Yun_Daday_Data = Common + "/api/index/get_index.html";
+    public static final String Yun_User_Data = Common + "/api/index/get_user_chart2.html";
+    public static final String Yun_Chart_Line_Bar = Common + "/api/index/get_real_time";
+
 
 }

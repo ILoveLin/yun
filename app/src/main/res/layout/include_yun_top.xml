@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingTop="@dimen/padding_20"
+    android:paddingBottom="@dimen/padding_20">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_marginLeft="@dimen/padding_10"
+        android:layout_marginRight="@dimen/padding_10"
+        android:background="@drawable/shape_data_chongzih"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingRight="@dimen/padding_10">
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_data_chongzih"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/padding_5"
+            android:paddingBottom="@dimen/padding_5">
+
+            <TextView
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日" />
+
+            <TextView
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="累计" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextTitle_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总计:" />
+
+                <TextView
+
+                    android:id="@+id/tv_total"
+                    style="@style/TextTitle_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/icon_yun_yellow"
+                    android:drawablePadding="4dp"
+                    android:paddingTop="@dimen/padding_2"
+                    android:text="-0.48" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_total_times"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="10086次" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_20"
+        android:layout_weight="3"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_10"
+        android:paddingRight="@dimen/padding_10">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_data_chongzih"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_5"
+            android:paddingBottom="@dimen/padding_5">
+
+            <TextView
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="展现" />
+
+            <TextView
+                android:id="@+id/tv_consume_times"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="10086次" />
+
+            <TextView
+                android:id="@+id/tv_drawable_icon_01"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/icon_yun_red"
+                android:drawablePadding="@dimen/padding_4"
+                android:paddingTop="@dimen/padding_2"
+                android:text="较昨日" />
+
+            <TextView
+                android:id="@+id/tv_consume_percent_01"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="0.02%" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_data_chongzih"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_5"
+            android:paddingBottom="@dimen/padding_5">
+
+            <TextView
+                android:id="@+id/tv_consume"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消费" />
+
+            <TextView
+                android:id="@+id/tv_num"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="10086元" />
+
+            <TextView
+                android:id="@+id/tv_drawable_icon_02"
+
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/icon_yun_red"
+                android:drawablePadding="@dimen/padding_4"
+                android:paddingTop="@dimen/padding_2"
+                android:text="较昨日" />
+
+            <TextView
+                android:id="@+id/tv_consume_percent_02"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="0.02%" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_data_chongzih"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_5"
+            android:paddingBottom="@dimen/padding_5">
+
+            <TextView
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="展现人数" />
+
+            <TextView
+                android:id="@+id/tv_consume_person"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="10086人" />
+
+            <TextView
+                android:id="@+id/tv_drawable_icon_03"
+
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/icon_yun_red"
+                android:drawablePadding="@dimen/padding_4"
+                android:paddingTop="@dimen/padding_2"
+                android:text="较昨日" />
+
+            <TextView
+                android:id="@+id/tv_consume_percent_03"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_2"
+                android:text="0.02%" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
