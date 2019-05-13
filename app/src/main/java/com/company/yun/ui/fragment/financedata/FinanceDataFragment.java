@@ -393,8 +393,8 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         } else {
             set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(getContext(), R.color.color_50b3ff);
-            int endColor1 = ContextCompat.getColor(getContext(), R.color.color_50b3ff);
+            int startColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
+            int endColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
 //            int startColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
 //            int endColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
             List<GradientColor> gradientColors = new ArrayList<>();
@@ -510,8 +510,8 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
 //            set1.enableDashedLine(10f, 5f, 0f);
 
             // black lines and points
-            set1.setColor(getResources().getColor(R.color.color_50b3ff));
-            set1.setCircleColor(getResources().getColor(R.color.color_50b3ff));
+            set1.setColor(getResources().getColor(R.color.color_21ac90));
+            set1.setCircleColor(getResources().getColor(R.color.color_21ac90));
 
             // line thickness and point size
             set1.setLineWidth(1f);
