@@ -1,8 +1,6 @@
 package com.company.yun.utils;
 
-import android.util.Log;
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +20,21 @@ public class DataUtils {
 //            Log.e("fs======","排序====="+fs[i]);
 //        }
         return fs;
+    }
+
+
+    public static List<String> toStringList(List<Integer> list) {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        if (list == null) {
+            new ArrayList<>();
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                stringArrayList.add(list.get(i) + "");
+            }
+        }
+
+
+        return stringArrayList;
     }
 
 

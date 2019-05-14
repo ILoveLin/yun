@@ -8,7 +8,7 @@ import org.json.JSONObject;
  * <p>
  * Describe:
  */
-public class TodayDataBean {
+public class TodayBean {
     /**
      * consume_rate : -0.06
      * shows : 8,431,163

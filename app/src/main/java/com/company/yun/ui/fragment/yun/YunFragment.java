@@ -1,6 +1,11 @@
 package com.company.yun.ui.fragment.yun;
 
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +14,46 @@ import android.widget.TextView;
 
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
+import com.company.yun.bean.yun.PicChartBean;
 import com.company.yun.ui.fragment.yun.presenter.YunPresenter;
 import com.company.yun.ui.fragment.yun.presenter.YunView;
+import com.company.yun.utils.DataUtils;
+import com.company.yun.view.widget.DayAxisValueFormatter;
+import com.company.yun.view.widget.MyMarkerView;
+import com.company.yun.view.widget.XYMarkerView;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.model.GradientColor;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.MPPointF;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -43,14 +81,24 @@ public class YunFragment extends BaseFragment implements YunView {
     TextView mTvConsumePerson;
     @BindView(R.id.tv_consume_percent_03)
     TextView mTvConsumePercent03;
+    @BindView(R.id.tv_under_person_count)
+    TextView tv_under_person_count;
     @BindView(R.id.chart1)
     LineChart mTChart01;
     @BindView(R.id.chart02)
     BarChart mChart02;
-    @BindView(R.id.tv_under_person)
-    TextView mTvUnderPerson;
+    @BindView(R.id.sex_chart)
+    PieChart mChart;
+    @BindView(R.id.year_chart)
+    PieChart mYearChart;
+    @BindView(R.id.interest_chart)
+    PieChart mInterestChart;
     @BindView(R.id.tv_num)
     TextView tv_num;
+    @BindView(R.id.tv_under_person)
+    TextView tv_under_person;
+    @BindView(R.id.tv_under_before_days)
+    TextView tv_under_before_days;
     @BindView(R.id.tv_drawable_icon_01)
     TextView tv_drawable_icon_01;
     @BindView(R.id.tv_drawable_icon_02)
@@ -59,16 +107,23 @@ public class YunFragment extends BaseFragment implements YunView {
     TextView tv_drawable_icon_03;
     @BindView(R.id.linear_under_01)
     LinearLayout mLinearUnder01;
-    @BindView(R.id.tv_under_person_count)
-    TextView mTvUnderPersonCount;
     @BindView(R.id.linear_under_02)
     LinearLayout mLinearUnder02;
-    @BindView(R.id.tv_under_before_days)
-    TextView mTvUnderBeforeDays;
     @BindView(R.id.linear_under_03)
     LinearLayout mLinearUnder03;
     Unbinder unbinder;
     private YunPresenter mPresenter;
+    private final Timer timer = new Timer();
+    private TimerTask task;
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            // 要做的事情
+            super.handleMessage(msg);
+            mPresenter.sendChartDataRequest("times");
+        }
+    };
 
 
     @Override
@@ -83,6 +138,21 @@ public class YunFragment extends BaseFragment implements YunView {
         responseListener();
     }
 
+    private void responseListener() {
+        mPresenter.sendRequest();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                Message message = new Message();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+        };
+
+        timer.schedule(task, 2000, 3000);
+    }
+
     private void initView() {
         setTitleBarVisibility(View.VISIBLE);
         setTitleLeftBtnVisibility(View.GONE);
@@ -90,9 +160,422 @@ public class YunFragment extends BaseFragment implements YunView {
         setPageStateView();
     }
 
-    private void responseListener() {
-        mPresenter.sendRequest();
+
+    @Override
+    public void refreshLineBarUIData(List<String> xList, List<String> todayDataList, List<String> yesterdayDataList) {
+        initChart01(xList, DataUtils.toFloat(todayDataList));
+        initChart02(xList, DataUtils.toFloat(yesterdayDataList));
+//        initPicChart(mSexChart,floats);
+
     }
+
+    @Override
+    public void refreshPicChartUIData(PicChartBean.SexEntity sex, PicChartBean.AgeEntity age, PicChartBean.InterestEntity interest) {
+        List<String> sexString = sex.getY();      //Y   都是说明
+        List<String> sexRate = sex.getX();        //X  都是数值
+        List<String> ageString = age.getY();      //Y   都是说明
+        List<String> ageRate = age.getX();
+        List<String> interestString = interest.getY();      //Y   都是说明
+        List<String> interestRate = interest.getX();
+
+
+        initPicChart(mChart, sexString, DataUtils.toFloat(sexRate), "sex");
+        initPicChart(mYearChart, ageString, DataUtils.toFloat(ageRate), "age");
+        initPicChart(mInterestChart, interestString, DataUtils.toFloat(interestRate), "interest");
+
+    }
+
+
+    private void initPicChart(PieChart mSexChart, List<String> XList, float[] floats, String type) {
+        mSexChart.setUsePercentValues(true);
+        mSexChart.getDescription().setEnabled(false);
+        mSexChart.setExtraOffsets(5, 10, 5, 5);
+        mSexChart.setDragDecelerationFrictionCoef(0.95f);
+
+//        mSexChart.setCenterTextTypeface(tfLight);
+//        mSexChart.setCenterText(generateCenterSpannableText());
+
+        mSexChart.setDrawHoleEnabled(true);
+        mSexChart.setHoleColor(Color.WHITE);
+
+        mSexChart.setTransparentCircleColor(Color.WHITE);
+        mSexChart.setTransparentCircleAlpha(110);
+
+        mSexChart.setHoleRadius(58f);
+        mSexChart.setTransparentCircleRadius(61f);
+
+        mSexChart.setDrawCenterText(true);
+
+        mSexChart.setRotationAngle(0);
+        // enable rotation of the chart by touch
+        mSexChart.setRotationEnabled(true);
+        mSexChart.setHighlightPerTapEnabled(true);
+
+        // chart.setUnit(" €");
+        // chart.setDrawUnitsInChart(true);
+
+        // add a selection listener
+//        mSexChart.setOnChartValueSelectedListener(this);
+
+//        seekBarX.setProgress(4);
+//        seekBarY.setProgress(10);
+
+        mSexChart.animateY(1400, Easing.EaseInOutQuad);
+        // chart.spin(2000, 0, 360);
+
+        Legend l = mSexChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
+
+        // entry label styling
+        mSexChart.setEntryLabelColor(Color.WHITE);
+//        mSexChart.setEntryLabelTypeface(tfRegular);
+        mSexChart.setEntryLabelTextSize(12f);
+        setPicData(mSexChart, XList, XList.size(), floats, type);
+
+
+    }
+
+    private void setPicData(PieChart mSexChart, List<String> parties, int count, float[] floats, String type) {
+        ArrayList<PieEntry> entries = new ArrayList<>();
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        for (int i = 0; i < count; i++) {
+            entries.add(new PieEntry((float) (floats[i]),
+                    parties.get(i % parties.size())));
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+
+        dataSet.setDrawIcons(false);
+
+        dataSet.setSliceSpace(3f);
+        dataSet.setIconsOffset(new MPPointF(0, 40));
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter(mSexChart));
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.WHITE);
+//        data.setValueTypeface(tfLight);
+        mSexChart.setData(data);
+
+        if ("sex".equals(type)) {
+            mSexChart.invalidate();
+
+        } else {
+//            设置只有 百分百的
+//        for (IDataSet<?> set : mSexChart.getData().getDataSets())
+//            set.setDrawValues(!set.isDrawValuesEnabled());
+            mSexChart.setDrawEntryLabels(!mSexChart.isDrawEntryLabelsEnabled());
+//            chart.invalidate();
+            mSexChart.invalidate();
+////        设置全部园
+            if (mSexChart.isDrawHoleEnabled()) {
+                mSexChart.setDrawHoleEnabled(false);
+            } else {
+                mSexChart.setDrawHoleEnabled(true);
+            }
+        }
+        //设置只有 百分百的
+//        for (IDataSet<?> set : mSexChart.getData().getDataSets())
+//            set.setDrawValues(!set.isDrawValuesEnabled());
+//
+//        mSexChart.invalidate();
+//        设置全部园
+//        if (mSexChart.isDrawHoleEnabled()) {
+//            mSexChart.setDrawHoleEnabled(false);
+//        } else {
+//            mSexChart.setDrawHoleEnabled(true);
+//        }
+    }
+
+    @OnClick({R.id.linear_under_01, R.id.linear_under_03})
+    public void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.linear_under_01:
+                mPresenter.showPersonDialog(getActivity());
+                break;
+            case R.id.tv_under_before_days:
+                mPresenter.showDaysDialog(getActivity());
+                break;
+
+            case R.id.linear_under_03:
+                mPresenter.showDaysDialog(getActivity());
+                break;
+        }
+    }
+
+    //初始化02--树状图
+    private void initChart01(final List<String> data, float[] floats) {
+        // background color
+        mTChart01.setBackgroundColor(Color.WHITE);
+        // disable description text
+        mTChart01.getDescription().setEnabled(false);
+        // enable touch gestures
+        mTChart01.setTouchEnabled(true);
+        mTChart01.setDragEnabled(true);
+        mTChart01.setScaleEnabled(true);
+        mTChart01.setPinchZoom(true);
+
+        // set listeners
+        mTChart01.setDrawGridBackground(false);
+        // create marker to display box when values are selected
+        MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
+        // Set the marker to the chart
+        mv.setChartView(mTChart01);
+        mTChart01.setMarker(mv);
+        // enable scaling and dragging
+        XAxis xAxis = mTChart01.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.enableGridDashedLine(10f, 10f, 0f);
+        xAxis.setAxisMinimum(0f);
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return data.get((int) value % data.size());
+            }
+        });
+        YAxis yAxis;
+        yAxis = mTChart01.getAxisLeft();
+        // disable dual axis (only use LEFT axis)
+        mTChart01.getAxisRight().setEnabled(false);
+        // horizontal grid lines
+        yAxis.enableGridDashedLine(10f, 10f, 0f);
+        // draw limit lines behind data instead of on top
+        yAxis.setDrawLimitLinesBehindData(true);
+        // add data
+//        setChart01Data();
+        setChartLineData(mTChart01, floats);
+        // draw points over time
+//        chart.animateX(1500);
+        // get the legend (only possible after setting data)
+        Legend l = mTChart01.getLegend();
+        // draw legend entries as lines
+        l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
+        drawNumAndPoint(mTChart01);
+
+        List<ILineDataSet> sets = mTChart01.getData()
+                .getDataSets();
+        for (ILineDataSet iSet : sets) {
+
+            LineDataSet set = (LineDataSet) iSet;
+            set.setDrawValues(!set.isDrawValuesEnabled());
+        }
+        mTChart01.invalidate();
+
+    }
+
+    private void initChart02(final List<String> data, float[] floats) {
+
+        mChart02.setDrawBarShadow(false);
+        mChart02.setDrawValueAboveBar(true);
+
+        mChart02.getDescription().setEnabled(false);
+
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
+//        chart02.setMaxVisibleValueCount(60);
+        // scaling can now only be done on x- and y-axis separately
+        mChart02.setPinchZoom(false);
+
+        mChart02.setDrawGridBackground(false);
+        // chart.setDrawYLabels(false);
+
+        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(mChart02);
+
+        XAxis xAxis = mChart02.getXAxis();
+        xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f); // only intervals of 1 day
+        xAxis.setLabelCount(7);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return data.get((int) value % data.size());
+            }
+        });
+
+//        ValueFormatter custom = new MyValueFormatter("");    设置自定义文字   Y轴上
+
+        YAxis leftAxis = mChart02.getAxisLeft();
+//        leftAxis.setTypeface(tfLight);
+        leftAxis.setLabelCount(8, false);
+//        leftAxis.setValueFormatter(custom);
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+        leftAxis.setSpaceTop(15f);
+        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+        YAxis rightAxis = mChart02.getAxisRight();
+        rightAxis.setEnabled(false);
+        XYMarkerView mv = new XYMarkerView(getContext(), xAxisFormatter);    //点击柱状图显示信息
+        mv.setChartView(mChart02); // For bounds control
+        mChart02.setMarker(mv); // Set the marker to the chart
+        setChart02Data(floats);
+        Legend l = mChart02.getLegend();
+        // draw legend entries as lines
+        l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
+        // chart.setDrawLegend(false);
+
+        //取消默认顶部值
+
+        for (IDataSet set : mChart02.getData().getDataSets())
+            set.setDrawValues(!set.isDrawValuesEnabled());
+
+        mChart02.invalidate();
+
+    }
+
+    private void setChart02Data(float[] floats) {
+
+        float start = 1f;
+        ArrayList<BarEntry> values = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            values.add(new BarEntry(i, floats[i]));
+        }
+        BarDataSet set1;
+        if (mChart02.getData() != null &&
+                mChart02.getData().getDataSetCount() > 0) {
+            set1 = (BarDataSet) mChart02.getData().getDataSetByIndex(0);
+            set1.setValues(values);
+            mChart02.getData().notifyDataChanged();
+            mChart02.notifyDataSetChanged();
+
+        } else {
+            set1 = new BarDataSet(values, "");
+            set1.setDrawIcons(false);
+            int startColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
+            int endColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
+//            int startColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
+//            int endColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
+            List<GradientColor> gradientColors = new ArrayList<>();
+            gradientColors.add(new GradientColor(startColor1, endColor1));
+            set1.setGradientColors(gradientColors);
+            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+            float barWidth = 0.4f; // x2 dataset    //这个是树状图的树桩直径
+            BarData data = new BarData(dataSets);
+            data.setValueTextSize(10f);
+            data.setBarWidth(barWidth);
+            mChart02.setData(data);
+        }
+    }
+
+    public void setChartLineData(LineChart chart, float[] floats) {
+        ArrayList<Entry> values = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            values.add(new Entry(i, floats[i]));
+        }
+        LineDataSet set1;
+
+        if (chart.getData() != null &&
+                chart.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
+            set1.setValues(values);
+            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
+            set1.notifyDataSetChanged();
+            chart.getData().notifyDataChanged();
+            chart.notifyDataSetChanged();
+        } else {
+            // create a dataset and give it a type
+            set1 = new LineDataSet(values, "");
+            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
+            set1.setDrawIcons(false);
+
+            // draw dashed line     //链接线
+//            set1.enableDashedLine(10f, 5f, 0f);
+
+            // black lines and points
+            set1.setColor(getResources().getColor(R.color.color_21ac90));
+            set1.setCircleColor(getResources().getColor(R.color.color_21ac90));
+
+            // line thickness and point size
+            set1.setLineWidth(1f);
+            set1.setCircleRadius(3f);
+
+            // draw points as solid circles
+            set1.setDrawCircleHole(false);
+
+            // customize legend entry
+            set1.setFormLineWidth(1f);
+            set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+            set1.setFormSize(15.f);
+
+            // text size of values
+            set1.setValueTextSize(9f);
+
+            // draw selection line as dashed
+            set1.enableDashedHighlightLine(10f, 5f, 0f);
+
+
+            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
+            set1.setLineWidth(1.5f);
+            set1.setCircleRadius(4f);
+
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1); // add the data sets
+
+            // create a data object with the data sets
+            LineData data = new LineData(dataSets);
+
+            // set data
+            chart.setData(data);
+        }
+    }
+
+    private void drawNumAndPoint(LineChart chart) {
+        List<ILineDataSet> sets = chart.getData()
+                .getDataSets();
+
+        for (ILineDataSet iSet : sets) {
+
+            LineDataSet set = (LineDataSet) iSet;
+            set.setDrawValues(!set.isDrawValuesEnabled());
+        }
+        for (ILineDataSet iSet : sets) {
+
+            LineDataSet set = (LineDataSet) iSet;
+            if (set.isDrawCirclesEnabled())
+                set.setDrawCircles(false);
+            else
+                set.setDrawCircles(true);
+        }
+
+        chart.invalidate();
+    }
+
 
     @Override
     public void showLoadingView() {
@@ -113,6 +596,7 @@ public class YunFragment extends BaseFragment implements YunView {
     public void showErrorView() {
         showError();
     }
+
 
     @Override
     public TextView getTotal() {
@@ -155,6 +639,21 @@ public class YunFragment extends BaseFragment implements YunView {
     }
 
     @Override
+    public TextView getUnderPersonCount() {
+        return tv_under_person_count;
+    }
+
+    @Override
+    public TextView getUnderType() {
+        return tv_under_person;
+    }
+
+    @Override
+    public TextView getUnderDays() {
+        return tv_under_before_days;
+    }
+
+    @Override
     public TextView getDrableIcon01() {
         return tv_drawable_icon_01;
     }
@@ -180,6 +679,8 @@ public class YunFragment extends BaseFragment implements YunView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        timer.cancel();
+
         unbinder.unbind();
     }
 }

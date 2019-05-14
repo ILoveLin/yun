@@ -333,6 +333,11 @@
     <color name="color_85878f">#85878f</color>
     <color name="color_f53c3c">#f53c3c</color>
     <color name="color_b3b3b3">#b3b3b3</color>
+    <color name="dialog_confirm">#007aff</color>
+    <color name="dialog_line">#2c000000</color>
+    <color name="dialog_bg">#ffffff</color>
+    <color name="dialog_bg_press">#f0f0f0</color>
+    <color name="dialog_cancel">#f44336</color>
 
     <!--zbar start-->
     <color name="viewfinder_laser">#ffff0000</color>

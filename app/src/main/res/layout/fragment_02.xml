@@ -23,6 +23,13 @@
 
                 <include layout="@layout/include_yun_top"></include>
 
+                <View style="@style/LineItemStyleTransparent_10dp" />
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="昨日数据" />
+
+                <View style="@style/LineItemStyleTransparent_10dp" />
                 <!--曲线图 -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -33,7 +40,7 @@
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/chart1"
                         android:layout_width="match_parent"
-                        android:layout_height="220dp"
+                        android:layout_height="200dp"
                         android:layout_marginTop="@dimen/padding_10"
                         android:layout_marginBottom="@dimen/padding_10"
                         android:background="#ffffff" />
@@ -41,6 +48,12 @@
                 </LinearLayout>
 
                 <!--树状图-->
+                <View style="@style/LineItemStyleTransparent_10dp" />
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="今日数据" />
+
                 <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
@@ -73,14 +86,66 @@
 
                 <View style="@style/LineItemStyleE0E0E0" />
 
+                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="性别占比" />
+
+                <View style="@style/LineItemStyleTransparent_10dp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
-                    android:gravity="center"
-                    android:text="圆形图"
-                    android:textColor="@color/color_21ac90"
-                    android:textSize="@dimen/padding_35" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/sex_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/padding_240" />
+                </LinearLayout>
+
+                <View style="@style/LineItemStyleTransparent_10dp" />
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="年龄占比" />
+
+                <View style="@style/LineItemStyleTransparent_10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/year_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/padding_240" />
+                </LinearLayout>
+
+                <View style="@style/LineItemStyleTransparent_10dp" />
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="兴趣占比" />
+
+                <View style="@style/LineItemStyleTransparent_10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/interest_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/padding_240" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
