@@ -58,6 +58,13 @@ import butterknife.Unbinder;
  * Describe:财务数据--01
  */
 public class FinanceDataFragment extends BaseFragment implements FinanceDataView {
+    float myDateY[] = new float[]{8, 6, 16, 14, 12, 12, 2, 8, 14, 12, 6, 6, 4, 18, 16, 6, 8, 4, 8, 4, 16};
+    float myDateLineY[] = new float[]{8, 6, 14, 6, 4, 14, 14, 12, 4, 4, 6, 8, 10, 4, 12, 8, 10, 10, 14, 12, 10};
+
+    protected final String[] mXDate = new String[]{
+            "9:44:54", "9:44:53", "9:44:52", "9:44:51", "9:44:50", "9:44:49", "9:44:48", "9:44:47",
+            "9:44:46", "9:44:45", "9:44:44", "9:44:43", "9:44:42", "9:44:41", "9:44:40", "9:44:39",
+            "9:44:38", "9:44:37", "9:44:36", "9:44:35", "9:44:34"};
 
     @BindView(R.id.fake_status_bar)
     View mFakeStatusBar;
@@ -359,8 +366,8 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         // chart.setDrawLegend(false);
 
         //取消默认顶部值
-//        for (IDataSet set : chart02.getData().getDataSets())
-//            set.setDrawValues(!set.isDrawValuesEnabled());
+        for (IDataSet set : chart02.getData().getDataSets())
+            set.setDrawValues(!set.isDrawValuesEnabled());
 
         chart02.invalidate();
 
@@ -399,12 +406,6 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
             data.setBarWidth(barWidth);
-
-            //柱状图顶部带数值
-            for (IDataSet<?> set : chart02.getData().getDataSets())
-                set.setDrawValues(!set.isDrawValuesEnabled());
-
-
             chart02.setData(data);
         }
     }
@@ -458,17 +459,6 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         // draw legend entries as lines
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
         drawNumAndPoint(chart01);
-
-//        List<ILineDataSet> sets = chart01.getData()
-//                .getDataSets();
-//
-//        for (ILineDataSet iSet : sets) {
-//
-//            LineDataSet set = (LineDataSet) iSet;
-//            set.setDrawValues(!set.isDrawValuesEnabled());
-//        }
-//
-//        chart01.invalidate();
 
 
     }
