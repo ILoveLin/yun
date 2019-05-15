@@ -43,24 +43,6 @@ public class YunPresenter {
         this.mView = mView;
     }
 
-    public void showPersonDialog(FragmentActivity activity) {
-        List<String> data = new ArrayList<>();
-        data.add("展现");
-        data.add("展现人数");
-        data.add("消费");
-        data.add("点击");
-        data.add("点击人数");
-        showDialog(activity, data, "type");
-    }
-
-
-    public void showDaysDialog(FragmentActivity activity) {
-        List<String> data = new ArrayList<>();
-        data.add("昨天");
-        data.add("过去7天");
-        data.add("过去30天");
-        showDialog(activity, data, "days");
-    }
 
     private void showDialog(FragmentActivity activity, List<String> data, final String type) {
         new MenuDialog.Builder(activity)
@@ -74,15 +56,15 @@ public class YunPresenter {
 //                        sendPicChartRequest("7", "1");   //默认给的  7天    1:展现人数
                         if ("type".equals(type)) {     //类型
                             mView.getUnderType().setText("" + text);
-                            setCurrentTypeStr(text);
-                            selectParams(currentDayStr, currentTypeStr);
+                            setCurrentDayStr(text);
+                            selectParams(getCurrentDayStr(), getCurrentTypeStr());
                             sendPicChartRequest(currentDayNum, currentTypeNum);   //默认给的  7天    1:展现人数
-
 
                         } else {                  //过去天数
                             mView.getUnderDays().setText("" + text);
                             setCurrentDayStr(text);
-                            selectParams(currentDayStr, currentTypeStr);
+                            selectParams(getCurrentDayStr(), getCurrentTypeStr());
+
                             sendPicChartRequest(currentDayNum, currentTypeNum);   //默认给的  7天    1:展现人数
                         }
 //                        mView.showToast("位置：" + position + "，文本：" + text);
@@ -98,10 +80,24 @@ public class YunPresenter {
                 .show();
     }
 
-    private void selectParams(String currentDayStr, String currentTypeStr) {
+    public void selectParams(String currentDayStr, String currentTypeStr) {
 //        0：展现 1：展现人数 2：消费 3：点击 4：点击人数       //currentTypeNum
 //        1:昨日,7:7天,14:14天,30:30天                          //currentDayNum
         switch (currentDayStr) {
+            case "昨日":
+                this.currentDayNum = "1";
+                break;
+            case "过去7天":
+                this.currentDayNum = "7";
+                break;
+            case "过去14天":
+                this.currentDayNum = "14";
+                break;
+            case "过去30天":
+                this.currentDayNum = "30";
+                break;
+        }
+        switch (currentTypeStr) {
             case "展现":
                 this.currentTypeNum = "0";
                 break;
@@ -116,21 +112,6 @@ public class YunPresenter {
                 break;
             case "点击人数":
                 this.currentTypeNum = "4";
-                break;
-        }
-
-        switch (currentTypeStr) {
-            case "昨日":
-                this.currentTypeNum = "1";
-                break;
-            case "7天":
-                this.currentTypeNum = "7";
-                break;
-            case "14天":
-                this.currentTypeNum = "14";
-                break;
-            case "30天":
-                this.currentTypeNum = "30";
                 break;
         }
 
@@ -288,7 +269,25 @@ public class YunPresenter {
 
     }
 
+    public void showPersonDialog(FragmentActivity activity) {
+        List<String> data = new ArrayList<>();
+        data.add("展现");
+        data.add("展现人数");
+        data.add("消费");
+        data.add("点击");
+        data.add("点击人数");
+        showDialog(activity, data, "type");
+    }
 
+
+    public void showDaysDialog(FragmentActivity activity) {
+        List<String> data = new ArrayList<>();
+        data.add("昨天");
+        data.add("过去7天");
+        data.add("过去14天");
+        data.add("过去30天");
+        showDialog(activity, data, "days");
+    }
 
     public String getCurrentDayStr() {
         return currentDayStr;

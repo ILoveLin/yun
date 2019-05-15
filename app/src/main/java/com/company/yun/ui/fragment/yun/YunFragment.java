@@ -40,7 +40,6 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.model.GradientColor;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -109,22 +108,19 @@ public class YunFragment extends BaseFragment implements YunView {
     LinearLayout mLinearUnder01;
     @BindView(R.id.linear_under_02)
     LinearLayout mLinearUnder02;
-    @BindView(R.id.linear_under_03)
-    LinearLayout mLinearUnder03;
     Unbinder unbinder;
     private YunPresenter mPresenter;
     private final Timer timer = new Timer();
     private TimerTask task;
+    public Boolean isFirstPicRequest = true;    // 解决圆形图 显示类型数字bug
+    public int time = 1;
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            // 要做的事情
             super.handleMessage(msg);
             mPresenter.sendChartDataRequest("times");
         }
     };
-
 
     @Override
     public int getContentViewId() {
@@ -143,14 +139,13 @@ public class YunFragment extends BaseFragment implements YunView {
         task = new TimerTask() {
             @Override
             public void run() {
-                // TODO Auto-generated method stub
                 Message message = new Message();
                 message.what = 1;
                 handler.sendMessage(message);
             }
         };
 
-        timer.schedule(task, 2000, 3000);
+        timer.schedule(task, 5000, 3000);
     }
 
     private void initView() {
@@ -165,7 +160,6 @@ public class YunFragment extends BaseFragment implements YunView {
     public void refreshLineBarUIData(List<String> xList, List<String> todayDataList, List<String> yesterdayDataList) {
         initChart01(xList, DataUtils.toFloat(todayDataList));
         initChart02(xList, DataUtils.toFloat(yesterdayDataList));
-//        initPicChart(mSexChart,floats);
 
     }
 
@@ -177,7 +171,6 @@ public class YunFragment extends BaseFragment implements YunView {
         List<String> ageRate = age.getX();
         List<String> interestString = interest.getY();      //Y   都是说明
         List<String> interestRate = interest.getX();
-
 
         initPicChart(mChart, sexString, DataUtils.toFloat(sexRate), "sex");
         initPicChart(mYearChart, ageString, DataUtils.toFloat(ageRate), "age");
@@ -191,38 +184,17 @@ public class YunFragment extends BaseFragment implements YunView {
         mSexChart.getDescription().setEnabled(false);
         mSexChart.setExtraOffsets(5, 10, 5, 5);
         mSexChart.setDragDecelerationFrictionCoef(0.95f);
-
-//        mSexChart.setCenterTextTypeface(tfLight);
-//        mSexChart.setCenterText(generateCenterSpannableText());
-
         mSexChart.setDrawHoleEnabled(true);
         mSexChart.setHoleColor(Color.WHITE);
-
         mSexChart.setTransparentCircleColor(Color.WHITE);
         mSexChart.setTransparentCircleAlpha(110);
-
         mSexChart.setHoleRadius(58f);
         mSexChart.setTransparentCircleRadius(61f);
-
         mSexChart.setDrawCenterText(true);
-
         mSexChart.setRotationAngle(0);
-        // enable rotation of the chart by touch
         mSexChart.setRotationEnabled(true);
         mSexChart.setHighlightPerTapEnabled(true);
-
-        // chart.setUnit(" €");
-        // chart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-//        mSexChart.setOnChartValueSelectedListener(this);
-
-//        seekBarX.setProgress(4);
-//        seekBarY.setProgress(10);
-
         mSexChart.animateY(1400, Easing.EaseInOutQuad);
-        // chart.spin(2000, 0, 360);
-
         Legend l = mSexChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
@@ -231,10 +203,7 @@ public class YunFragment extends BaseFragment implements YunView {
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
-
-        // entry label styling
         mSexChart.setEntryLabelColor(Color.WHITE);
-//        mSexChart.setEntryLabelTypeface(tfRegular);
         mSexChart.setEntryLabelTextSize(12f);
         setPicData(mSexChart, XList, XList.size(), floats, type);
 
@@ -243,84 +212,55 @@ public class YunFragment extends BaseFragment implements YunView {
 
     private void setPicData(PieChart mSexChart, List<String> parties, int count, float[] floats, String type) {
         ArrayList<PieEntry> entries = new ArrayList<>();
-
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
         for (int i = 0; i < count; i++) {
             entries.add(new PieEntry((float) (floats[i]),
                     parties.get(i % parties.size())));
         }
-
         PieDataSet dataSet = new PieDataSet(entries, "Election Results");
-
         dataSet.setDrawIcons(false);
-
         dataSet.setSliceSpace(3f);
         dataSet.setIconsOffset(new MPPointF(0, 40));
         dataSet.setSelectionShift(5f);
-
-        // add a lot of colors
-
         ArrayList<Integer> colors = new ArrayList<>();
-
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.JOYFUL_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.COLORFUL_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.LIBERTY_COLORS)
             colors.add(c);
-
         for (int c : ColorTemplate.PASTEL_COLORS)
             colors.add(c);
-
         colors.add(ColorTemplate.getHoloBlue());
-
         dataSet.setColors(colors);
-        //dataSet.setSelectionShift(0f);
-
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter(mSexChart));
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
-//        data.setValueTypeface(tfLight);
         mSexChart.setData(data);
-
         if ("sex".equals(type)) {
             mSexChart.invalidate();
-
-        } else {
-//            设置只有 百分百的
-//        for (IDataSet<?> set : mSexChart.getData().getDataSets())
-//            set.setDrawValues(!set.isDrawValuesEnabled());
+        } else if (isFirstPicRequest) {
+            time++;
+            if (time == 3) {
+                isFirstPicRequest = false;
+            }
             mSexChart.setDrawEntryLabels(!mSexChart.isDrawEntryLabelsEnabled());
-//            chart.invalidate();
             mSexChart.invalidate();
-////        设置全部园
+        } else {
+            //设置全部园
             if (mSexChart.isDrawHoleEnabled()) {
                 mSexChart.setDrawHoleEnabled(false);
             } else {
                 mSexChart.setDrawHoleEnabled(true);
             }
+            mSexChart.invalidate();
         }
-        //设置只有 百分百的
-//        for (IDataSet<?> set : mSexChart.getData().getDataSets())
-//            set.setDrawValues(!set.isDrawValuesEnabled());
-//
-//        mSexChart.invalidate();
-//        设置全部园
-//        if (mSexChart.isDrawHoleEnabled()) {
-//            mSexChart.setDrawHoleEnabled(false);
-//        } else {
-//            mSexChart.setDrawHoleEnabled(true);
-//        }
+
     }
 
-    @OnClick({R.id.linear_under_01, R.id.linear_under_03})
+    @OnClick({R.id.linear_under_01, R.id.tv_under_before_days})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.linear_under_01:
@@ -329,33 +269,21 @@ public class YunFragment extends BaseFragment implements YunView {
             case R.id.tv_under_before_days:
                 mPresenter.showDaysDialog(getActivity());
                 break;
-
-            case R.id.linear_under_03:
-                mPresenter.showDaysDialog(getActivity());
-                break;
         }
     }
 
     //初始化02--树状图
     private void initChart01(final List<String> data, float[] floats) {
-        // background color
         mTChart01.setBackgroundColor(Color.WHITE);
-        // disable description text
         mTChart01.getDescription().setEnabled(false);
-        // enable touch gestures
         mTChart01.setTouchEnabled(true);
         mTChart01.setDragEnabled(true);
         mTChart01.setScaleEnabled(true);
         mTChart01.setPinchZoom(true);
-
-        // set listeners
         mTChart01.setDrawGridBackground(false);
-        // create marker to display box when values are selected
         MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
-        // Set the marker to the chart
         mv.setChartView(mTChart01);
         mTChart01.setMarker(mv);
-        // enable scaling and dragging
         XAxis xAxis = mTChart01.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.enableGridDashedLine(10f, 10f, 0f);
@@ -369,52 +297,35 @@ public class YunFragment extends BaseFragment implements YunView {
         });
         YAxis yAxis;
         yAxis = mTChart01.getAxisLeft();
-        // disable dual axis (only use LEFT axis)
         mTChart01.getAxisRight().setEnabled(false);
-        // horizontal grid lines
         yAxis.enableGridDashedLine(10f, 10f, 0f);
-        // draw limit lines behind data instead of on top
         yAxis.setDrawLimitLinesBehindData(true);
-        // add data
-//        setChart01Data();
         setChartLineData(mTChart01, floats);
-        // draw points over time
-//        chart.animateX(1500);
-        // get the legend (only possible after setting data)
         Legend l = mTChart01.getLegend();
-        // draw legend entries as lines
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
         drawNumAndPoint(mTChart01);
-
         List<ILineDataSet> sets = mTChart01.getData()
                 .getDataSets();
+        //画数值
         for (ILineDataSet iSet : sets) {
-
             LineDataSet set = (LineDataSet) iSet;
             set.setDrawValues(!set.isDrawValuesEnabled());
         }
+        //画小圆点
+        for (ILineDataSet iSet : sets) {
+            LineDataSet set = (LineDataSet) iSet;
+            set.setDrawCircles(false);
+        }
         mTChart01.invalidate();
-
     }
 
     private void initChart02(final List<String> data, float[] floats) {
-
         mChart02.setDrawBarShadow(false);
         mChart02.setDrawValueAboveBar(true);
-
         mChart02.getDescription().setEnabled(false);
-
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-//        chart02.setMaxVisibleValueCount(60);
-        // scaling can now only be done on x- and y-axis separately
         mChart02.setPinchZoom(false);
-
         mChart02.setDrawGridBackground(false);
-        // chart.setDrawYLabels(false);
-
         ValueFormatter xAxisFormatter = new DayAxisValueFormatter(mChart02);
-
         XAxis xAxis = mChart02.getXAxis();
         xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -427,13 +338,8 @@ public class YunFragment extends BaseFragment implements YunView {
                 return data.get((int) value % data.size());
             }
         });
-
-//        ValueFormatter custom = new MyValueFormatter("");    设置自定义文字   Y轴上
-
         YAxis leftAxis = mChart02.getAxisLeft();
-//        leftAxis.setTypeface(tfLight);
         leftAxis.setLabelCount(8, false);
-//        leftAxis.setValueFormatter(custom);
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(15f);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
@@ -444,22 +350,13 @@ public class YunFragment extends BaseFragment implements YunView {
         mChart02.setMarker(mv); // Set the marker to the chart
         setChart02Data(floats);
         Legend l = mChart02.getLegend();
-        // draw legend entries as lines
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
-        // chart.setDrawLegend(false);
-
         //取消默认顶部值
-
-        for (IDataSet set : mChart02.getData().getDataSets())
-            set.setDrawValues(!set.isDrawValuesEnabled());
-
         mChart02.invalidate();
 
     }
 
     private void setChart02Data(float[] floats) {
-
-        float start = 1f;
         ArrayList<BarEntry> values = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             values.add(new BarEntry(i, floats[i]));
@@ -477,8 +374,6 @@ public class YunFragment extends BaseFragment implements YunView {
             set1.setDrawIcons(false);
             int startColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
             int endColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
-//            int startColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
-//            int endColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
             List<GradientColor> gradientColors = new ArrayList<>();
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
@@ -498,7 +393,6 @@ public class YunFragment extends BaseFragment implements YunView {
             values.add(new Entry(i, floats[i]));
         }
         LineDataSet set1;
-
         if (chart.getData() != null &&
                 chart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
@@ -508,49 +402,25 @@ public class YunFragment extends BaseFragment implements YunView {
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
         } else {
-            // create a dataset and give it a type
             set1 = new LineDataSet(values, "");
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
             set1.setDrawIcons(false);
-
-            // draw dashed line     //链接线
-//            set1.enableDashedLine(10f, 5f, 0f);
-
-            // black lines and points
             set1.setColor(getResources().getColor(R.color.color_21ac90));
             set1.setCircleColor(getResources().getColor(R.color.color_21ac90));
-
-            // line thickness and point size
             set1.setLineWidth(1f);
             set1.setCircleRadius(3f);
-
-            // draw points as solid circles
             set1.setDrawCircleHole(false);
-
-            // customize legend entry
             set1.setFormLineWidth(1f);
             set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
             set1.setFormSize(15.f);
-
-            // text size of values
             set1.setValueTextSize(9f);
-
-            // draw selection line as dashed
             set1.enableDashedHighlightLine(10f, 5f, 0f);
-
-
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
             set1.setLineWidth(1.5f);
             set1.setCircleRadius(4f);
-
-
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1); // add the data sets
-
-            // create a data object with the data sets
             LineData data = new LineData(dataSets);
-
-            // set data
             chart.setData(data);
         }
     }
@@ -558,21 +428,17 @@ public class YunFragment extends BaseFragment implements YunView {
     private void drawNumAndPoint(LineChart chart) {
         List<ILineDataSet> sets = chart.getData()
                 .getDataSets();
-
         for (ILineDataSet iSet : sets) {
-
             LineDataSet set = (LineDataSet) iSet;
             set.setDrawValues(!set.isDrawValuesEnabled());
         }
         for (ILineDataSet iSet : sets) {
-
             LineDataSet set = (LineDataSet) iSet;
             if (set.isDrawCirclesEnabled())
                 set.setDrawCircles(false);
             else
                 set.setDrawCircles(true);
         }
-
         chart.invalidate();
     }
 
@@ -596,7 +462,6 @@ public class YunFragment extends BaseFragment implements YunView {
     public void showErrorView() {
         showError();
     }
-
 
     @Override
     public TextView getTotal() {
@@ -680,7 +545,7 @@ public class YunFragment extends BaseFragment implements YunView {
     public void onDestroyView() {
         super.onDestroyView();
         timer.cancel();
-
+        time = 0;
         unbinder.unbind();
     }
 }

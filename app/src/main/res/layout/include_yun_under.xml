@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/padding_1"
     android:background="@color/color_21ac90"
     android:orientation="horizontal"
     android:paddingTop="@dimen/padding_10"
     android:paddingBottom="@dimen/padding_10"
-    android:layout_marginBottom="@dimen/padding_1"
     android:weightSum="3">
 
     <LinearLayout
@@ -53,22 +53,13 @@
             android:text="30000999人" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_under_03"
+    <TextView
+        android:id="@+id/tv_under_before_days"
+        style="@style/TextTitle_white"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_under_before_days"
-            style="@style/TextTitle_white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="过去30天" />
-
-
-    </LinearLayout>
+        android:gravity="center_horizontal|center_vertical"
+        android:text="过去30天" />
 
 </LinearLayout>
