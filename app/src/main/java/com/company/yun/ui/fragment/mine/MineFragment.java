@@ -49,7 +49,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public int getContentViewId() {
-        return R.layout.fragment_04;
+        return R.layout.fragment_mine;
     }
 
     @Override

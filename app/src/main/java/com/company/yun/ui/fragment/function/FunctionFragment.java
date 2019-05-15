@@ -35,7 +35,7 @@ public class FunctionFragment extends BaseFragment {
 
     @Override
     public int getContentViewId() {
-        return R.layout.fragment_03;
+        return R.layout.fragment_function;
     }
 
     @Override

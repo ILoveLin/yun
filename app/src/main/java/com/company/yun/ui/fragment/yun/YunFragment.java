@@ -124,7 +124,7 @@ public class YunFragment extends BaseFragment implements YunView {
 
     @Override
     public int getContentViewId() {
-        return R.layout.fragment_02;
+        return R.layout.fragment_yun;
     }
 
     @Override

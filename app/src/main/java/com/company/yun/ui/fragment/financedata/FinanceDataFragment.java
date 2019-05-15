@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.company.yun.ui.fragment.financedata.presenter.FinanceDataPresenter;
 import com.company.yun.ui.fragment.financedata.presenter.FinanceDataView;
 import com.company.yun.utils.DataUtils;
 import com.company.yun.utils.NetworkUtil;
-import com.company.yun.utils.NumberUtils;
 import com.company.yun.view.widget.DayAxisValueFormatter;
 import com.company.yun.view.widget.MyMarkerView;
 import com.company.yun.view.widget.SettingBar;
@@ -43,7 +41,6 @@ import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.model.GradientColor;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -100,7 +97,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
 
     @Override
     public int getContentViewId() {
-        return R.layout.fragment_01;
+        return R.layout.fragment_finance;
     }
 
     @Override

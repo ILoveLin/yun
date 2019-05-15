@@ -22,5 +22,8 @@ public class HttpConstants {
     public static final String Yun_User_Data = Common + "/api/index/get_user_portrait.html";
     public static final String Yun_Chart_Line_Bar = Common + "/api/index/get_real_time";
 
+    //账户管理
+    public static final String Account = Common + "/api/index/sems";
+
 
 }
