@@ -12,14 +12,15 @@
         android:layout_height="match_parent"
         app:srlEnableAutoLoadMore="false"
         app:srlEnableLoadMore="true">
+        <!--app:srlDrawableProgress="@drawable/ic_progress_puzzle"-->
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srlClassicsSpinnerStyle="FixedBehind"
             app:srlDrawableArrowSize="20dp"
+            app:srlDrawableProgress="@mipmap/icon_refresh_logo"
             app:srlDrawableMarginRight="20dp"
-            app:srlDrawableProgress="@drawable/ic_progress_puzzle"
             app:srlDrawableProgressSize="20dp"
             app:srlEnableLastTime="true"
             app:srlFinishDuration="500"
@@ -135,7 +136,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@mipmap/icon_account_004"
+                        android:drawableLeft="@mipmap/icon_account_4"
                         android:drawablePadding="@dimen/padding_10"
                         android:paddingLeft="@dimen/padding_15"
                         android:text="总消费"
@@ -175,6 +176,7 @@
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
+            app:srlDrawableProgress="@mipmap/icon_refresh_logo"
             android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
