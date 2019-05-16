@@ -10,6 +10,19 @@ import java.util.List;
  */
 public class DataUtils {
 
+    protected final String[] mXString = new String[]{
+            "办公效率", "生活实用", "丽人母婴", "图像", "运动健康", "生活服务"};
+
+    public static List<String> get6List(List<String> list) {
+
+        ArrayList<String> m6List = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            m6List.add(list.get(i));
+        }
+        return m6List;
+    }
+
+
     public static float[] toFloat(List<String> money) {
         float[] fs = new float[money.size()];
         for (int i = 0; i < money.size(); i++) {

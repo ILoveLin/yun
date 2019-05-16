@@ -1,12 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="0111111"
-        android:textSize="@dimen/padding_18" />
-</LinearLayout>
+        app:srlEnablePureScrollMode="true">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!--性别占比-->
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="性别占比" />
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_pic_chart_sex"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pic_chart_sex"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+                <!---->
+
+                <!--省份占比-->
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="省份分布" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_bar_chart_province"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_chart_province"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+
+
+                <!--年龄结构-->
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="年龄结构" />
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_pic_chart_age"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pic_chart_age"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+                <!---->
+
+                <!--城市分布-->
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="城市分布" />
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_bar_chart_city"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_chart_city"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+
+                <!--消费水平-->
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="消费水平" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_pic_chart_xiaofei"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pic_chart_xiaofei"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+                <!---->
+
+                <!--学历分布-->
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="学历分布" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_bar_chart_study"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_chart_study"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+
+
+
+                <!--偏好分布-->
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="偏好分布" />
+
+
+                <!--bottom的三个柱状图-->
+                <include layout="@layout/include_person_bottom" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+</RelativeLayout>

@@ -26,4 +26,8 @@ public class HttpConstants {
     public static final String Account = Common + "/api/index/sems";
 
 
+    //功能 -- 人物画像
+    public static final String Person = Common + "/api/index/portrait_results";
+
+
 }

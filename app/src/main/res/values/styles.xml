@@ -90,6 +90,8 @@
         <item name="android:paddingRight">@dimen/padding_10</item>
     </style>
 
+    <!--<android.support.v7.widget.CardView-->
+        <!--style="@style/CommonCardViewStyle">-->
 
     <!--分隔线 line style  start-->
     <style name="LineItemStyle">
