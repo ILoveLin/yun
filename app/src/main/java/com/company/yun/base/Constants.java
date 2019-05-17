@@ -19,12 +19,25 @@ public class Constants {
     public static final String Device = "android";
     public static final String UserName = "username";
 
-
+    public static final int[] MATERIAL_COLORS_01 = {
+            rgb("#2ecc71")
+    };
     public static final int[] MATERIAL_COLORS_02 = {
             rgb("#2ecc71"), rgb("#f1c40f")
+
     };
     public static final int[] MATERIAL_COLORS_03 = {
             rgb("#2ecc71"), rgb("#f1c40f"), rgb("#e74c3c")
+
+    };
+    public static final int[] MATERIAL_COLORS_04 = {
+            rgb("#2ecc71"), rgb("#f1c40f"), rgb("#e74c3c"), rgb("#3498db")
+
+
+    };
+    public static final int[] MATERIAL_COLORS_05 = {
+            rgb("#2ecc71"), rgb("#f1c40f"), rgb("#e74c3c"), rgb("#3498db"), rgb("#f23030")
+
     };
     public static final int[] MATERIAL_COLORS_06 = {
             rgb("#2ecc71"), rgb("#f1c40f"), rgb("#e74c3c"), rgb("#3498db"), rgb("#f23030"), rgb("#1765bd"),

@@ -1,5 +1,7 @@
 package com.company.yun.utils;
 
+import com.company.yun.bean.function.PersonBean;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,16 +24,115 @@ public class DataUtils {
         return m6List;
     }
 
+    public static List<String> getEducationName(List<PersonBean.DataEntity.EducationEntity> education) {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        for (int i = 0; i < education.size(); i++) {
+            stringArrayList.add(education.get(i).getName());
+        }
+        return get6List(stringArrayList);
+
+    }
+
+
+    public static List<String> getEducationValue(List<PersonBean.DataEntity.EducationEntity> education) {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        for (int i = 0; i < education.size(); i++) {
+            stringArrayList.add(education.get(i).getValue());
+        }
+        return get6List(stringArrayList);
+
+    }
+
+    public static ArrayList<String> getConsumptionName(List<PersonBean.DataEntity.ConsumptionEntity> consumption) {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        for (int i = 0; i < consumption.size(); i++) {
+            stringArrayList.add(consumption.get(i).getName());
+        }
+        return stringArrayList;
+
+    }
+
+
+    public static ArrayList<String> getConsumptionValue(List<PersonBean.DataEntity.ConsumptionEntity> consumption) {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        for (int i = 0; i < consumption.size(); i++) {
+            stringArrayList.add(consumption.get(i).getValue());
+        }
+        return stringArrayList;
+
+    }
+
+    public static ArrayList<String> getAgeNameList(PersonBean.DataEntity.SocialEntity.Str_ageEntity str_age) {
+        ArrayList<String> ageList = new ArrayList<>();
+//        年龄 1:0-17,2:18-24,3:25-34,4:35-44,5:45+,
+        ageList.add("0-17岁");
+        ageList.add("18-24岁");
+        ageList.add("25-34岁");
+        ageList.add("35-44岁");
+        ageList.add("45+岁");
+        return ageList;
+
+    }
+
+    public static ArrayList<String> getAgeVauleList(PersonBean.DataEntity.SocialEntity.Str_ageEntity str_age) {
+        ArrayList<String> ageList = new ArrayList<>();
+//        年龄 1:0-17,2:18-24,3:25-34,4:35-44,5:45+,
+        ageList.add(str_age.getNoe());
+        ageList.add(str_age.getTow());
+        ageList.add(str_age.getThree());
+        ageList.add(str_age.getFour());
+        ageList.add(str_age.getFive());
+        return ageList;
+
+    }
+
+    public static List<String> getCityName(List<PersonBean.DataEntity.RegionEntity.CityEntity.ListEntity> provinceList) {
+        ArrayList<String> nameList = new ArrayList<>();
+        for (int i = 0; i < provinceList.size(); i++) {
+            nameList.add(provinceList.get(i).getName());
+        }
+        return get6List(nameList);
+    }
+
+    public static List<String> getCityValue(List<PersonBean.DataEntity.RegionEntity.CityEntity.ListEntity> provinceList) {
+        ArrayList<String> nameList = new ArrayList<>();
+        for (int i = 0; i < provinceList.size(); i++) {
+            nameList.add(provinceList.get(i).getValue());
+        }
+        return get6List(nameList);
+    }
+
+
+    public static List<String> getProvinceName(List<PersonBean.DataEntity.RegionEntity.ProvincesEntity.ListEntity> provinceList) {
+        ArrayList<String> nameList = new ArrayList<>();
+        for (int i = 0; i < provinceList.size(); i++) {
+            nameList.add(provinceList.get(i).getName());
+        }
+        return get6List(nameList);
+    }
+
+    public static List<String> getProvinceValue(List<PersonBean.DataEntity.RegionEntity.ProvincesEntity.ListEntity> provinceList) {
+        ArrayList<String> nameList = new ArrayList<>();
+        for (int i = 0; i < provinceList.size(); i++) {
+            nameList.add(provinceList.get(i).getValue());
+        }
+        return get6List(nameList);
+    }
+
 
     public static float[] toFloat(List<String> money) {
         float[] fs = new float[money.size()];
         for (int i = 0; i < money.size(); i++) {
             fs[i] = Float.parseFloat(money.get(i));
         }
-//        Arrays.sort(fs);
-//        for (int i = 0; i < fs.length; i++) {
-//            Log.e("fs======","排序====="+fs[i]);
-//        }
+        return fs;
+    }
+
+    public static String[] toString(List<String> money) {
+        String[] fs = new String[money.size()];
+        for (int i = 0; i < money.size(); i++) {
+            fs[i] = money.get(i);
+        }
         return fs;
     }
 

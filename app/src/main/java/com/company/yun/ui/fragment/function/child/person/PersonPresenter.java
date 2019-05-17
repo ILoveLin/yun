@@ -4,10 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.company.yun.base.HttpConstants;
-import com.company.yun.bean.account.AccountBean;
 import com.company.yun.bean.function.PersonBean;
-import com.company.yun.ui.fragment.account.presenter.AccountView;
-import com.company.yun.utils.NumberUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -50,11 +47,11 @@ public class PersonPresenter {
                         mBean.getAllData(response);
                         Log.e("PersonPresenter======", "解析之后=======" + mBean.toString());
                         if (mBean.getStatus().equals("0")) {
-                            mView.showToast("解析错误");
-                            mView.showErrorView();
-                        } else {
                             mView.showContentView();
                             mView.refreshData(mBean);
+                        } else {
+                            mView.showToast("解析错误");
+                            mView.showErrorView();
                         }
 
                     }

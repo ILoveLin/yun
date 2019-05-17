@@ -243,7 +243,7 @@ public class PersonBean {
                     setStr_age(str_ageEntity);
 
                     Str_sexEntity str_sexEntity = new Str_sexEntity();
-                    str_ageEntity.getData(object.getJSONObject("str_sex"));
+                    str_sexEntity.getData(object.getJSONObject("str_sex"));
                     setStr_sex(str_sexEntity);
 
                 } catch (JSONException e) {
@@ -510,11 +510,10 @@ public class PersonBean {
                         for (int i = 0; i < z.length(); i++) {
 
                             ArrayList<String> zList = new ArrayList<>();
-
                             //取出第一个array
                             JSONArray arrayZ = (JSONArray) z.get(i);
                             for (int zz = 0; zz < arrayZ.length(); zz++) {
-                                zList.add((String) arrayZ.get(i));
+                                zList.add((String) arrayZ.get(zz));
                             }
                             lists.add(zList);
                             setZ(lists);
@@ -590,7 +589,7 @@ public class PersonBean {
                             //取出第一个array
                             JSONArray arrayZ = (JSONArray) z.get(i);
                             for (int zz = 0; zz < arrayZ.length(); zz++) {
-                                zList.add((String) arrayZ.get(i));
+                                zList.add((String) arrayZ.get(zz));
                             }
                             lists.add(zList);
                             setZ(lists);
@@ -665,7 +664,7 @@ public class PersonBean {
                             //取出第一个array
                             JSONArray arrayZ = (JSONArray) z.get(i);
                             for (int zz = 0; zz < arrayZ.length(); zz++) {
-                                zList.add((String) arrayZ.get(i));
+                                zList.add((String) arrayZ.get(zz));
                             }
                             lists.add(zList);
                             setZ(lists);

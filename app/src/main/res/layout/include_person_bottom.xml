@@ -23,12 +23,24 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+
             <TextView
                 style="@style/TextTitle_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:text="年龄" />
+
+            <TextView
+                android:layout_marginTop="@dimen/padding_2"
+                android:id="@+id/tv_bottom_age"
+                style="@style/TextTitle_white"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:text="" />
+
 
         </LinearLayout>
 
@@ -47,53 +59,87 @@
                 android:gravity="center_horizontal"
                 android:text="性别" />
 
+            <TextView
+                android:layout_marginTop="@dimen/padding_2"
+                android:id="@+id/tv_bottom_sex"
+                style="@style/TextTitle_white"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:text="" />
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/linear_under_city"
-            style="@style/TextTitle_white"
+        <LinearLayout
+            android:id="@+id/linear_under_city_city"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical"
-            android:text="城市等级" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/linear_under_city"
+                style="@style/TextTitle_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="城市等级" />
+
+            <TextView
+                android:layout_marginTop="@dimen/padding_2"
+                android:id="@+id/tv_bottom_city"
+                style="@style/TextTitle_white"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:text="" />
+        </LinearLayout>
+
 
     </LinearLayout>
+
     <!--年龄-->
     <android.support.v7.widget.CardView
-        android:layout_below="@+id/person_all_tab"
         android:id="@+id/person_bottom_cardview_01"
-        style="@style/CommonCardViewStyle">
+        style="@style/CommonCardViewStyle"
+        android:visibility="invisible"
+        android:layout_below="@+id/person_all_tab">
 
         <com.github.mikephil.charting.charts.BarChart
-            android:visibility="invisible"
             android:id="@+id/bottom_chart01"
-            style="@style/CommonChartStyle" />
+            style="@style/CommonChartStyle"
+            android:visibility="visible" />
 
     </android.support.v7.widget.CardView>
 
     <!--性别-->
     <android.support.v7.widget.CardView
-        android:layout_below="@+id/person_all_tab"
         android:id="@+id/person_bottom_cardview_02"
-        style="@style/CommonCardViewStyle">
+        style="@style/CommonCardViewStyle"
+        android:visibility="invisible"
+        android:layout_below="@+id/person_all_tab">
 
         <com.github.mikephil.charting.charts.BarChart
-            android:visibility="invisible"
             android:id="@+id/bottom_chart02"
-            style="@style/CommonChartStyle" />
+            style="@style/CommonChartStyle"
+             />
 
     </android.support.v7.widget.CardView>
 
     <!--城市等级-->
     <android.support.v7.widget.CardView
-        android:layout_below="@+id/person_all_tab"
         android:id="@+id/person_bottom_cardview_03"
-        style="@style/CommonCardViewStyle">
+        style="@style/CommonCardViewStyle"
+        android:visibility="invisible"
+        android:layout_below="@+id/person_all_tab">
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bottom_chart03"
             style="@style/CommonChartStyle" />
 
     </android.support.v7.widget.CardView>
+
+
 </RelativeLayout>
