@@ -95,8 +95,8 @@ public class PlanFragment extends BaseFragment implements PlanView {
     }
 
     private void responseListener() {
-        mPresenter.sendRequest("口红");
-
+//        mPresenter.sendRequest("口红");
+        mPresenter.sendCheckRequest("口红");
         picChartChannel.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, Highlight h) {

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.company.yun.base.HttpConstants;
 import com.company.yun.bean.function.plan.AreaBean;
 import com.company.yun.bean.function.plan.ChannelBean;
+import com.company.yun.bean.function.plan.CheckBean;
 import com.company.yun.bean.function.plan.PortBean;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -27,50 +28,39 @@ public class PlanPresenter {
     private PortBean portBean;
     private ChannelBean channelBean;
     private AreaBean areaBean;
+    private CheckBean checkBean;
 
-    public PlanPresenter(PlanView mView, Context mContext) {
-        this.mView = mView;
-        this.mContext = mContext;
+    public void sendCheckRequest(final String keyword) {
+        mView.showLoadingView();
+        OkHttpUtils.post()
+                .url(HttpConstants.Plan_Check)
+                .addParams("keyword", keyword)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        mView.showErrorView();
+                        mView.showToast("请求返回错误");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.e("PersonPresenter======", "response=======" + response);
+                        mView.showContentView();
+                        checkBean = new CheckBean();
+                        checkBean.getAllData(response);
+                        if (checkBean.getStatus().equals("0")) {
+                            sendRequest(keyword);
+                        } else {
+                            mView.showToast("该关键字不支持搜索");
+                        }
+
+                    }
+                });
     }
 
-    public ArrayList<String> getArealNameList(List<AreaBean.DataEntity.ProvincesEntity.ListEntity> areaList) {
-
-        ArrayList<String> nameList = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            nameList.add(areaList.get(i).getName());
-        }
-        return nameList;
-    }
-
-    public ArrayList<String> getArealValueList(List<AreaBean.DataEntity.ProvincesEntity.ListEntity> areaList) {
-
-        ArrayList<String> valueList = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            valueList.add(areaList.get(i).getValue());
-        }
-        return valueList;
-    }
-
-    public ArrayList<String> getChannelNameList(List<ChannelBean.DataEntity> channelBeanList) {
-
-        ArrayList<String> nameList = new ArrayList<>();
-        for (int i = 0; i < channelBeanList.size(); i++) {
-            nameList.add(channelBeanList.get(i).getName());
-        }
-        return nameList;
-    }
-
-    public ArrayList<String> getChannelValueList(List<ChannelBean.DataEntity> channelBeanList) {
-
-        ArrayList<String> valueList = new ArrayList<>();
-        for (int i = 0; i < channelBeanList.size(); i++) {
-            valueList.add(channelBeanList.get(i).getValue());
-        }
-        return valueList;
-    }
 
     public void sendRequest(final String keyword) {
-        mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Plan_Port)
                 .addParams("keyword", keyword)
@@ -159,7 +149,46 @@ public class PlanPresenter {
                 });
     }
 
+    public PlanPresenter(PlanView mView, Context mContext) {
+        this.mView = mView;
+        this.mContext = mContext;
+    }
 
+    public ArrayList<String> getArealNameList(List<AreaBean.DataEntity.ProvincesEntity.ListEntity> areaList) {
+
+        ArrayList<String> nameList = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            nameList.add(areaList.get(i).getName());
+        }
+        return nameList;
+    }
+
+    public ArrayList<String> getArealValueList(List<AreaBean.DataEntity.ProvincesEntity.ListEntity> areaList) {
+
+        ArrayList<String> valueList = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            valueList.add(areaList.get(i).getValue());
+        }
+        return valueList;
+    }
+
+    public ArrayList<String> getChannelNameList(List<ChannelBean.DataEntity> channelBeanList) {
+
+        ArrayList<String> nameList = new ArrayList<>();
+        for (int i = 0; i < channelBeanList.size(); i++) {
+            nameList.add(channelBeanList.get(i).getName());
+        }
+        return nameList;
+    }
+
+    public ArrayList<String> getChannelValueList(List<ChannelBean.DataEntity> channelBeanList) {
+
+        ArrayList<String> valueList = new ArrayList<>();
+        for (int i = 0; i < channelBeanList.size(); i++) {
+            valueList.add(channelBeanList.get(i).getValue());
+        }
+        return valueList;
+    }
 }
 
 
