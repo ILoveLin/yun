@@ -22,6 +22,7 @@ import com.company.yun.utils.DataUtils;
 import com.company.yun.utils.NetworkUtil;
 import com.company.yun.view.widget.DayAxisValueFormatter;
 import com.company.yun.view.widget.MyMarkerView;
+import com.company.yun.view.widget.MyPersonDayAxisValueFormatter;
 import com.company.yun.view.widget.SettingBar;
 import com.company.yun.view.widget.XYMarkerView;
 import com.github.mikephil.charting.charts.BarChart;
@@ -150,7 +151,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         List<String> ddate = month.getDdate();
         List<String> money1 = month.getMoney();
         List<String> ratio = month.getRatio();
-        initChart02(ddate, DataUtils.toFloat(money1));
+        initChart02(ddate, DataUtils.toFloat(money1),DataUtils.toString(data));
         //环比
         //ratio---month---(x---data   y-----ratio)
         Collections.sort(ddate);
@@ -311,7 +312,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
 
     //初始化02--柱状图
 
-    private void initChart02(final List<String> data, float[] floats) {
+    private void initChart02(final List<String> data, float[] floats, String[] string) {
 
         chart02.setDrawBarShadow(false);
         chart02.setDrawValueAboveBar(true);
@@ -327,7 +328,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         chart02.setDrawGridBackground(false);
         // chart.setDrawYLabels(false);
 
-        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(chart02);
+        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(chart02,string);
 
         XAxis xAxis = chart02.getXAxis();
         xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线

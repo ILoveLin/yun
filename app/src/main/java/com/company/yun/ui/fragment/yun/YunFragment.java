@@ -20,6 +20,7 @@ import com.company.yun.ui.fragment.yun.presenter.YunView;
 import com.company.yun.utils.DataUtils;
 import com.company.yun.view.widget.DayAxisValueFormatter;
 import com.company.yun.view.widget.MyMarkerView;
+import com.company.yun.view.widget.MyPersonDayAxisValueFormatter;
 import com.company.yun.view.widget.XYMarkerView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -158,8 +159,9 @@ public class YunFragment extends BaseFragment implements YunView {
 
     @Override
     public void refreshLineBarUIData(List<String> xList, List<String> todayDataList, List<String> yesterdayDataList) {
-        initChart01(xList, DataUtils.toFloat(todayDataList));
-        initChart02(xList, DataUtils.toFloat(yesterdayDataList));
+        initChart01(xList, DataUtils.toFloat(todayDataList),DataUtils.toString(xList));
+
+        initChart02(xList, DataUtils.toFloat(yesterdayDataList),DataUtils.toString(xList));
 
     }
 
@@ -273,7 +275,7 @@ public class YunFragment extends BaseFragment implements YunView {
     }
 
     //初始化02--树状图
-    private void initChart01(final List<String> data, float[] floats) {
+    private void initChart01(final List<String> data, float[] floats,String[] string) {
         mTChart01.setBackgroundColor(Color.WHITE);
         mTChart01.getDescription().setEnabled(false);
         mTChart01.setTouchEnabled(true);
@@ -284,11 +286,14 @@ public class YunFragment extends BaseFragment implements YunView {
         MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
         mv.setChartView(mTChart01);
         mTChart01.setMarker(mv);
+        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(mChart02,string);
         XAxis xAxis = mTChart01.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.enableGridDashedLine(10f, 10f, 0f);
         xAxis.setAxisMinimum(0f);
         xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(xAxisFormatter);
+
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
@@ -319,13 +324,15 @@ public class YunFragment extends BaseFragment implements YunView {
         mTChart01.invalidate();
     }
 
-    private void initChart02(final List<String> data, float[] floats) {
+    private void initChart02(final List<String> data, float[] floats,String[] string) {
         mChart02.setDrawBarShadow(false);
         mChart02.setDrawValueAboveBar(true);
         mChart02.getDescription().setEnabled(false);
         mChart02.setPinchZoom(false);
         mChart02.setDrawGridBackground(false);
-        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(mChart02);
+//        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(mChart02);
+        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(mChart02,string);
+
         XAxis xAxis = mChart02.getXAxis();
         xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);

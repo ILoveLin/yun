@@ -172,7 +172,8 @@ public class YunPresenter {
                             // y[0]今日数据,y[1]为昨日数据
                             List<Integer> todayDataList = yList.get(0);
                             List<Integer> yesterdayDataList = yList.get(1);
-                            mView.refreshLineBarUIData(xList, DataUtils.toStringList(todayDataList), DataUtils.toStringList(yesterdayDataList));
+                            mView.refreshLineBarUIData(xList, DataUtils.toStringList(todayDataList),
+                                    DataUtils.toStringList(yesterdayDataList));
                             if ("alone".equals(type)) {
                                 sendPicChartRequest("7", "1");   //默认给的  7天    1:展现人数
                             }

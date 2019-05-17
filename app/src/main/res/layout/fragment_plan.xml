@@ -1,12 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="02222"
-        android:textSize="@dimen/padding_18" />
-</LinearLayout>
+        app:srlEnablePureScrollMode="true">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--投放端口-->
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="投放端口" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_bar_chart_port"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_chart_port"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+
+                <!--渠道分布-->
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="渠道分布" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_pic_chart_channel"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pic_chart_channel"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+                <!---->
+
+                <!--区域分布-->
+
+                <TextView
+                    style="@style/TextTitle_color_21ac90"
+                    android:text="区域分布--- Top 6 占比" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardview_bar_chart_area"
+                    style="@style/CommonCardViewStyle">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bar_chart_area"
+                        style="@style/CommonChartStyle" />
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>

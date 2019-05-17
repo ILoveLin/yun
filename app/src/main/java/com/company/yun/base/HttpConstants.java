@@ -28,6 +28,12 @@ public class HttpConstants {
 
     //功能 -- 人物画像
     public static final String Person = Common + "/api/index/portrait_results";
+    //功能 -- 投放方案-投放端口
+    public static final String Plan_Port = Common + "/api/Promotion/get_duankou";
+    //功能 -- 投放方案-渠道分布
+    public static final String Plan_Channel = Common + "/api/Promotion/get_qudao";
+    //功能 -- 投放方案-地域分布
+    public static final String Plan_Area = Common + "/api/Promotion/get_china";
 
 
 }

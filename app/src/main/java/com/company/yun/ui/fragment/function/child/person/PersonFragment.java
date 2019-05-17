@@ -1,10 +1,9 @@
-package com.company.yun.ui.fragment.function.child;
+package com.company.yun.ui.fragment.function.child.person;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,11 @@ import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.base.Constants;
 import com.company.yun.bean.function.PersonBean;
-import com.company.yun.ui.fragment.function.child.person.PersonPresenter;
-import com.company.yun.ui.fragment.function.child.person.PersonView;
+import com.company.yun.ui.fragment.function.child.person.presenter.PersonPresenter;
+import com.company.yun.ui.fragment.function.child.person.presenter.PersonView;
 import com.company.yun.utils.DataUtils;
-import com.company.yun.view.widget.DayAxisValueFormatter;
 import com.company.yun.view.widget.DayProvinceAxisValueFormatter;
+import com.company.yun.view.widget.MyPersonDayAxisValueFormatter;
 import com.company.yun.view.widget.XYMarkerView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -140,7 +139,9 @@ public class PersonFragment extends BaseFragment implements PersonView {
         initPicChart(picChartSex, sexList, DataUtils.toFloat(sexDataList), "picSex");
         //省份分布
         List<PersonBean.DataEntity.RegionEntity.ProvincesEntity.ListEntity> provinceList = mBean.getData().getRegion().getProvinces().getList();
-        initBarChart(barChartProvince, DataUtils.getProvinceName(provinceList), DataUtils.toFloat(DataUtils.getProvinceValue(provinceList)));
+        initBarChart(barChartProvince, DataUtils.getProvinceName(provinceList),
+                DataUtils.toFloat(DataUtils.getProvinceValue(provinceList))
+                , DataUtils.toString(DataUtils.getProvinceName(provinceList)));
 //        initBarChart(barChartProvince, DataUtils.getProvinceName(provinceList), DataUtils.toFloat(DataUtils.getProvinceValue(provinceList)));
 
         //年龄结构
@@ -150,7 +151,8 @@ public class PersonFragment extends BaseFragment implements PersonView {
 
         //城市分布
         List<PersonBean.DataEntity.RegionEntity.CityEntity.ListEntity> cityList = mBean.getData().getRegion().getCity().getList();
-        initBarChart(barChartCity, DataUtils.getCityName(cityList), DataUtils.toFloat(DataUtils.getCityValue(cityList)));
+        initBarChart(barChartCity, DataUtils.getCityName(cityList), DataUtils.toFloat(DataUtils.getCityValue(cityList))
+                , DataUtils.toString(DataUtils.getCityName(cityList)));
 
         //消费水平
         List<PersonBean.DataEntity.ConsumptionEntity> consumption = mBean.getData().getConsumption();
@@ -158,7 +160,8 @@ public class PersonFragment extends BaseFragment implements PersonView {
 
         //学历分布
         List<PersonBean.DataEntity.EducationEntity> education = mBean.getData().getEducation();
-        initBarChart(barChartStudy, DataUtils.getEducationName(education), DataUtils.toFloat(DataUtils.getEducationValue(education)));
+        initBarChart(barChartStudy, DataUtils.getEducationName(education), DataUtils.toFloat(DataUtils.getEducationValue(education)),
+                DataUtils.toString(DataUtils.getEducationName(education)));
 
         //偏好分布
         //城市
@@ -181,23 +184,7 @@ public class PersonFragment extends BaseFragment implements PersonView {
 
         //年纪    tv_bottom_age    默认显示年纪的柱状图
         changeBottomLinesStatues(tv_bottom_age, person_bottom_cardview_01);
-        for (int i = 0; i < DataUtils.get6List(xAgeList).size(); i++) {
-            String s = DataUtils.get6List(xAgeList).get(i);
-            Log.e("AGE=======", ":xAgeList======" + s);
-        }
-        for (int i = 0; i < yAgeList.size(); i++) {
-            Log.e("AGE=======", ":yAgeList======" + yAgeList.get(i));
-
-        }
-        for (int i = 0; i < zAgeList.size(); i++) {
-            Log.e("AGE=======", ":zAgeList===外==i====" + zAgeList.size());
-
-            for (int i1 = 0; i1 < zAgeList.get(i).size(); i1++) {
-                Log.e("AGE=======", ":zAgeList===内==i1====" + zAgeList.get(i).get(i1));
-
-            }
-        }
-        initThreeBsrChart(bottomChartAge, DataUtils.get6List(xAgeList), zAgeList, yAgeList);
+        initThreeBsrChart(bottomChartAge, DataUtils.get6List(xAgeList), zAgeList, yAgeList, DataUtils.toString(DataUtils.get6List(xAgeList)));
 
 //
 //        changeBottomLinesStatues(tv_bottom_sex, bottomChartSex);
@@ -213,15 +200,15 @@ public class PersonFragment extends BaseFragment implements PersonView {
         switch (view.getId()) {
             case R.id.linear_under_sex:
                 changeBottomLinesStatues(tv_bottom_sex, person_bottom_cardview_02);
-                initThreeBsrChart(bottomChartSex, DataUtils.get6List(xSexList), zSexList, ySexList);
+                initThreeBsrChart(bottomChartSex, DataUtils.get6List(xSexList), zSexList, ySexList, DataUtils.toString(DataUtils.get6List(xAgeList)));
                 break;
             case R.id.linear_under_city_city:
                 changeBottomLinesStatues(tv_bottom_city, person_bottom_cardview_03);
-                initThreeBsrChart(bottomChartCity, DataUtils.get6List(xCityList), zCityList, yCityList);
+                initThreeBsrChart(bottomChartCity, DataUtils.get6List(xCityList), zCityList, yCityList, DataUtils.toString(DataUtils.get6List(xAgeList)));
                 break;
             case R.id.linear_under_age:
                 changeBottomLinesStatues(tv_bottom_age, person_bottom_cardview_01);
-                initThreeBsrChart(bottomChartAge, DataUtils.get6List(xAgeList), zAgeList, yAgeList);
+                initThreeBsrChart(bottomChartAge, DataUtils.get6List(xAgeList), zAgeList, yAgeList, DataUtils.toString(DataUtils.get6List(xAgeList)));
                 break;
         }
     }
@@ -245,13 +232,13 @@ public class PersonFragment extends BaseFragment implements PersonView {
      * @param data   文字说明
      * @param floats 值
      */
-    private void initBarChart(BarChart chart, final List<String> data, float[] floats) {
+    private void initBarChart(BarChart chart, final List<String> data, float[] floats, String[] strings) {
         chart.setDrawBarShadow(false);
         chart.setDrawValueAboveBar(true);
         chart.getDescription().setEnabled(false);
         chart.setPinchZoom(false);
         chart.setDrawGridBackground(false);
-        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(chart);
+        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(chart, strings);
         XAxis xAxis = chart.getXAxis();
         DayProvinceAxisValueFormatter dayAxisValueFormatter = new DayProvinceAxisValueFormatter(chart);    //设置底部文字
         xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线
@@ -416,8 +403,9 @@ public class PersonFragment extends BaseFragment implements PersonView {
      * @param xList     类型分布
      * @param zCityList 一个柱状有一个组成成分
      * @param yCityList
+     * @param strings
      */
-    private void initThreeBsrChart(BarChart chart, List<String> xList, List<List<String>> zCityList, List<String> yCityList) {
+    private void initThreeBsrChart(BarChart chart, List<String> xList, List<List<String>> zCityList, List<String> yCityList, String[] strings) {
         chart.getDescription().setEnabled(false);
 
         // if more than 60 entries are displayed in the chart, no values will be
@@ -439,7 +427,7 @@ public class PersonFragment extends BaseFragment implements PersonView {
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         chart.getAxisRight().setEnabled(false);
 
-        DayAxisValueFormatter dayAxisValueFormatter = new DayAxisValueFormatter(chart);    //设置底部文字
+        MyPersonDayAxisValueFormatter dayAxisValueFormatter = new MyPersonDayAxisValueFormatter(chart, strings);    //设置底部文字
 //        DayAxisValueFormatter dayAxisValueFormatter = new DayAxisValueFormatter(mChart);
         XAxis xLabels = chart.getXAxis();
         xLabels.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -462,8 +450,6 @@ public class PersonFragment extends BaseFragment implements PersonView {
     private void setThreeBarData(BarChart chart, List<String> xList, List<List<String>> zCityList, List<String> yCityList) {  //mXlist===6
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
         String strType = yCityList.size() + "";
-        Log.e(" yCityList.size()", "========yCityList====" + yCityList.size());
-        Log.e(" zCityList.size()", "========zCityList====" + zCityList.size());
         switch (strType) {     //这里是给  一个柱状图中不同颜色设置当前数值的
             case "1":
                 for (int i = 0; i < xList.size(); i++) {

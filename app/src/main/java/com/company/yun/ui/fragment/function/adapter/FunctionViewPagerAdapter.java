@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.company.yun.ui.fragment.function.child.PersonFragment;
-import com.company.yun.ui.fragment.function.child.PlanFragment;
+import com.company.yun.ui.fragment.function.child.person.PersonFragment;
+import com.company.yun.ui.fragment.function.child.plan.PlanFragment;
 
 /**
  * Created by Lovelin on 2019/5/10

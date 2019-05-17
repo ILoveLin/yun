@@ -1,7 +1,9 @@
 package com.company.yun.utils;
 
 import com.company.yun.bean.function.PersonBean;
+import com.company.yun.bean.function.plan.ChannelBean;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,19 @@ public class DataUtils {
 
     protected final String[] mXString = new String[]{
             "办公效率", "生活实用", "丽人母婴", "图像", "运动健康", "生活服务"};
+
+
+    public static String getStringName(List<ChannelBean.DataEntity> list, float value) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getValue().equals(value+"")) {
+                return list.get(i).getName();
+            }
+        }
+
+
+        return "百度";
+    }
+
 
     public static List<String> get6List(List<String> list) {
 

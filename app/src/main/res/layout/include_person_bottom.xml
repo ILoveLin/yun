@@ -32,11 +32,11 @@
                 android:text="年龄" />
 
             <TextView
-                android:layout_marginTop="@dimen/padding_2"
                 android:id="@+id/tv_bottom_age"
                 style="@style/TextTitle_white"
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/padding_2"
                 android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:text="" />
@@ -60,11 +60,11 @@
                 android:text="性别" />
 
             <TextView
-                android:layout_marginTop="@dimen/padding_2"
                 android:id="@+id/tv_bottom_sex"
                 style="@style/TextTitle_white"
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/padding_2"
                 android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:text="" />
@@ -87,11 +87,11 @@
                 android:text="城市等级" />
 
             <TextView
-                android:layout_marginTop="@dimen/padding_2"
                 android:id="@+id/tv_bottom_city"
                 style="@style/TextTitle_white"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
+                android:layout_marginTop="@dimen/padding_2"
                 android:background="@color/white"
                 android:gravity="center_horizontal"
                 android:text="" />
@@ -104,8 +104,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/person_bottom_cardview_01"
         style="@style/CommonCardViewStyle"
-        android:visibility="invisible"
-        android:layout_below="@+id/person_all_tab">
+        android:layout_below="@+id/person_all_tab"
+        android:visibility="invisible">
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bottom_chart01"
@@ -118,13 +118,12 @@
     <android.support.v7.widget.CardView
         android:id="@+id/person_bottom_cardview_02"
         style="@style/CommonCardViewStyle"
-        android:visibility="invisible"
-        android:layout_below="@+id/person_all_tab">
+        android:layout_below="@+id/person_all_tab"
+        android:visibility="invisible">
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bottom_chart02"
-            style="@style/CommonChartStyle"
-             />
+            style="@style/CommonChartStyle" />
 
     </android.support.v7.widget.CardView>
 
@@ -132,8 +131,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/person_bottom_cardview_03"
         style="@style/CommonCardViewStyle"
-        android:visibility="invisible"
-        android:layout_below="@+id/person_all_tab">
+        android:layout_below="@+id/person_all_tab"
+        android:visibility="invisible">
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bottom_chart03"

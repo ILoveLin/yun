@@ -6,16 +6,14 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 /**
  * Created by philipp on 02/06/16.
  */
-public class DayAxisValueFormatter extends ValueFormatter {
+public class MyPersonDayAxisValueFormatter extends ValueFormatter {
 
-    private final String[] mMonths = new String[]{
-            "办公效率", "生活实用", "丽人母婴", "图像", "运动健康", "生活服务",
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    };
+    private final String[] mMonths;
 
     private final BarLineChartBase<?> chart;
 
-    public DayAxisValueFormatter(BarLineChartBase<?> chart) {
+    public MyPersonDayAxisValueFormatter(BarLineChartBase<?> chart, String[] mMonths) {
+        this.mMonths = mMonths;
         this.chart = chart;
     }
 
