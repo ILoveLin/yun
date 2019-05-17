@@ -6,29 +6,40 @@ package com.company.yun.base;
  * Describe:API
  */
 public class HttpConstants {
-
+    /**
+     * Common
+     */
     public static final String Common = "http://yun2.jxsccm.com";
-
-
+    /**
+     * 登入
+     */
     public static final String Login = Common + "/api/Login/login";
 
-//    http://yun2.jxsccm.com/api/index/record
 
-    //财务数据
+    /**
+     * 财务数据
+     */
     public static final String Data = Common + "/api/index/record";
 
-    //尚城云
+    /**
+     * 尚城云
+     */
     public static final String Yun_Daday_Data = Common + "/api/index/get_index.html";
     public static final String Yun_User_Data = Common + "/api/index/get_user_portrait.html";
     public static final String Yun_Chart_Line_Bar = Common + "/api/index/get_real_time";
 
-    //账户管理
+    /**
+     * 账户管理
+     */
+
     public static final String Account = Common + "/api/index/sems";
 
 
-    //功能 -- 人物画像
+    /**
+     * 功能 --
+     */
+    //人物画像
     public static final String Person = Common + "/api/index/portrait_results";
-
     //功能 --  关键字--检查校验
     public static final String Plan_Check = Common + "/api/index/is_keyword";
     //功能 -- 投放方案-投放端口
