@@ -21,7 +21,6 @@ import butterknife.Unbinder;
  */
 public class ResultOriginalityFragment extends BaseFragment {
     private SmartTable mTabel;
-    private Button mBtn;
 
     @Override
     public int getContentViewId() {
@@ -38,7 +37,6 @@ public class ResultOriginalityFragment extends BaseFragment {
 
     private void initView(ViewGroup rootView) {
         mTabel = rootView.findViewById(R.id.table);
-        mBtn = rootView.findViewById(R.id.btn2);
         setTitleBarVisibility(View.GONE);
         setTitleLeftBtnVisibility(View.VISIBLE);
     }

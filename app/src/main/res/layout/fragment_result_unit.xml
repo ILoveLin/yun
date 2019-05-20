@@ -16,18 +16,4 @@
         android:layout_weight="1"
         />
 
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/selector_button"
-        android:clickable="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="单元--切换位置"
-        android:textColor="#fff" />
-
-
 </LinearLayout>

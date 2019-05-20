@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Lovelin on 2019/5/20
  * <p>
- * Describe:
+ * Describe:结果Bean
  */
 public class ResultBean {
 

@@ -7,6 +7,7 @@ import com.androidkun.xtablayout.XTabLayout;
 import com.company.yun.R;
 import com.company.yun.base.BaseActivity;
 import com.company.yun.ui.activity.result.adapter.ResultViewPagerAdapter;
+import com.company.yun.view.widget.NoScrollViewPager;
 import com.yun.common.utils.StatusBarUtil;
 import com.yun.common.utils.StatusBarUtils;
 
@@ -24,7 +25,7 @@ public class ResultActivity extends BaseActivity {
     @BindView(R.id.tab_layout)
     XTabLayout tabLayout;
     @BindView(R.id.viewpager)
-    ViewPager viewpager;
+    NoScrollViewPager viewpager;
     private ResultViewPagerAdapter mAdapter;
 
     @Override
