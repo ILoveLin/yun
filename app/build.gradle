@@ -36,6 +36,8 @@ dependencies {
 
     implementation 'com.androidkun:XTabLayout:1.1.4'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //表格
+    implementation 'com.github.huangyanbin:SmartTable:2.2.0'
 
 
 }

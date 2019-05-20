@@ -82,7 +82,7 @@ public class PersonBean {
 
         @Override
         public String toString() {
-            return "DataEntity{" +
+            return "DataBean{" +
                     "education=" + education +
                     ", social=" + social +
                     ", consumption=" + consumption +

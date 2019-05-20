@@ -36,7 +36,7 @@ public class HttpConstants {
 
 
     /**
-     * 功能 --
+     * 功能
      */
     //人物画像
     public static final String Person = Common + "/api/index/portrait_results";
@@ -48,6 +48,12 @@ public class HttpConstants {
     public static final String Plan_Channel = Common + "/api/Promotion/get_qudao";
     //功能 -- 投放方案-地域分布
     public static final String Plan_Area = Common + "/api/Promotion/get_china";
+
+
+    /**
+     * 投放方案   -----搜索结果中--渠道分布点击进去,更具不同的渠道进入界面
+     */
+    public static final String Channel_Result = Common + "/api/Index/promotion";
 
 
 }

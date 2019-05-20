@@ -39,7 +39,6 @@ import butterknife.Unbinder;
  */
 public abstract class BaseFragment extends Fragment {
 
-
     @BindView(R.id.ib_left)
     ImageButton mTitleLeftBtn;
     @BindView(R.id.ib_left_1)
@@ -114,7 +113,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        unbinder.unbind();
+//        unbinder.unbind();
         super.onDestroy();
     }
 

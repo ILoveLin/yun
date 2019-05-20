@@ -13,6 +13,7 @@ import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.function.plan.AreaBean;
 import com.company.yun.bean.function.plan.ChannelBean;
 import com.company.yun.bean.function.plan.PortBean;
+import com.company.yun.ui.activity.result.ResultActivity;
 import com.company.yun.ui.fragment.function.child.plan.presenter.PlanPresenter;
 import com.company.yun.ui.fragment.function.child.plan.presenter.PlanView;
 import com.company.yun.utils.DataUtils;
@@ -106,7 +107,9 @@ public class PlanFragment extends BaseFragment implements PlanView {
                     //获取到当前对应的  名称
                     String stringName = DataUtils.getStringName(channelBeanList, entry.getY());
                     showToast(stringName);
-
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", stringName);
+                    openActivity(ResultActivity.class, bundle);
                 }
             }
 
