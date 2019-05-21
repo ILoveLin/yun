@@ -40,5 +40,8 @@ dependencies {
     implementation 'com.github.huangyanbin:SmartTable:2.2.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
 
+    //查看pdf
+    implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+
 
 }

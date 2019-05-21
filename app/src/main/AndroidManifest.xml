@@ -32,6 +32,7 @@
         <activity android:name=".ui.activity.GuideActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.result.ResultActivity"/>
+        <activity android:name=".ui.activity.PDFActivity"/>
     </application>
 
 </manifest>

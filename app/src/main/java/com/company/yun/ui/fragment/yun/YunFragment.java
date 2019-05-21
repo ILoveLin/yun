@@ -9,12 +9,14 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.yun.PicChartBean;
+import com.company.yun.ui.activity.PDFActivity;
 import com.company.yun.ui.fragment.yun.presenter.YunPresenter;
 import com.company.yun.ui.fragment.yun.presenter.YunView;
 import com.company.yun.utils.DataUtils;
@@ -95,8 +97,16 @@ public class YunFragment extends BaseFragment implements YunView {
     PieChart mInterestChart;
     @BindView(R.id.tv_num)
     TextView tv_num;
+    @BindView(R.id.ib_left)
+    ImageButton ib_left;
     @BindView(R.id.tv_under_person)
     TextView tv_under_person;
+    @BindView(R.id.tv_title_yun)
+    TextView tv_title_yun;
+    @BindView(R.id.ib_left_yun)
+    ImageButton ib_left_yun;
+    @BindView(R.id.ib_right_yun)
+    ImageButton ib_right_yun;
     @BindView(R.id.tv_under_before_days)
     TextView tv_under_before_days;
     @BindView(R.id.tv_drawable_icon_01)
@@ -136,6 +146,20 @@ public class YunFragment extends BaseFragment implements YunView {
     }
 
     private void responseListener() {
+        ib_left_yun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(PDFActivity.class);
+            }
+        });
+        ib_right_yun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("进入地图");
+
+            }
+        });
+
         mPresenter.sendRequest();
         task = new TimerTask() {
             @Override
@@ -150,18 +174,17 @@ public class YunFragment extends BaseFragment implements YunView {
     }
 
     private void initView() {
-        setTitleBarVisibility(View.VISIBLE);
-        setTitleLeftBtnVisibility(View.GONE);
-        setTitleName("尚城云");
+        setTitleBarVisibility(View.GONE);
+        tv_title_yun.setText("尚城云");
         setPageStateView();
     }
 
 
     @Override
     public void refreshLineBarUIData(List<String> xList, List<String> todayDataList, List<String> yesterdayDataList) {
-        initChart01(xList, DataUtils.toFloat(todayDataList),DataUtils.toString(xList));
+        initChart01(xList, DataUtils.toFloat(todayDataList), DataUtils.toString(xList));
 
-        initChart02(xList, DataUtils.toFloat(yesterdayDataList),DataUtils.toString(xList));
+        initChart02(xList, DataUtils.toFloat(yesterdayDataList), DataUtils.toString(xList));
 
     }
 
@@ -275,7 +298,7 @@ public class YunFragment extends BaseFragment implements YunView {
     }
 
     //初始化02--树状图
-    private void initChart01(final List<String> data, float[] floats,String[] string) {
+    private void initChart01(final List<String> data, float[] floats, String[] string) {
         mTChart01.setBackgroundColor(Color.WHITE);
         mTChart01.getDescription().setEnabled(false);
         mTChart01.setTouchEnabled(true);
@@ -286,7 +309,7 @@ public class YunFragment extends BaseFragment implements YunView {
         MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
         mv.setChartView(mTChart01);
         mTChart01.setMarker(mv);
-        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(mChart02,string);
+        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(mChart02, string);
         XAxis xAxis = mTChart01.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.enableGridDashedLine(10f, 10f, 0f);
@@ -324,14 +347,14 @@ public class YunFragment extends BaseFragment implements YunView {
         mTChart01.invalidate();
     }
 
-    private void initChart02(final List<String> data, float[] floats,String[] string) {
+    private void initChart02(final List<String> data, float[] floats, String[] string) {
         mChart02.setDrawBarShadow(false);
         mChart02.setDrawValueAboveBar(true);
         mChart02.getDescription().setEnabled(false);
         mChart02.setPinchZoom(false);
         mChart02.setDrawGridBackground(false);
 //        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(mChart02);
-        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(mChart02,string);
+        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(mChart02, string);
 
         XAxis xAxis = mChart02.getXAxis();
         xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线
