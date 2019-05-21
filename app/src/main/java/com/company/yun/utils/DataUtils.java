@@ -1,5 +1,7 @@
 package com.company.yun.utils;
 
+import android.util.Log;
+
 import com.company.yun.bean.function.PersonBean;
 import com.company.yun.bean.function.plan.ChannelBean;
 
@@ -20,12 +22,11 @@ public class DataUtils {
 
     public static String getStringName(List<ChannelBean.DataEntity> list, float value) {
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getValue().equals(value+"")) {
+            float valueff = Float.parseFloat(list.get(i).getValue());
+            if (valueff==value) {
                 return list.get(i).getName();
             }
         }
-
-
         return "百度";
     }
 

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.company.yun.bean.result.ResultBean;
 import com.company.yun.ui.fragment.result.ResultKeywordFragment;
 import com.company.yun.ui.fragment.result.ResultOriginalityFragment;
 import com.company.yun.ui.fragment.result.ResultPlanFragment;
@@ -18,9 +19,22 @@ import com.company.yun.ui.fragment.result.ResultUnitFragment;
 public class ResultViewPagerAdapter extends FragmentStatePagerAdapter {
     private String[] tabTitle;
 
+
+
     public ResultViewPagerAdapter(FragmentManager fm, String[] tabString) {
         super(fm);
         this.tabTitle = tabString;
+    }
+
+    private ResultBean.DataBean data;
+
+
+    public ResultBean.DataBean getData() {
+        return data;
+    }
+
+    public void setData(ResultBean.DataBean data) {
+        this.data = data;
     }
 
     @Nullable

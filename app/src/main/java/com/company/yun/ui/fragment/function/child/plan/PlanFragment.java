@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,17 +88,19 @@ public class PlanFragment extends BaseFragment implements PlanView {
     }
 
     private void initView() {
+
         mPresenter = new PlanPresenter(this, getActivity());
         setTitleBarVisibility(View.GONE);
         setTitleLeftBtnVisibility(View.GONE);
         setPageStateView();
-        responseListener();
+        responseListener("口红");
 
     }
 
-    private void responseListener() {
+    private void responseListener(final String keyword) {
 //        mPresenter.sendRequest("口红");
-        mPresenter.sendCheckRequest("口红");
+        mPresenter.sendCheckRequest(keyword);
+
         picChartChannel.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry entry, Highlight h) {
@@ -105,10 +108,15 @@ public class PlanFragment extends BaseFragment implements PlanView {
                 //此时e.getY()等于数据 由此判断点击了哪一个扇区
                 if (entry.getY() == entry.getY()) {
                     //获取到当前对应的  名称
+                    Log.e("result====", ""+entry.getY());
+
                     String stringName = DataUtils.getStringName(channelBeanList, entry.getY());
                     showToast(stringName);
                     Bundle bundle = new Bundle();
+
+
                     bundle.putString("name", stringName);
+                    bundle.putString("keyword", keyword);
                     openActivity(ResultActivity.class, bundle);
                 }
             }

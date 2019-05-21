@@ -28,7 +28,7 @@ public class ResultBean {
         try {
             JSONObject object = new JSONObject(response);
 
-            setStatus(object.getString("object"));
+            setStatus(object.getString("status"));
             setInfo(object.getString("info"));
             DataBean dataBean = new DataBean();
             JSONObject data = object.getJSONObject("data");
