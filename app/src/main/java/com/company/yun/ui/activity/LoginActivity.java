@@ -105,6 +105,7 @@ public class LoginActivity extends BaseActivity {
                             Log.e("Net", "login==response===" + mBean.getData().getToken());
                             Log.e("Net", "login==response===" + "android");
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Is_Logined, true);
+                            SharePreferenceUtil.put(LoginActivity.this, Constants.ID, mBean.getData().getId());
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Token, mBean.getData().getToken());
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Device, "android");
                             SharePreferenceUtil.put(LoginActivity.this, Constants.UserName, mBean.getData().getUsername());

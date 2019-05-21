@@ -54,7 +54,7 @@ public class AccountFragment extends BaseFragment implements AccountView {
     @BindView(R.id.smartRefresh)
     SmartRefreshLayout mSmartRefresh;
     Unbinder unbinder;
-    private int page;
+    private int page = 1;
     private AccountPresenter mPresenter;
     private ArrayList<AccountBean.DataBean.Chams_usersEntity> mDataList;
     private AccountAdapter mAdapter;
@@ -73,12 +73,12 @@ public class AccountFragment extends BaseFragment implements AccountView {
     }
 
     private void responseListener() {
-        mPresenter.sendRequest(page, "refresh");
-
+//        mPresenter.sendRequest(page, "refresh");
+        mPresenter.sendTopRequest(4 + "");   //全年的
         mSmartRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                page = 0;
+                page = 1;
                 mPresenter.sendRequest(page, "refresh");
             }
         });

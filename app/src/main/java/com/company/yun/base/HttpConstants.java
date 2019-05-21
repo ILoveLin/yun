@@ -33,6 +33,7 @@ public class HttpConstants {
      */
 
     public static final String Account = Common + "/api/index/sems";
+    public static final String Account_total = Common + "/api/Sems/sems_record_total";
 
 
     /**

@@ -42,6 +42,8 @@
             android:src="@mipmap/bg_shenma" />
     </RelativeLayout>
 
+    <View style="@style/LineItemStyleE0E0E0" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/padding_54"

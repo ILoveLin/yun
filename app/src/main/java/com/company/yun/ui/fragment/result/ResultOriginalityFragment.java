@@ -1,29 +1,18 @@
 package com.company.yun.ui.fragment.result;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.bin.david.form.core.SmartTable;
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
+import com.company.yun.bean.result.OriginalityBean;
 import com.company.yun.bean.result.ResultBean;
-import com.company.yun.bean.result.Student;
-import com.company.yun.event.ResultEvent;
+import com.company.yun.ui.activity.result.ResultActivity;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by Lovelin on 2019/5/20
@@ -54,37 +43,41 @@ public class ResultOriginalityFragment extends BaseFragment {
     }
 
     private void initData() {
-        final List<Student> students = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            Student student = new Student("张三+李四", "男", "03", "04", "05", "06", "07", "08", "right", "url---baidu");
-            students.add(student);
+        ResultBean.DataBean data = ResultActivity.data;
+        if (data != null) {
+            List<ResultBean.DataBean.PlanBean.OriginalityEntity> originality = data.getPlan().getOriginality();
+            final List<OriginalityBean> originalityBeanList = new ArrayList<>();
+            for (int i = 0; i < originality.size(); i++) {
+                ResultBean.DataBean.PlanBean.OriginalityEntity originalityEntity = originality.get(i);
+                String originality1 = originalityEntity.getOriginality();
+                String show = originalityEntity.getTotal().getAll().getShow();
+                String click = originalityEntity.getTotal().getAll().getClick();
+                String charge = originalityEntity.getTotal().getAll().getCharge();
+
+                List<ResultBean.DataBean.PlanBean.PlanEntity> plan = data.getPlan().getPlan();
+                List<ResultBean.DataBean.PlanBean.UnitEntity> unit = data.getPlan().getUnit();
+                String plan_id = originalityEntity.getPlan_id();
+                String namePlan = plan.get(Integer.parseInt(plan_id)).getName();
+                String unit_id = originalityEntity.getUnit_id();
+                String nameUnit = unit.get(Integer.parseInt(unit_id)).getName();
+
+                DecimalFormat df = new DecimalFormat("0.00");
+                String formatPrice = df.format((float) Float.parseFloat(charge) / Float.parseFloat(click));
+                String formatclickRatre = df.format((float) Float.parseFloat(show) / Float.parseFloat(click));
+
+                OriginalityBean originalityBean = new OriginalityBean(originality1, "-", "-", "-", namePlan,
+                        nameUnit, charge, show, click, formatPrice, formatclickRatre);
+
+
+                originalityBeanList.add(originalityBean);
+
+            }
+            mTabel.setData(originalityBeanList);
+            mTabel.getConfig().setShowTableTitle(true);
+            mTabel.getConfig().setShowXSequence(true);
+            mTabel.getConfig().setShowYSequence(true);
+            mTabel.setZoom(true, 2, 0.2f);
         }
-        mTabel.setData(students);
-        mTabel.getConfig().setShowTableTitle(true);
-        mTabel.getConfig().setShowXSequence(true);
-        mTabel.getConfig().setShowYSequence(true);
-        mTabel.setZoom(true, 2, 0.2f);
 
     }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void initResultData(ResultEvent resultEvent) {
-        ResultBean.DataBean data = resultEvent.getData();
-
-    }
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-
-    }
-
-
 }

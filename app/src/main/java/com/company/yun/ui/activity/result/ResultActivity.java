@@ -76,7 +76,7 @@ public class ResultActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-//                        Log.e("result====", "response======" + response);
+                        Log.e("result====", "response======" + response);
                         showContent();
                         ResultBean resultBean = new ResultBean();
                         resultBean.getAllData(response);
