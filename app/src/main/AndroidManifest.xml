@@ -28,11 +28,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--百度地图AppKey-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="EhKgsmD1AmvBz9G0ZoGdmDZbKlSKKOcH" />
+
+        <!--版本更新的service 和provider-->
+        <service
+            android:name="com.yun.common.utils.updateutils.UpdateIntentService"
+            android:exported="false" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.company.yun.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.GuideActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.result.ResultActivity"/>
-        <activity android:name=".ui.activity.PDFActivity"/>
+        <activity android:name=".ui.activity.ppt.PPTActivity"/>
+        <activity android:name=".ui.activity.YunMapActivity"/>
     </application>
 
 </manifest>

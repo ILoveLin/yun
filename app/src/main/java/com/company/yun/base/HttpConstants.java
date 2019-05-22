@@ -14,6 +14,14 @@ public class HttpConstants {
      * 登入
      */
     public static final String Login = Common + "/api/Login/login";
+    /**
+     * PPT
+     */
+    public static final String PPT = Common + "/api/index/getPptList";
+    /**
+     * 版本更新
+     */
+    public static final String  Update = Common + "/api/login/app_version";
 
 
     /**

@@ -16,11 +16,11 @@ import android.widget.TextView;
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.yun.PicChartBean;
-import com.company.yun.ui.activity.PDFActivity;
+import com.company.yun.ui.activity.ppt.PPTActivity;
+import com.company.yun.ui.activity.YunMapActivity;
 import com.company.yun.ui.fragment.yun.presenter.YunPresenter;
 import com.company.yun.ui.fragment.yun.presenter.YunView;
 import com.company.yun.utils.DataUtils;
-import com.company.yun.view.widget.DayAxisValueFormatter;
 import com.company.yun.view.widget.MyMarkerView;
 import com.company.yun.view.widget.MyPersonDayAxisValueFormatter;
 import com.company.yun.view.widget.XYMarkerView;
@@ -149,13 +149,14 @@ public class YunFragment extends BaseFragment implements YunView {
         ib_left_yun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity(PDFActivity.class);
+                openActivity(PPTActivity.class);
             }
         });
         ib_right_yun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showToast("进入地图");
+                openActivity(YunMapActivity.class);
 
             }
         });

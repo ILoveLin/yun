@@ -2,9 +2,17 @@ package com.company.yun.ui.activity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,19 +23,28 @@ import android.widget.TextView;
 import com.company.yun.R;
 import com.company.yun.app.ActivityCollector;
 import com.company.yun.base.BaseActivity;
+import com.company.yun.base.HttpConstants;
+import com.company.yun.bean.UpdateBean;
 import com.company.yun.ui.fragment.account.AccountFragment;
 import com.company.yun.ui.fragment.financedata.FinanceDataFragment;
 import com.company.yun.ui.fragment.function.FunctionFragment;
 import com.company.yun.ui.fragment.mine.MineFragment;
 import com.company.yun.ui.fragment.yun.YunFragment;
 import com.yun.common.contant.Contants;
+import com.yun.common.utils.CommonUtils;
+import com.yun.common.utils.CustomToast;
 import com.yun.common.utils.SharePreferenceUtil;
 import com.yun.common.utils.StatusBarUtil;
 import com.yun.common.utils.StatusBarUtils;
+import com.yun.common.utils.popupwindow.PopupWindowTwoButton;
+import com.yun.common.utils.updateutils.UpdateIntentService;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * MainActivity
@@ -51,8 +68,12 @@ public class MainActivity extends BaseActivity {
     LinearLayout layoutBottomLin;
     @BindView(R.id.ll_mymain_bottom)
     LinearLayout linearBottom;
+    @BindView(R.id.linear_all)
+    LinearLayout linear_all;
     private FragmentManager fragmentManager;
     private Integer valTab;
+    private String localVersionCode;
+    private String version_code;
 
     @Override
     public int getContentViewId() {
@@ -66,7 +87,13 @@ public class MainActivity extends BaseActivity {
         fragmentManager = getSupportFragmentManager();
         valTab = (Integer) SharePreferenceUtil.get(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, Contants.TAB_DRUGS_QUERY);
         setChoiceItem(valTab);
+
+        //版本更新
+        requestUpdateVersion("Android");
+
+
     }
+
 
     //    private FinanceDataFragment dataFragment;
     private FinanceDataFragment dataFragment;
@@ -252,4 +279,165 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
     }
+
+    private void requestUpdateVersion(String type) {
+        localVersionCode = CommonUtils.getVersionName(this);
+        showLoading();
+        OkHttpUtils.post()
+                .url(HttpConstants.Update)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        CustomToast.showToast(getApplicationContext(), "网络请求错误");
+                        showError();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        UpdateBean updateBean = new UpdateBean();
+                        updateBean.getAllDate(response);
+                        version_code = updateBean.getData().getVersion_code();
+                        Log.e("update==========", "localVersionCode=====" + localVersionCode);
+                        Log.e("update==========", "version_code=====" + version_code);
+//                        int updateCode = Integer.parseInt(version_code);
+//                        int currentCode = Integer.parseInt(localVersionCode);
+                        if (2 > 1) {
+                            final String downUrl = updateBean.getData().getDownurl();
+                            // 如果指定的数与参数相等返回0。
+                            //如果指定的数小于参数返回 -1。
+                            //如果指定的数大于参数返回 1。
+//                            if (localVersionCode.compareTo(version_code) < 0)
+
+                            updateVersion(downUrl);
+//                            AllenVersionChecker
+//                                    .getInstance()
+//                                    .requestVersion()
+//                                    .setRequestUrl(downUrl)
+//                                    .request(new RequestVersionListener() {
+//                                        @Nullable
+//                                        @Override
+//                                        public UIData onRequestVersionSuccess(String result) {
+//                                            //拿到服务器返回的数据，解析，拿到downloadUrl和一些其他的UI数据
+//                                            return UIData.create().setDownloadUrl(downUrl);
+//                                        }
+//
+//                                        @Override
+//                                        public void onRequestVersionFailure(String message) {
+//
+//                                        }
+//                                    })
+//                                    .excuteMission(getApplicationContext());
+                        }
+                    }
+                });
+
+    }
+
+    //我就说一句话，这是坠吼的！
+    private void updateVersion(final String url) {
+        // 如果指定的数与参数相等返回0。
+        //如果指定的数小于参数返回 -1。
+        //如果指定的数大于参数返回 1。
+
+
+        final PopupWindowTwoButton twoButton = new PopupWindowTwoButton((Activity) this);
+        twoButton.getTv_content().setText("发现新版本，是否更新?");
+        twoButton.getTv_ok().setText("确定");
+        twoButton.getTv_cancel().setText("取消");
+        twoButton.getTv_ok().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("开始下载,请稍后...");
+                beforeUpdateWork();
+                twoButton.dismiss();
+
+            }
+        });
+        twoButton.getTv_cancel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //版本更新
+
+                twoButton.dismiss();
+
+            }
+        });
+        twoButton.showPopupWindow(linear_all, Gravity.CENTER);
+
+    }
+
+    private void beforeUpdateWork() {
+        if (!isEnableNotification()) {
+            showNotificationAsk();
+            return;
+        }
+        toIntentServiceUpdate();
+
+    }
+
+    private void showNotificationAsk() {
+        AlertDialog.Builder dialog =
+                new AlertDialog.Builder(this);
+        dialog.setTitle("通知权限");
+        dialog.setMessage("打开通知权限");
+        dialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        toSetting();
+                    }
+                });
+        dialog.setNeutralButton("跳过", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                toIntentServiceUpdate();
+            }
+        });
+        dialog.setNegativeButton("关闭",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //...To-do
+                    }
+                });
+        dialog.show();
+    }
+
+    private boolean isEnableNotification() {
+        boolean ret = true;
+        try {
+            NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+            ret = manager.areNotificationsEnabled();
+        } catch (Exception e) {
+            return true;
+        }
+        return ret;
+    }
+
+    public String appName = "update-";
+    public String url = "";
+
+    private void toIntentServiceUpdate() {
+        Intent updateIntent = new Intent(this, UpdateIntentService.class);
+        updateIntent.setAction(UpdateIntentService.ACTION_UPDATE);
+        updateIntent.putExtra("appName", appName + version_code);
+        //随便一个apk的url进行模拟
+        updateIntent.putExtra("downUrl", url);
+        this.startService(updateIntent);
+    }
+
+    private void toSetting() {
+        try {
+            Intent localIntent = new Intent();
+            localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+            localIntent.setData(Uri.fromParts("package", this.getPackageName(), null));
+            startActivity(localIntent);
+        } catch (Exception e) {
+
+        }
+    }
+
+
 }

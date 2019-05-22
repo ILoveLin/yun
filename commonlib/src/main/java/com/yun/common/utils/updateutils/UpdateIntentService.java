@@ -26,9 +26,15 @@ import java.net.URL;
 
 /**
  * Created by 天哥哥 at 2017/2/5 11:33
+ *
+ *
+ * 三个地方更改包名
+ * 清单文件provider
+ * UpdateIntentService----ACTION_UPDATE   字段
+ *UriUtil-----getUriForFile   方法里面
  */
 public class UpdateIntentService extends IntentService {
-    public static final String ACTION_UPDATE = "com.yun.yunball.action.UPDATE";
+    public static final String ACTION_UPDATE = "com.yun.common.action.UPDATE";
     private NotificationManager mNotificationManager;
     private RemoteViews mRemoteViews;
     private Notification mNotification;

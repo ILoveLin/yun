@@ -16,6 +16,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
 }
 
 dependencies {
@@ -42,6 +48,11 @@ dependencies {
 
     //查看pdf
     implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+    //百度地图sdk依赖
+    implementation files('libs\\BaiduLBS_Android.jar')
+
+    implementation 'com.github.bumptech.glide:glide:4.3.1'
+//    implementation 'com.allenliu.versionchecklib:library:2.0.0'
 
 
 }
