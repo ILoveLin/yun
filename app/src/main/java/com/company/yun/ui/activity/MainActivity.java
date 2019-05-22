@@ -301,14 +301,10 @@ public class MainActivity extends BaseActivity {
                         // 如果指定的数与参数相等返回0。
                         //如果指定的数小于参数返回 -1。
                         //如果指定的数大于参数返回 1。
-//                        if (localVersionCode.compareTo(version_code) < 0) {
-//                            downUrl = updateBean.getData().getDownurl();
-//                            updateVersion(downUrl);
-//                        }
-//                        if (localVersionCode.compareTo(version_code) < 0) {
+                        if (localVersionCode.compareTo(version_code) < 0) {
                             downUrl = updateBean.getData().getDownurl();
                             updateVersion(downUrl);
-//                        }
+                        }
                     }
                 });
 
