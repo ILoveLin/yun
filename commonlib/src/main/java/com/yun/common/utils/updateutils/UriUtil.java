@@ -26,7 +26,7 @@ public class UriUtil {
         if (Build.VERSION.SDK_INT >= 24) {
 //            uri = FileProvider.getUriForFile(context.getApplicationContext(), "com.freekeer.freekeer.FileProvider", file);
             //com.jkt.update
-            uri = FileProvider.getUriForFile(context.getApplicationContext(), "com.yun.common.fileProvider", file);
+            uri = FileProvider.getUriForFile(context.getApplicationContext(), "com.company.yun.fileProvider", file);
         } else {
             uri = Uri.fromFile(file);
         }

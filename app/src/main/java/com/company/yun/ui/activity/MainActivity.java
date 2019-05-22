@@ -74,6 +74,7 @@ public class MainActivity extends BaseActivity {
     private Integer valTab;
     private String localVersionCode;
     private String version_code;
+    private String downUrl;
 
     @Override
     public int getContentViewId() {
@@ -87,11 +88,8 @@ public class MainActivity extends BaseActivity {
         fragmentManager = getSupportFragmentManager();
         valTab = (Integer) SharePreferenceUtil.get(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, Contants.TAB_DRUGS_QUERY);
         setChoiceItem(valTab);
-
         //版本更新
         requestUpdateVersion("Android");
-
-
     }
 
 
@@ -300,35 +298,17 @@ public class MainActivity extends BaseActivity {
                         version_code = updateBean.getData().getVersion_code();
                         Log.e("update==========", "localVersionCode=====" + localVersionCode);
                         Log.e("update==========", "version_code=====" + version_code);
-//                        int updateCode = Integer.parseInt(version_code);
-//                        int currentCode = Integer.parseInt(localVersionCode);
-                        if (2 > 1) {
-                            final String downUrl = updateBean.getData().getDownurl();
-                            // 如果指定的数与参数相等返回0。
-                            //如果指定的数小于参数返回 -1。
-                            //如果指定的数大于参数返回 1。
-//                            if (localVersionCode.compareTo(version_code) < 0)
-
+                        // 如果指定的数与参数相等返回0。
+                        //如果指定的数小于参数返回 -1。
+                        //如果指定的数大于参数返回 1。
+//                        if (localVersionCode.compareTo(version_code) < 0) {
+//                            downUrl = updateBean.getData().getDownurl();
+//                            updateVersion(downUrl);
+//                        }
+//                        if (localVersionCode.compareTo(version_code) < 0) {
+                            downUrl = updateBean.getData().getDownurl();
                             updateVersion(downUrl);
-//                            AllenVersionChecker
-//                                    .getInstance()
-//                                    .requestVersion()
-//                                    .setRequestUrl(downUrl)
-//                                    .request(new RequestVersionListener() {
-//                                        @Nullable
-//                                        @Override
-//                                        public UIData onRequestVersionSuccess(String result) {
-//                                            //拿到服务器返回的数据，解析，拿到downloadUrl和一些其他的UI数据
-//                                            return UIData.create().setDownloadUrl(downUrl);
-//                                        }
-//
-//                                        @Override
-//                                        public void onRequestVersionFailure(String message) {
-//
-//                                        }
-//                                    })
-//                                    .excuteMission(getApplicationContext());
-                        }
+//                        }
                     }
                 });
 
@@ -416,14 +396,13 @@ public class MainActivity extends BaseActivity {
     }
 
     public String appName = "update-";
-    public String url = "";
 
     private void toIntentServiceUpdate() {
         Intent updateIntent = new Intent(this, UpdateIntentService.class);
         updateIntent.setAction(UpdateIntentService.ACTION_UPDATE);
         updateIntent.putExtra("appName", appName + version_code);
         //随便一个apk的url进行模拟
-        updateIntent.putExtra("downUrl", url);
+        updateIntent.putExtra("downUrl", downUrl);
         this.startService(updateIntent);
     }
 

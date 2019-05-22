@@ -29,7 +29,11 @@ import java.net.URL;
  *
  *
  * 三个地方更改包名
- * 清单文件provider
+ * 清单文件FileProvider---------------FileProvider
+ * 清单文件的 FileProvider和UriUtil
+ *  uri = FileProvider.getUriForFile(context.getApplicationContext(), "com.company.yun.fileProvider", file);
+ *
+ *  的FileProvider必须一样
  * UpdateIntentService----ACTION_UPDATE   字段
  *UriUtil-----getUriForFile   方法里面
  */
