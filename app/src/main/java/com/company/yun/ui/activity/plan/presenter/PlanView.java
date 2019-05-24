@@ -1,6 +1,5 @@
-package com.company.yun.ui.fragment.function.child.plan.presenter;
+package com.company.yun.ui.activity.plan.presenter;
 
-import com.company.yun.bean.function.PersonBean;
 import com.company.yun.bean.function.plan.AreaBean;
 import com.company.yun.bean.function.plan.ChannelBean;
 import com.company.yun.bean.function.plan.PortBean;

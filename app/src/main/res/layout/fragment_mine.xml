@@ -29,7 +29,7 @@
 
     <Button
         android:id="@+id/btn_exit"
-        style="@style/ButtonStyle"
+        style="@style/ButtonStyle_color_21ac90"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_30"

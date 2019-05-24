@@ -1,4 +1,4 @@
-package com.company.yun.ui.fragment.function.child.person.presenter;
+package com.company.yun.ui.activity.person.presenter;
 
 import android.content.Context;
 import android.util.Log;

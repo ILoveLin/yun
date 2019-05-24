@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-      style="@style/LineItemStyleE0E0E0" />
+    <TextView style="@style/LineItemStyleE0E0E0" />
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smartRefresh"
         android:layout_width="match_parent"
@@ -21,123 +21,126 @@
         <!--app:srlEnableLoadMore="true"-->
 
         <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_20"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/padding_160"
-                android:layout_weight="1"
-                android:src="@mipmap/bg_perso_01"
-                tools:ignore="Suspicious0dp" />
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/padding_20"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/padding_20"
-                    android:paddingTop="@dimen/padding_20"
-                    android:paddingRight="@dimen/padding_10"
-                    android:text="多种方式细化用户群"
-                    android:textSize="@dimen/padding_16" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/padding_160"
+                    android:layout_weight="1"
+                    android:src="@mipmap/bg_perso_01"
+                    tools:ignore="Suspicious0dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/padding_20"
-                    android:paddingTop="@dimen/padding_10"
-                    android:paddingRight="@dimen/padding_10"
-                    android:text="分析模型下钻保存分群、行为和属性自定义分群查看整体用户画像、偏好，
-                深入分析单用户行为验证分群，并进一步应用于分析和触达"
-                    android:textSize="@dimen/padding_14" />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/padding_15"
+                        android:paddingTop="@dimen/padding_20"
+                        android:paddingRight="@dimen/padding_10"
+                        android:text="多种方式细化用户群"
+                        android:textSize="@dimen/padding_16" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/padding_15"
+                        android:paddingTop="@dimen/padding_10"
+                        android:paddingRight="@dimen/padding_10"
+                        android:text="分析模型下钻保存分群、行为和属性自定义分群查看整体用户画像、偏好，深入分析单用户行为验证分群。"
+
+                        android:textSize="@dimen/padding_14" />
+                </LinearLayout>
+
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_20"
+                android:orientation="horizontal">
+
+                <com.company.yun.view.widget.ClearEditText
+                    android:id="@+id/edittext_person"
+                    style="@style/EditTextStyle"
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/padding_45"
+                    android:layout_marginLeft="@dimen/padding_30"
+                    android:layout_marginRight="@dimen/padding_20"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_bg_editext"
+                    android:hint="请输入关键字"
+                    android:text="" />
+
+
+                <Button
+                    android:id="@+id/btn_person_search"
+                    style="@style/ButtonStyle_color_21ac90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginRight="@dimen/padding_30"
+                    android:clickable="true"
+                    android:text="搜索" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_10"
+                android:layout_marginTop="@dimen/padding_20"
+                android:layout_marginRight="@dimen/padding_10"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/padding_150"
+                    android:layout_weight="1"
+                    android:background="@mipmap/bg_person_03" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/padding_150"
+                    android:layout_weight="1"
+                    android:background="@mipmap/bg_person_04" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_10"
+                android:layout_marginRight="@dimen/padding_10"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/padding_150"
+                    android:layout_weight="1"
+                    android:background="@mipmap/bg_person_05" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/padding_150"
+                    android:layout_weight="1"
+                    android:background="@mipmap/bg_person_06" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_20"
-            android:orientation="horizontal">
-
-            <com.company.yun.view.widget.ClearEditText
-                android:id="@+id/edittext_person"
-                style="@style/EditTextStyle"
-                android:layout_width="1dp"
-                android:layout_height="@dimen/padding_45"
-                android:layout_marginLeft="@dimen/padding_30"
-                android:layout_marginRight="@dimen/padding_20"
-                android:layout_weight="1"
-                android:background="@drawable/shape_bg_editext"
-                android:hint="请输入关键字"
-                android:text="" />
-
-
-            <Button
-                android:clickable="true"
-                android:id="@+id/btn_person_search"
-                style="@style/ButtonStyle_color_21ac90"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_marginRight="@dimen/padding_30"
-                android:text="搜索" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_20"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/padding_160"
-                android:layout_weight="1"
-                android:src="@mipmap/bg_person_03" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/padding_160"
-                android:layout_weight="1"
-                android:src="@mipmap/bg_person_04" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_20"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/padding_160"
-                android:layout_weight="1"
-                android:src="@mipmap/bg_person_05" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/padding_160"
-                android:layout_weight="1"
-                android:src="@mipmap/bg_person_06" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

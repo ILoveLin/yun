@@ -1,21 +1,17 @@
 package com.company.yun.ui.fragment.function.child;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.base.HttpConstants;
 import com.company.yun.bean.function.plan.CheckBean;
-import com.company.yun.ui.fragment.function.child.person.ResultPersonActivity;
-import com.company.yun.ui.fragment.function.child.plan.ResultPlanActivity;
+import com.company.yun.ui.activity.person.ResultPersonActivity;
 import com.company.yun.view.widget.ClearEditText;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yun.common.utils.KeyBoardUtils;
@@ -90,22 +86,23 @@ public class ResultPersonFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        showError();
-                        showToast("请求返回错误");
+                        showContent();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        showContent();
                         checkBean = new CheckBean();
                         checkBean.getAllData(response);
                         if (checkBean.getStatus().equals("0")) {
+                            showContent();
                             Bundle bundle = new Bundle();
                             bundle.putString("keyword", keyword);
                             KeyBoardUtils.closeKeybord(edittextPerson,getContext());
                             openActivity(ResultPersonActivity.class, bundle);
                         } else {
-                            showToast("该关键字不支持搜索");
+                            showContent();
+                            Toast.makeText(getContext(),"该关键字不支持搜索",Toast.LENGTH_SHORT).show();
+                            return;
                         }
 
                     }

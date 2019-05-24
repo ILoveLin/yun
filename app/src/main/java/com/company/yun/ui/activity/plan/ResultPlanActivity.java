@@ -1,4 +1,4 @@
-package com.company.yun.ui.fragment.function.child.plan;
+package com.company.yun.ui.activity.plan;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,19 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.company.yun.R;
 import com.company.yun.base.BaseActivity;
-import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.function.plan.AreaBean;
 import com.company.yun.bean.function.plan.ChannelBean;
 import com.company.yun.bean.function.plan.PortBean;
 import com.company.yun.ui.activity.result.ResultActivity;
-import com.company.yun.ui.fragment.function.child.plan.presenter.PlanPresenter;
-import com.company.yun.ui.fragment.function.child.plan.presenter.PlanView;
+import com.company.yun.ui.activity.plan.presenter.PlanPresenter;
+import com.company.yun.ui.activity.plan.presenter.PlanView;
 import com.company.yun.utils.DataUtils;
 import com.company.yun.view.widget.DayProvinceAxisValueFormatter;
 import com.company.yun.view.widget.MyPersonDayAxisValueFormatter;

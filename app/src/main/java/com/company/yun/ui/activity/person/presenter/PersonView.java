@@ -1,4 +1,4 @@
-package com.company.yun.ui.fragment.function.child.person.presenter;
+package com.company.yun.ui.activity.person.presenter;
 
 import com.company.yun.bean.function.PersonBean;
 

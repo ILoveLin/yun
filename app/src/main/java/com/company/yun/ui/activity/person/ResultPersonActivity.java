@@ -1,4 +1,4 @@
-package com.company.yun.ui.fragment.function.child.person;
+package com.company.yun.ui.activity.person;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import com.company.yun.R;
 import com.company.yun.base.BaseActivity;
 import com.company.yun.base.Constants;
 import com.company.yun.bean.function.PersonBean;
-import com.company.yun.ui.fragment.function.child.person.presenter.PersonPresenter;
-import com.company.yun.ui.fragment.function.child.person.presenter.PersonView;
+import com.company.yun.ui.activity.person.presenter.PersonPresenter;
+import com.company.yun.ui.activity.person.presenter.PersonView;
 import com.company.yun.utils.DataUtils;
 import com.company.yun.view.widget.DayProvinceAxisValueFormatter;
 import com.company.yun.view.widget.MyPersonDayAxisValueFormatter;

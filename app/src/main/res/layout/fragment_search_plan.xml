@@ -46,20 +46,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/padding_20"
+                        android:paddingLeft="@dimen/padding_15"
                         android:paddingTop="@dimen/padding_20"
                         android:paddingRight="@dimen/padding_10"
-                        android:text="多种方式细化用户群"
+                        android:text="大数据精准营销解决方案"
                         android:textSize="@dimen/padding_16" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/padding_20"
+                        android:paddingLeft="@dimen/padding_15"
                         android:paddingTop="@dimen/padding_10"
                         android:paddingRight="@dimen/padding_10"
-                        android:text="分析模型下钻保存分群、行为和属性自定义分群查看整体用户画像、偏好，
-                深入分析单用户行为验证分群，并进一步应用于分析和触达"
+                        android:text="尚诚云大数据帮助企业进行营销转型、通过标签定向快速找到目标用户、过相似用户扩展，快速找到高潜目标用户，为企业制定精准营销解决方案。"
                         android:textSize="@dimen/padding_14" />
                 </LinearLayout>
 
@@ -72,8 +71,8 @@
                 android:orientation="horizontal">
 
                 <com.company.yun.view.widget.ClearEditText
-                    style="@style/EditTextStyle"
                     android:id="@+id/edittext_plan"
+                    style="@style/EditTextStyle"
                     android:layout_width="1dp"
                     android:layout_height="@dimen/padding_45"
                     android:layout_marginLeft="@dimen/padding_30"
@@ -85,12 +84,12 @@
 
 
                 <Button
-                    android:clickable="true"
                     android:id="@+id/btn_plan_search"
                     style="@style/ButtonStyle_color_21ac90"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginRight="@dimen/padding_30"
+                    android:clickable="true"
                     android:text="搜索" />
             </LinearLayout>
 
@@ -98,41 +97,43 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_10"
                 android:layout_marginTop="@dimen/padding_20"
+                android:layout_marginRight="@dimen/padding_10"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/padding_160"
+                    android:layout_height="@dimen/padding_150"
                     android:layout_weight="1"
-                    android:src="@mipmap/bg_plan_03" />
+                    android:background="@mipmap/bg_plan_03" />
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/padding_160"
-                    android:layout_marginRight="@dimen/padding_10"
+                    android:layout_height="@dimen/padding_150"
                     android:layout_weight="1"
-                    android:src="@mipmap/bg_plan_04" />
+                    android:background="@mipmap/bg_plan_04" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_20"
+                android:layout_marginLeft="@dimen/padding_10"
+                android:layout_marginRight="@dimen/padding_10"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/padding_160"
+                    android:layout_height="@dimen/padding_150"
                     android:layout_weight="1"
-                    android:src="@mipmap/bg_plan_05" />
+                    android:background="@mipmap/bg_plan_05" />
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/padding_160"
+                    android:layout_height="@dimen/padding_150"
                     android:layout_weight="1"
-                    android:src="@mipmap/bg_plan_06" />
+                    android:background="@mipmap/bg_plan_06" />
 
             </LinearLayout>
 
