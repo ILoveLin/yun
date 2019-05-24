@@ -58,6 +58,8 @@
         <activity android:name=".ui.activity.result.ResultActivity" />
         <activity android:name=".ui.activity.ppt.PPTActivity" />
         <activity android:name=".ui.activity.YunMapActivity" />
+        <activity android:name=".ui.fragment.function.child.person.ResultPersonActivity" />
+        <activity android:name=".ui.fragment.function.child.plan.ResultPlanActivity" />
     </application>
 
 

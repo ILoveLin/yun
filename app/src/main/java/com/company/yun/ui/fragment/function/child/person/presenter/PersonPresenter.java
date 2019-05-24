@@ -28,6 +28,11 @@ public class PersonPresenter {
 
 
     public void sendRequest(String keyword) {
+        if ("".equals(keyword)) {
+            mView.showToast("关键字不能未空");
+            mView.showEmptyView();
+            return;
+        }
         mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Person)

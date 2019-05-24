@@ -2,6 +2,7 @@ package com.company.yun.ui.fragment.function.child.plan;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.company.yun.R;
+import com.company.yun.base.BaseActivity;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.function.plan.AreaBean;
 import com.company.yun.bean.function.plan.ChannelBean;
@@ -43,12 +45,15 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.model.GradientColor;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.yun.common.utils.StatusBarUtil;
+import com.yun.common.utils.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -56,7 +61,7 @@ import butterknife.Unbinder;
  * <p>
  * Describe:推广方案
  */
-public class PlanFragment extends BaseFragment implements PlanView {
+public class ResultPlanActivity extends BaseActivity implements PlanView {
 
     @BindView(R.id.bar_chart_port)
     BarChart barChartPort;
@@ -75,6 +80,7 @@ public class PlanFragment extends BaseFragment implements PlanView {
     private PlanPresenter mPresenter;
     private ArrayList<PieEntry> entries;
     private List<ChannelBean.DataEntity> channelBeanList;
+    private String keyword;
 
 
     @Override
@@ -83,21 +89,27 @@ public class PlanFragment extends BaseFragment implements PlanView {
     }
 
     @Override
-    protected void init(ViewGroup rootView) {
+    public void init() {
         initView();
+
     }
 
     private void initView() {
-
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
+        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
         mPresenter = new PlanPresenter(this, getActivity());
-        setTitleBarVisibility(View.GONE);
-        setTitleLeftBtnVisibility(View.GONE);
+        setTitleBarVisibility(View.VISIBLE);
+        setTitleLeftBtnVisibility(View.VISIBLE);
+        setTitleName("搜索结果");
         setPageStateView();
-        responseListener("口红");
+        keyword = getIntent().getStringExtra("keyword");
+        responseListener(keyword);
 
     }
 
+
     private void responseListener(final String keyword) {
+
 //        mPresenter.sendRequest("口红");
         mPresenter.sendCheckRequest(keyword);
 
@@ -108,13 +120,11 @@ public class PlanFragment extends BaseFragment implements PlanView {
                 //此时e.getY()等于数据 由此判断点击了哪一个扇区
                 if (entry.getY() == entry.getY()) {
                     //获取到当前对应的  名称
-                    Log.e("result====", ""+entry.getY());
+                    Log.e("result====", "" + entry.getY());
 
                     String stringName = DataUtils.getStringName(channelBeanList, entry.getY());
                     showToast(stringName);
                     Bundle bundle = new Bundle();
-
-
                     bundle.putString("name", stringName);
                     bundle.putString("keyword", keyword);
                     openActivity(ResultActivity.class, bundle);
@@ -187,7 +197,7 @@ public class PlanFragment extends BaseFragment implements PlanView {
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.setEnabled(false);
-        XYMarkerView mv = new XYMarkerView(getContext(), xAxisFormatter);    //点击柱状图显示信息
+        XYMarkerView mv = new XYMarkerView(this, xAxisFormatter);    //点击柱状图显示信息
         mv.setChartView(chart); // For bounds control
         chart.setMarker(mv); // Set the marker to the chart
         setChartBarData(floats, chart);
@@ -217,8 +227,8 @@ public class PlanFragment extends BaseFragment implements PlanView {
         } else {
             set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
-            int endColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
+            int startColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
+            int endColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
             List<GradientColor> gradientColors = new ArrayList<>();
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
@@ -345,18 +355,22 @@ public class PlanFragment extends BaseFragment implements PlanView {
         showError();
     }
 
-
+    @OnClick(R.id.ib_left)
+    public void onClickTitleLeftBtn(View v) {
+        this.finish();
+    }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        unbinder = ButterKnife.bind(this);
+
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    protected void onDestroy() {
+        super.onDestroy();
         unbinder.unbind();
+
     }
+
 }

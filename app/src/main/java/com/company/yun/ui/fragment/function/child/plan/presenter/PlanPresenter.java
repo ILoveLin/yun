@@ -31,6 +31,10 @@ public class PlanPresenter {
     private CheckBean checkBean;
 
     public void sendCheckRequest(final String keyword) {
+        if ("".equals(keyword)) {
+            mView.showToast("关键字不能未空");
+            return;
+        }
         mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Plan_Check)

@@ -2,16 +2,15 @@ package com.company.yun.ui.fragment.function.child.person;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.company.yun.R;
-import com.company.yun.base.BaseFragment;
+import com.company.yun.base.BaseActivity;
 import com.company.yun.base.Constants;
 import com.company.yun.bean.function.PersonBean;
 import com.company.yun.ui.fragment.function.child.person.presenter.PersonPresenter;
@@ -39,6 +38,8 @@ import com.github.mikephil.charting.model.GradientColor;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.yun.common.utils.StatusBarUtil;
+import com.yun.common.utils.StatusBarUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ import butterknife.Unbinder;
  * <p>
  * Describe:人物画像
  */
-public class PersonFragment extends BaseFragment implements PersonView {
+public class ResultPersonActivity extends BaseActivity implements PersonView {
     @BindView(R.id.pic_chart_sex)
     PieChart picChartSex;
     @BindView(R.id.bar_chart_province)
@@ -107,6 +108,7 @@ public class PersonFragment extends BaseFragment implements PersonView {
     private List<String> xSexList;
     private List<String> ySexList;
     private List<List<String>> zSexList;
+    private String keyword;
 
     @Override
     public int getContentViewId() {
@@ -114,16 +116,23 @@ public class PersonFragment extends BaseFragment implements PersonView {
     }
 
     @Override
-    protected void init(ViewGroup rootView) {
+    public void init() {
         mPresenter = new PersonPresenter(this, getActivity());
         initView();
-        mPresenter.sendRequest("口红");
+        keyword = getIntent().getStringExtra("keyword");
+        mPresenter.sendRequest(keyword);
     }
 
+
     private void initView() {
-        setTitleBarVisibility(View.GONE);
-        setTitleLeftBtnVisibility(View.GONE);
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
+        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+        setTitleBarVisibility(View.VISIBLE);
+        setTitleLeftBtnVisibility(View.VISIBLE);
+        setTitleName("搜索结果");
         setPageStateView();
+
+
     }
 
     //刷新数据
@@ -260,7 +269,7 @@ public class PersonFragment extends BaseFragment implements PersonView {
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.setEnabled(false);
-        XYMarkerView mv = new XYMarkerView(getContext(), xAxisFormatter);    //点击柱状图显示信息
+        XYMarkerView mv = new XYMarkerView(this, xAxisFormatter);    //点击柱状图显示信息
         mv.setChartView(chart); // For bounds control
         chart.setMarker(mv); // Set the marker to the chart
         setChartBarData(floats, chart);
@@ -290,8 +299,8 @@ public class PersonFragment extends BaseFragment implements PersonView {
         } else {
             set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
-            int endColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
+            int startColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
+            int endColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
             List<GradientColor> gradientColors = new ArrayList<>();
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
@@ -608,18 +617,22 @@ public class PersonFragment extends BaseFragment implements PersonView {
         showError();
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
+    @OnClick(R.id.ib_left)
+    public void onClickTitleLeftBtn(View v) {
+        this.finish();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        unbinder = ButterKnife.bind(this);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         unbinder.unbind();
+
     }
 }

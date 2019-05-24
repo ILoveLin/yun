@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.company.yun.ui.fragment.function.child.person.PersonFragment;
-import com.company.yun.ui.fragment.function.child.plan.PlanFragment;
+import com.company.yun.ui.fragment.function.child.ResultPersonFragment;
+import com.company.yun.ui.fragment.function.child.ResultPlanFragment;
 
 /**
  * Created by Lovelin on 2019/5/10
@@ -38,9 +38,9 @@ public class FunctionViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:   //人物画像
-                return new PersonFragment();
+                return new ResultPersonFragment();
             case 1:   //推广方案
-                return new PlanFragment();
+                return new ResultPlanFragment();
 
         }
         return null;
