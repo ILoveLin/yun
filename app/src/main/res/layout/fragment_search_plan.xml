@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@mipmap/bg"
     android:orientation="vertical">
 
 
@@ -49,12 +49,14 @@
                         android:paddingLeft="@dimen/padding_15"
                         android:paddingTop="@dimen/padding_20"
                         android:paddingRight="@dimen/padding_10"
+                        android:textColor="@color/white"
                         android:text="大数据精准营销解决方案"
                         android:textSize="@dimen/padding_16" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:paddingLeft="@dimen/padding_15"
                         android:paddingTop="@dimen/padding_10"
                         android:paddingRight="@dimen/padding_10"
@@ -78,14 +80,14 @@
                     android:layout_marginLeft="@dimen/padding_30"
                     android:layout_marginRight="@dimen/padding_20"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_editext"
+                    android:background="@drawable/shape_yun_bar"
                     android:hint="请输入关键字"
                     android:text="" />
 
 
                 <Button
                     android:id="@+id/btn_plan_search"
-                    style="@style/ButtonStyle_color_21ac90"
+                    style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginRight="@dimen/padding_30"

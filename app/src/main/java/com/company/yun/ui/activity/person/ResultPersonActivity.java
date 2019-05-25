@@ -73,8 +73,6 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
     LinearLayout linearUnderSex;
     @BindView(R.id.linear_under_city_city)
     LinearLayout linear_under_city_city;
-    @BindView(R.id.linear_under_city)
-    TextView linearUnderCity;
     @BindView(R.id.person_all_tab)
     LinearLayout personAllTab;
     @BindView(R.id.bottom_chart01)
@@ -89,12 +87,18 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
     TextView tv_bottom_sex;
     @BindView(R.id.tv_bottom_city)
     TextView tv_bottom_city;
+    @BindView(R.id.linear_under_city)
+    TextView linear_under_city;
+    @BindView(R.id.tv_text_sex)
+    TextView tv_text_sex;
+    @BindView(R.id.tv_text_age)
+    TextView tv_text_age;
     @BindView(R.id.person_bottom_cardview_01)
-    CardView person_bottom_cardview_01;
+    LinearLayout person_bottom_cardview_01;
     @BindView(R.id.person_bottom_cardview_02)
-    CardView person_bottom_cardview_02;
+    LinearLayout person_bottom_cardview_02;
     @BindView(R.id.person_bottom_cardview_03)
-    CardView person_bottom_cardview_03;
+    LinearLayout person_bottom_cardview_03;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     Unbinder unbinder;
@@ -192,7 +196,7 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
 
 
         //年纪    tv_bottom_age    默认显示年纪的柱状图
-        changeBottomLinesStatues(tv_bottom_age, person_bottom_cardview_01);
+        changeBottomLinesStatues(tv_text_age, tv_bottom_age, person_bottom_cardview_01);
         initThreeBsrChart(bottomChartAge, DataUtils.get6List(xAgeList), zAgeList, yAgeList, DataUtils.toString(DataUtils.get6List(xAgeList)));
 
 //
@@ -208,28 +212,31 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.linear_under_sex:
-                changeBottomLinesStatues(tv_bottom_sex, person_bottom_cardview_02);
+                changeBottomLinesStatues(tv_text_sex, tv_bottom_sex, person_bottom_cardview_02);
                 initThreeBsrChart(bottomChartSex, DataUtils.get6List(xSexList), zSexList, ySexList, DataUtils.toString(DataUtils.get6List(xAgeList)));
                 break;
             case R.id.linear_under_city_city:
-                changeBottomLinesStatues(tv_bottom_city, person_bottom_cardview_03);
+                changeBottomLinesStatues(tv_bottom_age, tv_bottom_city, person_bottom_cardview_03);
                 initThreeBsrChart(bottomChartCity, DataUtils.get6List(xCityList), zCityList, yCityList, DataUtils.toString(DataUtils.get6List(xAgeList)));
                 break;
             case R.id.linear_under_age:
-                changeBottomLinesStatues(tv_bottom_age, person_bottom_cardview_01);
+                changeBottomLinesStatues(tv_bottom_age, tv_bottom_age, person_bottom_cardview_01);
                 initThreeBsrChart(bottomChartAge, DataUtils.get6List(xAgeList), zAgeList, yAgeList, DataUtils.toString(DataUtils.get6List(xAgeList)));
                 break;
         }
     }
 
-    private void changeBottomLinesStatues(TextView currentView, CardView currentThreeBar) {
+    private void changeBottomLinesStatues(TextView textView, TextView currentView, LinearLayout currentThreeBar) {
         tv_bottom_age.setVisibility(View.INVISIBLE);
         tv_bottom_sex.setVisibility(View.INVISIBLE);
         tv_bottom_city.setVisibility(View.INVISIBLE);
-
+        tv_text_age.setTextColor(getResources().getColor(R.color.white));
+        tv_text_sex.setTextColor(getResources().getColor(R.color.white));
+        linear_under_city.setTextColor(getResources().getColor(R.color.white));
         person_bottom_cardview_01.setVisibility(View.INVISIBLE);
         person_bottom_cardview_02.setVisibility(View.INVISIBLE);
         person_bottom_cardview_03.setVisibility(View.INVISIBLE);
+        textView.setTextColor(getResources().getColor(R.color.white));
         currentView.setVisibility(View.VISIBLE);
         currentThreeBar.setVisibility(View.VISIBLE);
     }
@@ -249,8 +256,8 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
         chart.setDrawGridBackground(false);
         MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(chart, strings);
         XAxis xAxis = chart.getXAxis();
-        DayProvinceAxisValueFormatter dayAxisValueFormatter = new DayProvinceAxisValueFormatter(chart);    //设置底部文字
         xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线
+        DayProvinceAxisValueFormatter dayAxisValueFormatter = new DayProvinceAxisValueFormatter(chart);    //设置底部文字
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f); // only intervals of 1 day
@@ -277,6 +284,15 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
         chart.animateXY(1000, 1000);        //执行动画
 
+        //柱状图
+
+        chart.setBackgroundColor(Color.TRANSPARENT);
+        leftAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.WHITE);
+        //设置网格颜色
+        xAxis.setGridColor(Color.WHITE);//设置x线颜色
+        leftAxis.setGridColor(Color.WHITE);//设置y线颜色
+
 
         //取消默认顶部值
         chart.invalidate();
@@ -299,8 +315,8 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
         } else {
             set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
-            int endColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
+            int startColor1 = ContextCompat.getColor(this, R.color.zise);
+            int endColor1 = ContextCompat.getColor(this, R.color.zise);
             List<GradientColor> gradientColors = new ArrayList<>();
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
@@ -345,6 +361,7 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
+        l.setTextColor(Color.WHITE);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
         mSexChart.setEntryLabelColor(Color.WHITE);
@@ -400,6 +417,13 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
 //                mSexChart.setDrawHoleEnabled(true);
 //            }
 //            mSexChart.invalidate();
+        //设置全部园
+        if (mSexChart.isDrawHoleEnabled()) {
+            mSexChart.setDrawHoleEnabled(false);
+        } else {
+            mSexChart.setDrawHoleEnabled(true);
+        }
+        mSexChart.invalidate();
     }
 
 
@@ -454,6 +478,18 @@ public class ResultPersonActivity extends BaseActivity implements PersonView {
         l.setFormSize(8f);
         l.setFormToTextSpace(4f);
         l.setXEntrySpace(6f);
+
+        //柱状图
+
+        chart.setBackgroundColor(Color.TRANSPARENT);
+
+        leftAxis.setTextColor(Color.WHITE);
+        xLabels.setTextColor(Color.WHITE);
+        //设置网格颜色
+        xLabels.setGridColor(Color.WHITE);//设置x线颜色
+        leftAxis.setGridColor(Color.WHITE);//设置y线颜色
+
+
     }
 
     private void setThreeBarData(BarChart chart, List<String> xList, List<List<String>> zCityList, List<String> yCityList) {  //mXlist===6

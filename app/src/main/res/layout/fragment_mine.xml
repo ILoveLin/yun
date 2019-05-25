@@ -4,6 +4,7 @@
     android:id="@+id/linear_04"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/bg"
     android:orientation="vertical">
 
     <View
@@ -15,21 +16,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:bar_leftText="当前账号"
-        app:bar_rightHint="张三"
+        android:background="@drawable/shape_yun_bar"
+        app:bar_rightText="张三"
+        app:bar_leftColor="@color/white"
+        app:bar_rightColor="@color/white"
         app:bar_rightIcon="@mipmap/ico_go_black" />
 
     <com.company.yun.view.widget.SettingBar
         android:id="@+id/sb_person_data_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_yun_bar"
+        app:bar_leftColor="@color/white"
         app:bar_leftText="清除缓存"
-        app:bar_rightHint="0.3M"
-        app:bar_rightIcon="@mipmap/ico_go_black" />
+        app:bar_rightColor="@color/white"
+        app:bar_rightIcon="@mipmap/ico_go_black"
+        app:bar_rightText="0.3M" />
 
 
     <Button
         android:id="@+id/btn_exit"
-        style="@style/ButtonStyle_color_21ac90"
+        style="@style/ButtonStyle_shape_yun_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_30"

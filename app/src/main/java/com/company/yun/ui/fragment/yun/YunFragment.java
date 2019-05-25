@@ -43,6 +43,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.model.GradientColor;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -219,16 +220,20 @@ public class YunFragment extends BaseFragment implements YunView {
         mSexChart.setDrawCenterText(true);
         mSexChart.setRotationAngle(0);
         mSexChart.setRotationEnabled(true);
+        mSexChart.setDrawHoleEnabled(false);
+//        mSexChart(getResources().getColor(R.color.transparent));
         mSexChart.setHighlightPerTapEnabled(true);
         mSexChart.animateY(1400, Easing.EaseInOutQuad);
-        Legend l = mSexChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
+        Legend mLegend = mSexChart.getLegend();
+        mLegend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        mLegend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        mLegend.setOrientation(Legend.LegendOrientation.VERTICAL);
+        mLegend.setDrawInside(false);
+        mLegend.setTextColor(Color.WHITE);
+        mLegend.setXEntrySpace(7f);
+        mLegend.setYEntrySpace(0f);
+        mLegend.setYOffset(0f);
+
         mSexChart.setEntryLabelColor(Color.WHITE);
         mSexChart.setEntryLabelTextSize(12f);
         setPicData(mSexChart, XList, XList.size(), floats, type);
@@ -242,7 +247,16 @@ public class YunFragment extends BaseFragment implements YunView {
             entries.add(new PieEntry((float) (floats[i]),
                     parties.get(i % parties.size())));
         }
-        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+        PieDataSet dataSet = null;
+        if ("sex".equals(type)) {
+            dataSet = new PieDataSet(entries, "性别占比");
+
+        } else if ("age".equals(type)) {
+            dataSet = new PieDataSet(entries, "年龄占比");
+        } else {
+            dataSet = new PieDataSet(entries, "兴趣占比");
+        }
+
         dataSet.setDrawIcons(false);
         dataSet.setSliceSpace(3f);
         dataSet.setIconsOffset(new MPPointF(0, 40));
@@ -335,10 +349,20 @@ public class YunFragment extends BaseFragment implements YunView {
         drawNumAndPoint(mTChart01);
         List<ILineDataSet> sets = mTChart01.getData()
                 .getDataSets();
+
+        mTChart01.setBackgroundColor(Color.TRANSPARENT);
+
+        yAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.WHITE);
+
+//设置网格颜色
+        xAxis.setGridColor(Color.WHITE);//设置x线颜色
+        yAxis.setGridColor(Color.WHITE);//设置y线颜色
         //画数值
         for (ILineDataSet iSet : sets) {
             LineDataSet set = (LineDataSet) iSet;
             set.setDrawValues(!set.isDrawValuesEnabled());
+            set.setColor(Color.WHITE);
         }
         //画小圆点
         for (ILineDataSet iSet : sets) {
@@ -375,14 +399,23 @@ public class YunFragment extends BaseFragment implements YunView {
         leftAxis.setSpaceTop(15f);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         YAxis rightAxis = mChart02.getAxisRight();
+
         rightAxis.setEnabled(false);
+
+        mChart02.setBackgroundColor(Color.TRANSPARENT);
+        leftAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.WHITE);
+        //设置网格颜色
+        xAxis.setGridColor(Color.WHITE);//设置x线颜色
+        leftAxis.setGridColor(Color.WHITE);//设置y线颜色
+
         XYMarkerView mv = new XYMarkerView(getContext(), xAxisFormatter);    //点击柱状图显示信息
         mv.setChartView(mChart02); // For bounds control
         mChart02.setMarker(mv); // Set the marker to the chart
         setChart02Data(floats);
         Legend l = mChart02.getLegend();
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
-        //取消默认顶部值
+
         mChart02.invalidate();
 
     }
@@ -403,8 +436,8 @@ public class YunFragment extends BaseFragment implements YunView {
         } else {
             set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
-            int endColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
+            int startColor1 = ContextCompat.getColor(getContext(), R.color.zise);
+            int endColor1 = ContextCompat.getColor(getContext(), R.color.zise);
             List<GradientColor> gradientColors = new ArrayList<>();
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
@@ -436,8 +469,8 @@ public class YunFragment extends BaseFragment implements YunView {
             set1 = new LineDataSet(values, "");
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
             set1.setDrawIcons(false);
-            set1.setColor(getResources().getColor(R.color.color_21ac90));
-            set1.setCircleColor(getResources().getColor(R.color.color_21ac90));
+            set1.setColor(getResources().getColor(R.color.white));
+            set1.setCircleColor(getResources().getColor(R.color.white));
             set1.setLineWidth(1f);
             set1.setCircleRadius(3f);
             set1.setDrawCircleHole(false);

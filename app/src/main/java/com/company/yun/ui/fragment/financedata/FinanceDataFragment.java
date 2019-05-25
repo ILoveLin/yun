@@ -56,14 +56,6 @@ import butterknife.Unbinder;
  * Describe:财务数据--01
  */
 public class FinanceDataFragment extends BaseFragment implements FinanceDataView {
-    float myDateY[] = new float[]{8, 6, 16, 14, 12, 12, 2, 8, 14, 12, 6, 6, 4, 18, 16, 6, 8, 4, 8, 4, 16};
-    float myDateLineY[] = new float[]{8, 6, 14, 6, 4, 14, 14, 12, 4, 4, 6, 8, 10, 4, 12, 8, 10, 10, 14, 12, 10};
-
-    protected final String[] mXDate = new String[]{
-            "9:44:54", "9:44:53", "9:44:52", "9:44:51", "9:44:50", "9:44:49", "9:44:48", "9:44:47",
-            "9:44:46", "9:44:45", "9:44:44", "9:44:43", "9:44:42", "9:44:41", "9:44:40", "9:44:39",
-            "9:44:38", "9:44:37", "9:44:36", "9:44:35", "9:44:34"};
-
     @BindView(R.id.fake_status_bar)
     View mFakeStatusBar;
     @BindView(R.id.chart1)
@@ -151,7 +143,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         List<String> ddate = month.getDdate();
         List<String> money1 = month.getMoney();
         List<String> ratio = month.getRatio();
-        initChart02(ddate, DataUtils.toFloat(money1),DataUtils.toString(data));
+        initChart02(ddate, DataUtils.toFloat(money1), DataUtils.toString(data));
         //环比
         //ratio---month---(x---data   y-----ratio)
         Collections.sort(ddate);
@@ -194,12 +186,15 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         mTopRecycleView.setLayoutManager(topLinearLayoutManager);
         mTopAdapter = new TopAdapter(mTopDataList, getActivity());
         mTopRecycleView.setAdapter(mTopAdapter);
-
+        mTopRecycleView.setBackgroundColor(getResources().getColor(R.color.white_85));
         underlinearLayoutManager = new LinearLayoutManager(getContext());
         underlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
         mUnderRecycleView.setLayoutManager(underlinearLayoutManager);
         mUnderAdapter = new UnderAdapter(mUnderDataList, getActivity());
         mUnderRecycleView.setAdapter(mUnderAdapter);
+        mUnderRecycleView.setBackgroundColor(getResources().getColor(R.color.white_85));
+
 
 
     }
@@ -244,6 +239,16 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         yAxis.enableGridDashedLine(10f, 10f, 0f);
         // draw limit lines behind data instead of on top
         yAxis.setDrawLimitLinesBehindData(true);
+
+        chart04.setBackgroundColor(Color.TRANSPARENT);
+
+        yAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.WHITE);
+
+        //设置网格颜色
+        xAxis.setGridColor(Color.WHITE);//设置x线颜色
+        yAxis.setGridColor(Color.WHITE);//设置y线颜色
+
         // add data
 //        setChart01Data();
         setChartLineData(chart04, floats);
@@ -298,6 +303,17 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         yAxis.enableGridDashedLine(10f, 10f, 0f);
         // draw limit lines behind data instead of on top
         yAxis.setDrawLimitLinesBehindData(true);
+
+        chart03.setBackgroundColor(Color.TRANSPARENT);
+
+        yAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.WHITE);
+
+        //设置网格颜色
+        xAxis.setGridColor(Color.WHITE);//设置x线颜色
+        yAxis.setGridColor(Color.WHITE);//设置y线颜色
+
+
         // add data
         setChartLineData(chart03, floats);
         // draw points over time
@@ -326,12 +342,14 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         chart02.setPinchZoom(false);
 
         chart02.setDrawGridBackground(false);
+        chart02.setBackgroundColor(Color.TRANSPARENT);
         // chart.setDrawYLabels(false);
 
-        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(chart02,string);
+        MyPersonDayAxisValueFormatter xAxisFormatter = new MyPersonDayAxisValueFormatter(chart02, string);
 
         XAxis xAxis = chart02.getXAxis();
         xAxis.enableGridDashedLine(10f, 10f, 0f);   //画虚线
+
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f); // only intervals of 1 day
@@ -363,6 +381,12 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
         // chart.setDrawLegend(false);
 
+
+        leftAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.WHITE);
+        //设置网格颜色
+        xAxis.setGridColor(Color.WHITE);//设置x线颜色
+        leftAxis.setGridColor(Color.WHITE);//设置y线颜色
         //取消默认顶部值
         for (IDataSet set : chart02.getData().getDataSets())
             set.setDrawValues(!set.isDrawValuesEnabled());
@@ -391,8 +415,8 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         } else {
             set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
-            int endColor1 = ContextCompat.getColor(getContext(), R.color.color_21ac90);
+            int startColor1 = ContextCompat.getColor(getContext(), R.color.zise);
+            int endColor1 = ContextCompat.getColor(getContext(), R.color.zise);
 //            int startColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
 //            int endColor1 = ContextCompat.getColor(getContext(), android.R.color.holo_orange_light);
             List<GradientColor> gradientColors = new ArrayList<>();
@@ -411,7 +435,6 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
     //初始化02--充值图表
     private void initChart01(final List<String> data, float[] floats) {
         // background color
-        chart01.setBackgroundColor(Color.WHITE);
         // disable description text
         chart01.getDescription().setEnabled(false);
         // enable touch gestures
@@ -421,7 +444,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         chart01.setPinchZoom(true);
 
         // set listeners
-        chart01.setDrawGridBackground(false);
+
         // create marker to display box when values are selected
         MyMarkerView mv = new MyMarkerView(getContext(), R.layout.custom_marker_view);
         // Set the marker to the chart
@@ -433,20 +456,28 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         xAxis.enableGridDashedLine(10f, 10f, 0f);
         xAxis.setAxisMinimum(0f);
         xAxis.setGranularity(1f);
+        xAxis.setGridColor(Color.WHITE);//设置竖线颜色
+//        xAxis.setAxisLineColor(Color.RED);//设置x轴线颜色
         xAxis.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
                 return data.get((int) value % data.size());
             }
         });
+        xAxis.setTextColor(Color.WHITE);
         YAxis yAxis;
         yAxis = chart01.getAxisLeft();
+        chart01.setBackgroundColor(Color.TRANSPARENT);
         // disable dual axis (only use LEFT axis)
         chart01.getAxisRight().setEnabled(false);
         // horizontal grid lines
         yAxis.enableGridDashedLine(10f, 10f, 0f);
         // draw limit lines behind data instead of on top
         yAxis.setDrawLimitLinesBehindData(true);
+        yAxis.setTextColor(Color.WHITE);
+        yAxis.setGridColor(Color.WHITE);//设置竖线颜色
+        chart01.setDrawGridBackground(false);
+
         // add data
 //        setChart01Data();
         setChartLineData(chart01, floats);
@@ -508,8 +539,8 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
 //            set1.enableDashedLine(10f, 5f, 0f);
 
             // black lines and points
-            set1.setColor(getResources().getColor(R.color.color_21ac90));
-            set1.setCircleColor(getResources().getColor(R.color.color_21ac90));
+            set1.setColor(Color.WHITE);
+            set1.setCircleColor(Color.WHITE);
 
             // line thickness and point size
             set1.setLineWidth(1f);

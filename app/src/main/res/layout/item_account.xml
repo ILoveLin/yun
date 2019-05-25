@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <!--android:background="@color/white_85"-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="账户名:"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
 
             <TextView
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_10"
                 android:text="bj-易哲网络05"
-                android:textColor="@color/color_7D7D7D"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
         </LinearLayout>
 
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="框架名:"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_10"
                 android:text="bj-易哲网络"
-                android:textColor="@color/color_7D7D7D"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
         </LinearLayout>
     </LinearLayout>
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="展现:"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
 
             <TextView
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_10"
                 android:text="bj-易哲网络05"
-                android:textColor="@color/color_7D7D7D"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
         </LinearLayout>
 
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="点击:"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
 
             <TextView
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_10"
                 android:text="bj-易哲网络"
-                android:textColor="@color/color_7D7D7D"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
         </LinearLayout>
     </LinearLayout>
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="消费:"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
 
             <TextView
@@ -142,14 +142,14 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_10"
                 android:text="bj-易哲网络05"
-                android:textColor="@color/color_7D7D7D"
+                android:textColor="@color/white"
                 android:textSize="@dimen/padding_16" />
         </LinearLayout>
 
     </LinearLayout>
 
     <View
-        android:layout_marginTop="@dimen/padding_10"
         android:id="@+id/v_title_line"
-        style="@style/LineItemStyleE0E0E0" />
+        style="@style/LineItemStyleE0E0E0"
+        android:layout_marginTop="@dimen/padding_10" />
 </LinearLayout>

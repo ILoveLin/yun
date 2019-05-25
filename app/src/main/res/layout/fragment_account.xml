@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/bg"
     android:orientation="vertical">
 
 
@@ -39,7 +40,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -66,7 +66,7 @@
 
                     <TextView
                         android:id="@+id/tv_account_01"
-                        style="@style/TextTitle_Account_white"
+                        style="@style/TextTitle_Account_white_text"
                         android:text="10086" />
                 </LinearLayout>
 
@@ -94,7 +94,7 @@
 
                     <TextView
                         android:id="@+id/tv_account_02"
-                        style="@style/TextTitle_Account_white"
+                        style="@style/TextTitle_Account_white_text"
                         android:text="10086" />
                 </LinearLayout>
 
@@ -122,7 +122,7 @@
 
                     <TextView
                         android:id="@+id/tv_account_03"
-                        style="@style/TextTitle_Account_white"
+                        style="@style/TextTitle_Account_white_text"
                         android:text="10086" />
                 </LinearLayout>
 
@@ -150,7 +150,7 @@
 
                     <TextView
                         android:id="@+id/tv_account_04"
-                        style="@style/TextTitle_Account_white"
+                        style="@style/TextTitle_Account_white_text"
                         android:text="10086" />
 
 
@@ -165,7 +165,7 @@
                     android:id="@+id/recyclerView_account"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white">
+                  >
 
 
                 </android.support.v7.widget.RecyclerView>

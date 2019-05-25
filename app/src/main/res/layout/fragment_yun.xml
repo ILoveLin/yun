@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/bg"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/padding_54"
-        android:background="@color/white"
+        android:background="@mipmap/bg_top"
         android:orientation="vertical">
         <!--android:background="@color/color_f7f7f7"-->
 
@@ -46,7 +47,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="标题"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_font_17" />
 
         <TextView
@@ -98,18 +99,16 @@
 
                 <include layout="@layout/include_yun_top"></include>
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="昨日数据" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
                 <!--曲线图 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/white_85"
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.LineChart
@@ -117,24 +116,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_marginTop="@dimen/padding_10"
-                        android:layout_marginBottom="@dimen/padding_10"
-                        android:background="#ffffff" />
+                        android:layout_marginBottom="@dimen/padding_10" />
 
                 </LinearLayout>
 
                 <!--树状图-->
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="今日数据" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+
+                    android:background="@color/white_85"
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.BarChart
@@ -142,12 +139,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="260dp"
                         android:layout_marginTop="@dimen/padding_10"
-                        android:layout_marginBottom="@dimen/padding_10"
-                        android:background="@color/white" />
+                        android:layout_marginBottom="@dimen/padding_10" />
 
                 </LinearLayout>
 
-                <View style="@style/LineItemStyleE0E0E0" />
+                <View
+                    style="@style/LineItemStyleE0E0E0"
+                    android:layout_marginTop="@dimen/padding_10" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -161,18 +159,16 @@
 
                 <View style="@style/LineItemStyleE0E0E0" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="性别占比" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/white_85"
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.PieChart
@@ -181,18 +177,17 @@
                         android:layout_height="@dimen/padding_240" />
                 </LinearLayout>
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="年龄占比" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/white_85"
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.PieChart
@@ -201,18 +196,17 @@
                         android:layout_height="@dimen/padding_240" />
                 </LinearLayout>
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="兴趣占比" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/white_85"
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.PieChart

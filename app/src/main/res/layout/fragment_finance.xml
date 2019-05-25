@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@mipmap/bg"
     android:layout_height="match_parent">
     <!--android:background="@mipmap/bg_main"-->
 
@@ -10,6 +11,7 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         app:srlEnablePureScrollMode="true">
         <!--纯滚动模式-->
         <!--app:srlEnablePureScrollMode="true"-->
@@ -35,7 +37,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <com.company.yun.view.widget.SettingBar
@@ -58,7 +59,7 @@
                         android:layout_marginLeft="@dimen/padding_20"
                         android:layout_marginTop="@dimen/padding_20"
                         android:layout_marginRight="@dimen/padding_20"
-                        android:background="@drawable/shape_data_chongzih"
+                        android:background="@drawable/shape_data_02"
                         app:bar_leftColor="@color/white"
                         app:bar_leftText="12.23亿"
                         app:bar_rightColor="@color/white"
@@ -72,7 +73,7 @@
                         android:layout_marginTop="@dimen/padding_20"
                         android:layout_marginRight="@dimen/padding_20"
                         android:layout_marginBottom="@dimen/padding_20"
-                        android:background="@drawable/shape_data_chongzih"
+                        android:background="@drawable/shape_data_03"
                         app:bar_leftColor="@color/white"
                         app:bar_leftText="12.23亿"
                         app:bar_rightColor="@color/white"
@@ -80,18 +81,17 @@
 
                 </LinearLayout>
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
+
                     style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_tubiao" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
+                    android:background="@color/white_85"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.LineChart
@@ -100,41 +100,36 @@
                         android:layout_height="220dp"
                         android:layout_marginTop="@dimen/padding_10"
                         android:layout_marginBottom="@dimen/padding_10"
-                        android:background="#ffffff" />
+                      />
 
                 </LinearLayout>
 
                 <!--Top 客户充值数据-->
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_Top_kehu_chongzhi_data" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleview_top"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
+                    android:layout_height="match_parent">
                 </android.support.v7.widget.RecyclerView>
 
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_zhuzhuangtu" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
+                    android:background="@color/white_85"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.BarChart
@@ -143,22 +138,21 @@
                         android:layout_height="260dp"
                         android:layout_marginTop="@dimen/padding_10"
                         android:layout_marginBottom="@dimen/padding_10"
-                        android:background="@color/white" />
+                        android:background="@color/transparent" />
 
                 </LinearLayout>
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_huanbi" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/white_85"
+
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.LineChart
@@ -167,8 +161,7 @@
                         android:layout_height="220dp"
                         android:layout_marginTop="@dimen/padding_10"
                         android:layout_marginBottom="@dimen/padding_10"
-
-                        android:background="#ffffff" />
+/>
                 </LinearLayout>
 
 
@@ -183,7 +176,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/white_85"
+
                     android:orientation="vertical">
 
                     <com.github.mikephil.charting.charts.LineChart
@@ -192,23 +186,22 @@
                         android:layout_height="220dp"
                         android:layout_marginTop="@dimen/padding_10"
                         android:layout_marginBottom="@dimen/padding_10"
-                        android:background="#ffffff" />
+                       />
 
                 </LinearLayout>
 
 
                 <!--充值列表-->
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <TextView
                     style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_list" />
 
-                <View style="@style/LineItemStyleTransparent_10dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycleview_under"
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content">
 
 

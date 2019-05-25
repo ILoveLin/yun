@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.company.yun.R;
 import com.company.yun.base.BaseActivity;
@@ -63,15 +64,15 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
     @BindView(R.id.bar_chart_port)
     BarChart barChartPort;
     @BindView(R.id.cardview_bar_chart_port)
-    CardView cardviewBarChartPort;
+    LinearLayout cardviewBarChartPort;
     @BindView(R.id.pic_chart_channel)
     PieChart picChartChannel;
     @BindView(R.id.cardview_pic_chart_channel)
-    CardView cardviewPicChartChannel;
+    LinearLayout cardviewPicChartChannel;
     @BindView(R.id.bar_chart_area)
     BarChart bar_chart_area;
     @BindView(R.id.cardview_bar_chart_area)
-    CardView cardview_bar_chart_area;
+    LinearLayout cardview_bar_chart_area;
 
     Unbinder unbinder;
     private PlanPresenter mPresenter;
@@ -201,6 +202,15 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
         Legend l = chart.getLegend();
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
         chart.animateXY(1000, 1000);        //执行动画
+        //柱状图
+
+        chart.setBackgroundColor(Color.TRANSPARENT);
+
+        leftAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.WHITE);
+        //设置网格颜色
+        xAxis.setGridColor(Color.WHITE);//设置x线颜色
+        leftAxis.setGridColor(Color.WHITE);//设置y线颜色
 
 
         //取消默认顶部值
@@ -224,8 +234,8 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
         } else {
             set1 = new BarDataSet(values, "");
             set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
-            int endColor1 = ContextCompat.getColor(this, R.color.color_21ac90);
+            int startColor1 = ContextCompat.getColor(this, R.color.zise);
+            int endColor1 = ContextCompat.getColor(this, R.color.zise);
             List<GradientColor> gradientColors = new ArrayList<>();
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
@@ -271,6 +281,7 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
+        l.setTextColor(Color.WHITE);
         mSexChart.setEntryLabelColor(Color.WHITE);
         mSexChart.setEntryLabelTextSize(12f);
         setPicData(mSexChart, XList, XList.size(), floats, type);
@@ -320,15 +331,15 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
             set.setDrawValues(set.isDrawValuesEnabled());
         //显示百分百
         mSexChart.setDrawEntryLabels(mSexChart.isDrawEntryLabelsEnabled());
-        mSexChart.invalidate();
+//        mSexChart.invalidate();
 //        } else {
-//            //设置全部园
-//            if (mSexChart.isDrawHoleEnabled()) {
-//                mSexChart.setDrawHoleEnabled(false);
-//            } else {
-//                mSexChart.setDrawHoleEnabled(true);
-//            }
-//            mSexChart.invalidate();
+        //设置全部园
+        if (mSexChart.isDrawHoleEnabled()) {
+            mSexChart.setDrawHoleEnabled(false);
+        } else {
+            mSexChart.setDrawHoleEnabled(true);
+        }
+        mSexChart.invalidate();
     }
 
 
@@ -356,6 +367,7 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
     public void onClickTitleLeftBtn(View v) {
         this.finish();
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

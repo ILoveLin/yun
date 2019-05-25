@@ -29,9 +29,8 @@
     </style>
 
     <style name="TextTitle_Account_white">
-        <!--<item name="android:background">@color/white</item>-->
+        <item name="android:background">@drawable/shape_account_bar</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:background">@drawable/shape_data_chongzih</item>
         <item name="android:textSize">@dimen/padding_15</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
@@ -40,13 +39,22 @@
         <item name="android:layout_marginRight">@dimen/padding_10</item>
         <item name="android:paddingLeft">@dimen/padding_2</item>
         <item name="android:paddingRight">@dimen/padding_10</item>
-
-
+    </style>
+    <style name="TextTitle_Account_white_text">
+        <!--<item name="android:background">@color/white_85</item>-->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/padding_15</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_height">@dimen/padding_50</item>
+        <item name="android:layout_marginLeft">@dimen/padding_10</item>
+        <item name="android:layout_marginRight">@dimen/padding_10</item>
+        <item name="android:paddingLeft">@dimen/padding_2</item>
+        <item name="android:paddingRight">@dimen/padding_10</item>
     </style>
 
     <style name="TextTitle_color_21ac90">
-        <item name="android:background">@color/white</item>
-        <item name="android:textColor">@color/color_21ac90</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/padding_17</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/padding_45</item>
@@ -57,7 +65,7 @@
     </style>
     <style name="TextTitle_white">
         <!--<item name="android:background">@color/white</item>-->
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/color_60ffffff</item>
         <item name="android:textSize">@dimen/padding_17</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/padding_45</item>
@@ -91,6 +99,18 @@
 
         <item name="android:foreground">@null</item>
     </style>
+
+    <style name="ButtonStyle_shape_yun_bar" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:paddingLeft">@dimen/padding_15</item>
+        <item name="android:paddingRight">@dimen/padding_15</item>
+        <item name="android:paddingTop">@dimen/padding_10</item>
+        <item name="android:paddingBottom">@dimen/padding_10</item>
+        <item name="android:textSize">@dimen/padding_14</item>
+        <item name="android:textColor">@color/viewfinder_laser</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/shape_yun_bar</item>
+        <item name="android:foreground">@null</item>
+    </style>
     <!-- 默认文本框样式 -->
     <style name="EditTextStyle">
         <!--<item name="android:background">@null</item>-->
@@ -119,7 +139,7 @@
     <style name="LineItemStyleE0E0E0">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1px</item>
-        <item name="android:background">@color/color_e0e0e0</item>
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="LineItemStyleTransparent_10dp">

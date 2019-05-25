@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@mipmap/bg"
     android:orientation="vertical">
 
     <TextView style="@style/LineItemStyleE0E0E0" />
@@ -51,6 +51,7 @@
                         android:paddingTop="@dimen/padding_20"
                         android:paddingRight="@dimen/padding_10"
                         android:text="多种方式细化用户群"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/padding_16" />
 
                     <TextView
@@ -60,6 +61,7 @@
                         android:paddingTop="@dimen/padding_10"
                         android:paddingRight="@dimen/padding_10"
                         android:text="分析模型下钻保存分群、行为和属性自定义分群查看整体用户画像、偏好，深入分析单用户行为验证分群。"
+                        android:textColor="@color/white"
 
                         android:textSize="@dimen/padding_14" />
                 </LinearLayout>
@@ -87,7 +89,7 @@
 
                 <Button
                     android:id="@+id/btn_person_search"
-                    style="@style/ButtonStyle_color_21ac90"
+                    style="@style/ButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
                     android:layout_marginRight="@dimen/padding_30"

@@ -1,5 +1,6 @@
 package com.company.yun.ui.fragment.result;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.data.style.FontStyle;
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.result.KeyWorldBean;
@@ -98,6 +100,12 @@ public class ResultKeywordFragment extends BaseFragment {
 
                 keyWorldBeanList.add(keyWorldBean);
             }
+
+            mTabel.getConfig().setYSequenceStyle(new FontStyle(40, Color.WHITE));     //ABC
+            mTabel.getConfig().setXSequenceStyle(new FontStyle(40, Color.WHITE));     //123
+            mTabel.getConfig().setColumnTitleStyle(new FontStyle(40, Color.WHITE));   //列标题
+            mTabel.getConfig().setTableTitleStyle(new FontStyle(40, Color.WHITE));    //表格标题
+            mTabel.getConfig().setContentStyle(new FontStyle(40, Color.WHITE));       //内容
             mTabel.setData(keyWorldBeanList);
             mTabel.getConfig().setShowTableTitle(true);
             mTabel.getConfig().setShowXSequence(true);

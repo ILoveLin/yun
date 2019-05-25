@@ -1,7 +1,9 @@
 package com.company.yun.ui.fragment.result;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.bin.david.form.component.XSequence;
+import com.bin.david.form.component.YSequence;
 import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.core.TableConfig;
+import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.format.bg.BaseCellBackgroundFormat;
+import com.bin.david.form.data.format.bg.ICellBackgroundFormat;
+import com.bin.david.form.data.style.FontStyle;
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.result.PlanBean;
@@ -83,6 +92,43 @@ public class ResultPlanFragment extends BaseFragment {
                 planBeanList.add(planBean);
 
             }
+            ICellBackgroundFormat<Column> background = new BaseCellBackgroundFormat<Column>() {
+                @Override
+                public int getBackGroundColor(Column column) {
+                    return ContextCompat.getColor(getActivity(), R.color.white);
+                }
+
+                @Override
+                public int getTextColor(Column column) {
+                    if ("展现".equals(column.getColumnName())) {
+                        return ContextCompat.getColor(getActivity(), R.color.white);
+                    }
+                    return TableConfig.INVALID_COLOR;
+                }
+            };
+////设置列标题背景和颜色
+//            table.getConfig().setColumnCellBackgroundFormat(background);
+////设置统计行背景和颜色
+//            table.getConfig().setCountBgCellFormat(background);
+
+
+//            1.  设置内容文字样式  setContentStyle
+//            2.  设置左边序列文字样式 setYSequenceStyle
+//            3.  设置顶部序列文字样式 setXSequenceStyle
+//            4.  设置列标题文字样式 setColumnTitleStyle
+//            5.  设置表格标题文字样式 setTableTitleStyle
+//            6.  设置统计行样式  setCountStyle
+//            7.  设置列标题网格样式 setColumnTitleGridStyle
+//            8.  设置内容网格样式 setGridStyle       //
+//            14. 设置内容背景 setContentBackgroundColor
+//            mTabel.getConfig().setContentStyle(new FontStyle(50, Color.WHITE));
+//            table.getConfig().setContentStyle(new FontStyle(50, Color.BLUE));
+
+            mTabel.getConfig().setYSequenceStyle(new FontStyle(40, Color.WHITE));     //ABC
+            mTabel.getConfig().setXSequenceStyle(new FontStyle(40, Color.WHITE));     //123
+            mTabel.getConfig().setColumnTitleStyle(new FontStyle(40, Color.WHITE));   //列标题
+            mTabel.getConfig().setTableTitleStyle(new FontStyle(40, Color.WHITE));    //表格标题
+            mTabel.getConfig().setContentStyle(new FontStyle(40, Color.WHITE));       //内容
             mTabel.setData(planBeanList);
             mTabel.getConfig().setShowTableTitle(true);
             mTabel.getConfig().setShowXSequence(true);

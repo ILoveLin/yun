@@ -107,8 +107,11 @@ public class MainActivity extends BaseActivity {
         SharePreferenceUtil.put(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, index);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         hideFragments(transaction);
+
+
         StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
         StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+
         switch (index) {
             case Contants.TAB_HOME:   //财务数据--0
 //                StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);

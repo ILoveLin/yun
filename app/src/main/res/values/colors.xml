@@ -339,6 +339,7 @@
     <color name="dialog_bg">#ffffff</color>
     <color name="dialog_bg_press">#f0f0f0</color>
     <color name="dialog_cancel">#f44336</color>
+    <color name="color_3375D5">#3375D5</color>
 
     <!--zbar start-->
     <color name="viewfinder_laser">#ffff0000</color>
@@ -348,6 +349,8 @@
     <color name="result_text">#ffffffff</color>
     <color name="result_view">#b0000000</color>
     <color name="white">#ffffffff</color>
+    <color name="zise">#6571e9</color>
+    <color name="white_85">#21ffffff</color>
     <!--zbar end-->
 
     <color name="color_ff1e1e">#ff1e1e</color>
