@@ -111,6 +111,9 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         setTitleBarVisibility(View.VISIBLE);
         setTitleName("财务数据");
         setTitleLeftBtnVisibility(View.GONE);
+        mSettingBar01.setLineVisible(false);
+        mSettingBar02.setLineVisible(false);
+        mSettingBar03.setLineVisible(false);
         setPageStateView();
         responseListener();
     }
@@ -128,7 +131,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         initRecycleView(rechargeCompanysList, rechargeList);
 
 
-        //Log.e("Net", "data==refreshUIData===" + mDataBean.toString());
+        //Log.e("Net", "data==refreshRecycleViewData===" + mDataBean.toString());
         FinanceDataBean.DataBean.Recharge_list_dataEntity bean = mDataBean.getRecharge_list_data();
         List<String> data = bean.getDdate();
         List<String> money = bean.getMyMoney();

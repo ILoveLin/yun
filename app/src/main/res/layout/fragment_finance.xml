@@ -72,7 +72,6 @@
                         android:layout_marginLeft="@dimen/padding_20"
                         android:layout_marginTop="@dimen/padding_20"
                         android:layout_marginRight="@dimen/padding_20"
-                        android:layout_marginBottom="@dimen/padding_20"
                         android:background="@drawable/shape_data_03"
                         app:bar_leftColor="@color/white"
                         app:bar_leftText="12.23亿"
@@ -83,7 +82,6 @@
 
 
                 <TextView
-
                     style="@style/TextTitle_color_21ac90"
                     android:text="@string/data_chongzhi_tubiao" />
 

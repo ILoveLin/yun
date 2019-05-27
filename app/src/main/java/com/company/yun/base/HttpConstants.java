@@ -21,7 +21,7 @@ public class HttpConstants {
     /**
      * 版本更新
      */
-    public static final String  Update = Common + "/api/login/app_version";
+    public static final String Update = Common + "/api/login/app_version";
 
 
     /**
@@ -41,7 +41,9 @@ public class HttpConstants {
      */
 
     public static final String Account = Common + "/api/index/sems";
-    public static final String Account_total = Common + "/api/Sems/sems_record_total";
+    public static final String Account_Detail_Total = Common + "/api/Sems/sems_record_total";
+    public static final String Account_Detail_Line = Common + "/api/Sems/sems_record_line";
+    public static final String Account_Detail_List = Common + "/api/Sems/sems_record_table";
 
 
     /**

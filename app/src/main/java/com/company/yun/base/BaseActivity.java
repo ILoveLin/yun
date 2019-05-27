@@ -26,6 +26,8 @@ import com.company.yun.utils.NetworkUtil;
 import com.company.yun.view.pagestate.PageManager;
 import com.yun.common.contant.Contants;
 import com.yun.common.utils.KeyBoardUtils;
+import com.yun.common.utils.StatusBarUtil;
+import com.yun.common.utils.StatusBarUtils;
 import com.yun.common.utils.ToastUtil;
 import com.yun.common.utils.popupwindow.PopupWindowTwoButton;
 
@@ -72,6 +74,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContentView = LayoutInflater.from(this).inflate(getContentViewId(), rootView, false);
         rootView.addView(mContentView);
         unbinder = ButterKnife.bind(this);
+
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
+        StatusBarUtil.darkMode(this, false);  //设置了状态栏文字的颜色
 //        StatusBarUtils.setColor(getActivity(), getResources().getColor(R.color.color_transparent), 0);
 //        StatusBarUtil.darkMode(getActivity(), true);  //设置了状态栏文字的颜色
 //        StatusBarUtils.setTranslucentForImageView(getActivity(), 0, relative_recommend);

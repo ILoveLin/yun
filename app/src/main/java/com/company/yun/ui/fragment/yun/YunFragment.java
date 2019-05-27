@@ -361,9 +361,10 @@ public class YunFragment extends BaseFragment implements YunView {
         //画数值
         for (ILineDataSet iSet : sets) {
             LineDataSet set = (LineDataSet) iSet;
-            set.setDrawValues(!set.isDrawValuesEnabled());
+            set.setDrawValues(false);
             set.setColor(Color.WHITE);
         }
+
         //画小圆点
         for (ILineDataSet iSet : sets) {
             LineDataSet set = (LineDataSet) iSet;
@@ -415,7 +416,8 @@ public class YunFragment extends BaseFragment implements YunView {
         setChart02Data(floats);
         Legend l = mChart02.getLegend();
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
-
+        for (IDataSet set : mChart02.getData().getDataSets())
+            set.setDrawValues(false);
         mChart02.invalidate();
 
     }
@@ -447,6 +449,9 @@ public class YunFragment extends BaseFragment implements YunView {
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
             data.setBarWidth(barWidth);
+
+
+
             mChart02.setData(data);
         }
     }

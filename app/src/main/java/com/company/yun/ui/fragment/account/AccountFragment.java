@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.company.yun.R;
 import com.company.yun.base.BaseFragment;
 import com.company.yun.bean.account.AccountBean;
+import com.company.yun.ui.activity.detail.AccountDetailActivity;
 import com.company.yun.ui.fragment.account.adapter.AccountAdapter;
 import com.company.yun.ui.fragment.account.presenter.AccountPresenter;
 import com.company.yun.ui.fragment.account.presenter.AccountView;
@@ -89,6 +90,13 @@ public class AccountFragment extends BaseFragment implements AccountView {
                 page++;
                 mPresenter.sendRequest(page, "loadMore");
 
+            }
+        });
+
+        mAdapter.setClickCallBack(new AccountAdapter.ItemClickCallBack() {
+            @Override
+            public void onItemClick(AccountBean.DataBean.Chams_usersEntity bean) {
+                openActivity(AccountDetailActivity.class);
             }
         });
 

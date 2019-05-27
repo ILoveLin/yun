@@ -66,7 +66,6 @@ public class ResultOriginalityFragment extends BaseFragment {
                 DecimalFormat df = new DecimalFormat("0.00");
                 String formatPrice = df.format((float) Float.parseFloat(charge) / Float.parseFloat(click));
                 String formatclickRatre = df.format((float) Float.parseFloat(show) / Float.parseFloat(click));
-
                 OriginalityBean originalityBean = new OriginalityBean(originality1, "-", "-", "-", namePlan,
                         nameUnit, charge, show, click, formatPrice, formatclickRatre);
                 originalityBeanList.add(originalityBean);

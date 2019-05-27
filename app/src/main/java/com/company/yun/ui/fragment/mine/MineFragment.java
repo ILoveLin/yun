@@ -47,6 +47,7 @@ public class MineFragment extends BaseFragment {
     private String formatSize;
     private long folderSize = 0;
 
+    //v_setting_bar_line
     @Override
     public int getContentViewId() {
         return R.layout.fragment_mine;
@@ -64,6 +65,8 @@ public class MineFragment extends BaseFragment {
         setTitleName("我的");
         setPageStateView();
         showContent();
+        barCurrentName.setLineVisible(true);
+        sbPersonDataAddress.setLineVisible(false);
         name = (String) SharePreferenceUtil.get(getActivity(), Constants.UserName, "张三");
         try {
             File cacheDir = getActivity().getCacheDir();

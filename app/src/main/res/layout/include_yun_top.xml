@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="@dimen/padding_20"
-    android:paddingBottom="@dimen/padding_20">
+   >
 
 
     <LinearLayout
@@ -111,7 +111,7 @@
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_10"
             android:paddingTop="@dimen/padding_5"
-            android:paddingBottom="@dimen/padding_5">
+           >
 
             <TextView
                 style="@style/TextTitle_white"
@@ -159,7 +159,7 @@
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_10"
             android:paddingTop="@dimen/padding_5"
-            android:paddingBottom="@dimen/padding_5">
+           >
 
             <TextView
                 android:id="@+id/tv_consume"
@@ -209,7 +209,7 @@
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_10"
             android:paddingTop="@dimen/padding_5"
-            android:paddingBottom="@dimen/padding_5">
+           >
 
             <TextView
                 style="@style/TextTitle_white"

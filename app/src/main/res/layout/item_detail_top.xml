@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/padding_140"
+    android:layout_height="@dimen/padding_70"
+    android:background="@drawable/selector_button_account_detail"
+    android:clickable="true"
+    android:gravity="center"
+    android:id="@+id/item_detail_top"
+    android:layout_marginRight="@dimen/padding_20"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_tv_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="总消费:"
+        android:textColor="@color/white"
+        android:textSize="@dimen/padding_16" />
+
+    <TextView
+        android:id="@+id/item_tv_under"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="10086"
+        android:textColor="@color/white"
+        android:textSize="@dimen/padding_16" />
+</LinearLayout>

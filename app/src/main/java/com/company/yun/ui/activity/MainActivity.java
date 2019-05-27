@@ -109,8 +109,8 @@ public class MainActivity extends BaseActivity {
         hideFragments(transaction);
 
 
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
-        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
+        StatusBarUtil.darkMode(this, false);  //设置了状态栏文字的颜色
 
         switch (index) {
             case Contants.TAB_HOME:   //财务数据--0
@@ -130,6 +130,8 @@ public class MainActivity extends BaseActivity {
                 overAnim(tvTabFirstPage);
                 break;
             case Contants.TAB_DRUG_SEACH://账户管理--1
+
+
 //                StatusBarUtils.setColor(this, getResources().getColor(R.color.result_points), 0);
 //                StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
                 if (accountFragment == null) {

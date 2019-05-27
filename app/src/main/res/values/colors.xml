@@ -19,9 +19,10 @@
 
     <color name="border_search_goods">#dfdfdf</color>
     <color name="light_gray">#bfbfbf</color>
-    <color name="tab_main_nor">#7c7c7c</color>
-    <color name="tab_main_pre">#1aa98c</color>
+    <color name="tab_main_nor">#ffffff</color>
+    <color name="tab_main_pre">#14237C</color>
     <color name="colorLine">#ECECEC</color>
+    <color name="statue_bar">#2F435B</color>
     <color name="toggle_color_slelected">#1aa98d</color>
     <color name="black">#FF000000</color>
     <color name="black40">#66000000</color>

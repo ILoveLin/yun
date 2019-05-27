@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.company.yun.R;
@@ -29,7 +30,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
     }
 
     public interface ItemClickCallBack {
-        void onItemClick(int bean);
+        void onItemClick(AccountBean.DataBean.Chams_usersEntity bean);
     }
 
     public ArrayList<AccountBean.DataBean.Chams_usersEntity> datas = null;
@@ -52,12 +53,18 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-        AccountBean.DataBean.Chams_usersEntity bean = datas.get(position);
+        final AccountBean.DataBean.Chams_usersEntity bean = datas.get(position);
         viewHolder.tv_account_name.setText(bean.getAccount() + "");
         viewHolder.tv_frame_name.setText(bean.getCham_account() + "");
         viewHolder.tv_zhanxian.setText(bean.getShows() + "");
         viewHolder.tv_click.setText(bean.getClick() + "");
         viewHolder.tv_xiaofei.setText(bean.getConsume() + "");
+        viewHolder.linear_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCallBack.onItemClick(bean);
+            }
+        });
 
     }
 
@@ -81,6 +88,7 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
         public TextView tv_click;
         public TextView tv_xiaofei;
         public View v_title_line;
+        public LinearLayout linear_account;
 
         public ViewHolder(View view) {
             super(view);
@@ -90,6 +98,8 @@ public class AccountAdapter extends RecyclerView.Adapter<AccountAdapter.ViewHold
             tv_click = (TextView) view.findViewById(R.id.tv_click);
             tv_xiaofei = (TextView) view.findViewById(R.id.tv_xiaofei);
             v_title_line = (View) view.findViewById(R.id.v_title_line);
+            v_title_line = (View) view.findViewById(R.id.v_title_line);
+            linear_account = (LinearLayout) view.findViewById(R.id.linear_account);
         }
     }
 }
