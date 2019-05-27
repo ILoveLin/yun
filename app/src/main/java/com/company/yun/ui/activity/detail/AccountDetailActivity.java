@@ -86,7 +86,7 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
     private TotalAdapter totalAdapter;
     private int page = 1;
     private DetailAdapter mAdapter;
-    private ArrayList<TotalBean> datasTotalList;
+    private ArrayList<TotalBean> datasTotalList =null;
     private TotalAdapter mTotalAdapter;
 
 
@@ -123,11 +123,16 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
             public void onItemClick(ArrayList<TotalBean> list, int position) {
                 for (int i = 0; i < list.size(); i++) {
                     list.get(i).setSelected(false);
-                    if(i==position) {
+                    if (i == position) {
                         list.get(i).setSelected(true);
                     }
                 }
-                mTotalAdapter.notifyDataSetChanged();
+//                datasTotalList.clear();
+//                datasTotalList.addAll(list);
+                datasTotalList = list;
+                mTopcleview.setAdapter(mTotalAdapter);
+//                mTotalAdapter.notifyDataSetChanged();
+
             }
         });
 
