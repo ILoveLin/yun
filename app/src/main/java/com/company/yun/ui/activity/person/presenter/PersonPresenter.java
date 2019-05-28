@@ -47,10 +47,8 @@ public class PersonPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("PersonPresenter======", "response=======" + response);
                         mBean = new PersonBean();
                         mBean.getAllData(response);
-                        Log.e("PersonPresenter======", "解析之后=======" + mBean.toString());
                         if (mBean.getStatus().equals("0")) {
                             mView.showContentView();
                             mView.refreshData(mBean);

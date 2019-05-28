@@ -8,8 +8,16 @@ package com.company.yun.bean.account;
 public class TotalBean {
     private boolean isSelected;
     private String data;
-
     private String text;
+    private String textid;
+
+    public String getTextid() {
+        return textid;
+    }
+
+    public void setTextid(String textid) {
+        this.textid = textid;
+    }
 
     public boolean isSelected() {
         return isSelected;

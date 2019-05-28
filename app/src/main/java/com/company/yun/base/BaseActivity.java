@@ -75,8 +75,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         rootView.addView(mContentView);
         unbinder = ButterKnife.bind(this);
 
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
-        StatusBarUtil.darkMode(this, false);  //设置了状态栏文字的颜色
 //        StatusBarUtils.setColor(getActivity(), getResources().getColor(R.color.color_transparent), 0);
 //        StatusBarUtil.darkMode(getActivity(), true);  //设置了状态栏文字的颜色
 //        StatusBarUtils.setTranslucentForImageView(getActivity(), 0, relative_recommend);

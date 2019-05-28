@@ -1,70 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linear_total"
     android:layout_width="match_parent"
     android:layout_height="@dimen/padding_70"
-    android:background="@drawable/shape_yun_bar"
+    android:background="@drawable/shape_account_detail_nor"
     android:gravity="center_horizontal|center_vertical"
-    android:orientation="horizontal"
-    android:weightSum="6">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_item_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="时间"
-        android:textSize="@dimen/padding_16" />
+    <LinearLayout
+        android:id="@+id/linear_total"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="6">
 
-    <TextView
-        android:id="@+id/tv_item_show"
+        <TextView
+            android:id="@+id/tv_item_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="时间"
+            android:textColor="@color/white"
+            android:textSize="@dimen/padding_16" />
 
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="展现"
-        android:textSize="@dimen/padding_16" />
+        <TextView
+            android:id="@+id/tv_item_show"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="展现"
+            android:textColor="@color/white"
+            android:textSize="@dimen/padding_16" />
 
-    <TextView
-        android:id="@+id/tv_item_click"
+        <TextView
+            android:id="@+id/tv_item_click"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="点击"
+            android:textColor="@color/white"
+            android:textSize="@dimen/padding_16" />
 
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="点击"
-        android:textSize="@dimen/padding_16" />
+        <TextView
+            android:id="@+id/tv_item_xiaofei"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="消费"
+            android:textColor="@color/white"
+            android:textSize="@dimen/padding_16" />
 
-    <TextView
-        android:id="@+id/tv_item_xiaofei"
+        <TextView
+            android:id="@+id/tv_item_click_rare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="点击率"
+            android:textColor="@color/white"
+            android:textSize="@dimen/padding_16" />
 
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="消费"
-        android:textSize="@dimen/padding_16" />
+        <TextView
+            android:id="@+id/tv_item_click_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="点击平均价格"
+            android:textColor="@color/white"
+            android:textSize="@dimen/padding_16" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_item_click_rare"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="点击率"
-        android:textSize="@dimen/padding_16" />
-
-    <TextView
-        android:id="@+id/tv_item_click_price"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="点击平均价格"
-        android:textSize="@dimen/padding_16" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
 
 
 </LinearLayout>

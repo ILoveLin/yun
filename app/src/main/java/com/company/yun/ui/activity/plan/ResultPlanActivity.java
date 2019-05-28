@@ -93,8 +93,8 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
     }
 
     private void initView() {
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
-        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+        StatusBarUtils.setColor(getActivity(), getResources().getColor(R.color.statue_bar), 0);
+        StatusBarUtil.darkMode(getActivity(), false);  //设置了状态栏文字的颜色
         mPresenter = new PlanPresenter(this, getActivity());
         setTitleBarVisibility(View.VISIBLE);
         setTitleLeftBtnVisibility(View.VISIBLE);
@@ -228,6 +228,7 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
                 chart.getData().getDataSetCount() > 0) {
             set1 = (BarDataSet) chart.getData().getDataSetByIndex(0);
             set1.setValues(values);
+            set1.setValueTextColor(Color.WHITE);
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
 
@@ -237,6 +238,7 @@ public class ResultPlanActivity extends BaseActivity implements PlanView {
             int startColor1 = ContextCompat.getColor(this, R.color.zise);
             int endColor1 = ContextCompat.getColor(this, R.color.zise);
             List<GradientColor> gradientColors = new ArrayList<>();
+            set1.setValueTextColor(Color.WHITE);
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
             ArrayList<IBarDataSet> dataSets = new ArrayList<>();

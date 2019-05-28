@@ -81,10 +81,12 @@
                     android:layout_height="@dimen/padding_45"
                     android:layout_marginLeft="@dimen/padding_30"
                     android:layout_marginRight="@dimen/padding_20"
+                    android:background="@drawable/shape_yun_bar"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_bg_editext"
                     android:hint="请输入关键字"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
 
 
                 <Button

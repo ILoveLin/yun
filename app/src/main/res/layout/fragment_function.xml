@@ -24,7 +24,7 @@
             android:layout_height="@dimen/padding_54"
             android:layout_weight="2"
             app:xTabIndicatorColor="@color/white"
-            app:xTabIndicatorHeight="@dimen/padding_3"
+            app:xTabIndicatorHeight="@dimen/padding_2"
             app:xTabIndicatorWidth="@dimen/padding_40"
             app:xTabMode="fixed"
             app:xTabSelectedTextColor="@color/white"

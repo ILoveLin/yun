@@ -6,7 +6,7 @@ public class LogUtils {
 
 	private static final String TAG = "sem";
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	
 	public static void i(String msg){
 		if(!DEBUG){

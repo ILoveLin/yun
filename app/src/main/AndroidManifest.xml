@@ -33,7 +33,7 @@
         <!--百度地图AppKey-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="EhKgsmD1AmvBz9G0ZoGdmDZbKlSKKOcH" />
+            android:value="EhKgsmD1AmvBz9G0ZoGdmDZbKlSKKOcH"/>
 
         <!--版本更新的service 和provider-->
         <service

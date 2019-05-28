@@ -121,18 +121,19 @@ public class DetailListBean {
              */
             private String ddate;
             private String shows;
-            private String click_rate;
             private String consume;
             private String id;
+            private String click_rate;
             private String click_price;
             private String click;
 
             public void getData(JSONObject object) {
                 try {
                     setDdate(object.getString("ddate"));
-                    setShows(object.getString("click_rate"));
+                    setShows(object.getString("shows"));
                     setConsume(object.getString("consume"));
                     setId(object.getString("id"));
+                    setClick_rate(object.getString("click_rate"));
                     setClick_price(object.getString("click_price"));
                     setClick(object.getString("click"));
 

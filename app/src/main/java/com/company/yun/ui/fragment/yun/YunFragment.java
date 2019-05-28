@@ -279,24 +279,28 @@ public class YunFragment extends BaseFragment implements YunView {
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
         mSexChart.setData(data);
-        if ("sex".equals(type)) {
-            mSexChart.invalidate();
-        } else if (isFirstPicRequest) {
-            time++;
-            if (time == 3) {
-                isFirstPicRequest = false;
-            }
-            mSexChart.setDrawEntryLabels(!mSexChart.isDrawEntryLabelsEnabled());
-            mSexChart.invalidate();
-        } else {
-            //设置全部园
-            if (mSexChart.isDrawHoleEnabled()) {
-                mSexChart.setDrawHoleEnabled(false);
-            } else {
-                mSexChart.setDrawHoleEnabled(true);
-            }
-            mSexChart.invalidate();
-        }
+//        if ("sex".equals(type)) {
+//            mSexChart.invalidate();
+//        } else if (isFirstPicRequest) {
+//            time++;
+//            if (time == 3) {
+//                isFirstPicRequest = false;
+//            }
+//            mSexChart.setDrawEntryLabels(!mSexChart.isDrawEntryLabelsEnabled());
+//            mSexChart.invalidate();
+//        } else {
+//            //设置全部园
+//            if (mSexChart.isDrawHoleEnabled()) {
+//                mSexChart.setDrawHoleEnabled(false);
+//            } else {
+//                mSexChart.setDrawHoleEnabled(true);
+//            }
+//            mSexChart.invalidate();
+//        }
+
+        mSexChart.setDrawHoleEnabled(false);
+        mSexChart.invalidate();
+
 
     }
 
@@ -358,10 +362,10 @@ public class YunFragment extends BaseFragment implements YunView {
 //设置网格颜色
         xAxis.setGridColor(Color.WHITE);//设置x线颜色
         yAxis.setGridColor(Color.WHITE);//设置y线颜色
-        //画数值
+//        //画数值
         for (ILineDataSet iSet : sets) {
             LineDataSet set = (LineDataSet) iSet;
-            set.setDrawValues(false);
+            set.setDrawValues(true);
             set.setColor(Color.WHITE);
         }
 
@@ -400,9 +404,7 @@ public class YunFragment extends BaseFragment implements YunView {
         leftAxis.setSpaceTop(15f);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         YAxis rightAxis = mChart02.getAxisRight();
-
         rightAxis.setEnabled(false);
-
         mChart02.setBackgroundColor(Color.TRANSPARENT);
         leftAxis.setTextColor(Color.WHITE);
         xAxis.setTextColor(Color.WHITE);
@@ -416,8 +418,8 @@ public class YunFragment extends BaseFragment implements YunView {
         setChart02Data(floats);
         Legend l = mChart02.getLegend();
         l.setForm(Legend.LegendForm.NONE);   //文字前面的  "线的类型标识"
-        for (IDataSet set : mChart02.getData().getDataSets())
-            set.setDrawValues(false);
+//        for (IDataSet set : mChart02.getData().getDataSets())
+//            set.setDrawValues(false);
         mChart02.invalidate();
 
     }
@@ -432,6 +434,7 @@ public class YunFragment extends BaseFragment implements YunView {
                 mChart02.getData().getDataSetCount() > 0) {
             set1 = (BarDataSet) mChart02.getData().getDataSetByIndex(0);
             set1.setValues(values);
+            set1.setValueTextColor(Color.WHITE);
             mChart02.getData().notifyDataChanged();
             mChart02.notifyDataSetChanged();
 
@@ -441,6 +444,7 @@ public class YunFragment extends BaseFragment implements YunView {
             int startColor1 = ContextCompat.getColor(getContext(), R.color.zise);
             int endColor1 = ContextCompat.getColor(getContext(), R.color.zise);
             List<GradientColor> gradientColors = new ArrayList<>();
+            set1.setValueTextColor(Color.WHITE);
             gradientColors.add(new GradientColor(startColor1, endColor1));
             set1.setGradientColors(gradientColors);
             ArrayList<IBarDataSet> dataSets = new ArrayList<>();
@@ -449,8 +453,6 @@ public class YunFragment extends BaseFragment implements YunView {
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
             data.setBarWidth(barWidth);
-
-
 
             mChart02.setData(data);
         }
@@ -467,6 +469,7 @@ public class YunFragment extends BaseFragment implements YunView {
             set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
             set1.setValues(values);
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
+            set1.setValueTextColor(Color.WHITE);
             set1.notifyDataSetChanged();
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
@@ -474,6 +477,7 @@ public class YunFragment extends BaseFragment implements YunView {
             set1 = new LineDataSet(values, "");
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
             set1.setDrawIcons(false);
+            set1.setValueTextColor(Color.WHITE);
             set1.setColor(getResources().getColor(R.color.white));
             set1.setCircleColor(getResources().getColor(R.color.white));
             set1.setLineWidth(1f);

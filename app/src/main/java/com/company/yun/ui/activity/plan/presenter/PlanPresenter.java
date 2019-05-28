@@ -49,7 +49,6 @@ public class PlanPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("PersonPresenter======", "response=======" + response);
                         mView.showContentView();
                         checkBean = new CheckBean();
                         checkBean.getAllData(response);
@@ -78,7 +77,6 @@ public class PlanPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("PersonPresenter======", "response=======" + response);
                         mView.showContentView();
                         portBean = new PortBean();
                         portBean.getAllData(response);
@@ -108,7 +106,6 @@ public class PlanPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("PersonPresenter======", "response=======" + response);
                         channelBean = new ChannelBean();
                         channelBean.getAllData(response);
                         if (channelBean.getStatus().equals("0")) {
@@ -137,7 +134,6 @@ public class PlanPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("PersonPresenter======", "response=======" + response);
                         areaBean = new AreaBean();
                         areaBean.getAllData(response);
                         if (areaBean.getStatus().equals("0")) {

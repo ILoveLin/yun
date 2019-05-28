@@ -58,12 +58,11 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         DetailListBean.DataEntity.TableEntity tableEntity = datas.get(position);
-
         viewHolder.tv_item_time.setText(tableEntity.getDdate());
         viewHolder.tv_item_show.setText(tableEntity.getShows());
         viewHolder.tv_item_click.setText(tableEntity.getClick());
-        viewHolder.tv_item_xiaofei.setText(tableEntity.getConsume());
-        viewHolder.tv_item_click_rare.setText(tableEntity.getClick_rate());
+        viewHolder.tv_item_xiaofei.setText("￥"+tableEntity.getConsume());
+        viewHolder.tv_item_click_rare.setText(tableEntity.getClick_rate()+"%");
         viewHolder.tv_item_click_price.setText(tableEntity.getClick_price());
 
         viewHolder.mLinearLayout.setOnClickListener(new View.OnClickListener() {

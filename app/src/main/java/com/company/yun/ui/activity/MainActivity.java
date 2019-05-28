@@ -107,8 +107,6 @@ public class MainActivity extends BaseActivity {
         SharePreferenceUtil.put(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, index);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         hideFragments(transaction);
-
-
         StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
         StatusBarUtil.darkMode(this, false);  //设置了状态栏文字的颜色
 
@@ -301,8 +299,8 @@ public class MainActivity extends BaseActivity {
                         UpdateBean updateBean = new UpdateBean();
                         updateBean.getAllDate(response);
                         version_code = updateBean.getData().getVersion_code();
-                        Log.e("update==========", "localVersionCode=====" + localVersionCode);
-                        Log.e("update==========", "version_code=====" + version_code);
+//                        Log.e("update==========", "localVersionCode=====" + localVersionCode);
+//                        Log.e("update==========", "version_code=====" + version_code);
                         // 如果指定的数与参数相等返回0。
                         //如果指定的数小于参数返回 -1。
                         //如果指定的数大于参数返回 1。

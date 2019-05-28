@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -86,8 +88,9 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
     private TotalAdapter totalAdapter;
     private int page = 1;
     private DetailAdapter mAdapter;
-    private ArrayList<TotalBean> datasTotalList =null;
+    private ArrayList<TotalBean> datasTotalList = null;
     private TotalAdapter mTotalAdapter;
+    private LinearLayoutManager linearManager;
 
 
     @Override
@@ -127,14 +130,13 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
                         list.get(i).setSelected(true);
                     }
                 }
-//                datasTotalList.clear();
-//                datasTotalList.addAll(list);
                 datasTotalList = list;
                 mTopcleview.setAdapter(mTotalAdapter);
-//                mTotalAdapter.notifyDataSetChanged();
-
+                mTopcleview.smoothScrollToPosition(position);
+                mPresenter.sendLineRequest("4", list.get(position).getTextid());
             }
         });
+
 
     }
 
@@ -175,15 +177,16 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
 
     private void initView() {
         mPresenter = new AccountDetailPresenter(this, this);
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
-        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
+        StatusBarUtil.darkMode(this, false);  //设置了状态栏文字的颜色
         setTitleBarVisibility(View.VISIBLE);
         setTitleLeftBtnVisibility(View.VISIBLE);
         setTitleName("详情");
         setPageStateView();
+        tvYear.setSelected(true);
 
 
-        LinearLayoutManager linearManager = new LinearLayoutManager(this);
+        linearManager = new LinearLayoutManager(this);
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         datasTotalList = new ArrayList<>();
         mTopcleview.setLayoutManager(linearManager);
@@ -205,15 +208,23 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
 //        mAdapter.notifyDataSetChanged();
         switch (requestType) {
             case "refresh":
-//                datasList.clear();
-//                datasList.addAll(tableList);
+                datasList.clear();
+                if (tableList != null && tableList.size() != 0) {
+                    datasList.addAll(tableList);
+                }
                 mSmartRefresh.finishRefresh();
-//                mAdapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
                 break;
             case "loadMore":
-//                datasList.addAll(tableList);
+                if (tableList != null && tableList.size() != 0) {
+                    datasList.addAll(tableList);
+                    mSmartRefresh.setNoMoreData(false);
+                } else {
+                    mSmartRefresh.setNoMoreData(true);
+                }
                 mSmartRefresh.finishLoadMore();
-//                mAdapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
+
                 break;
 
         }
@@ -291,7 +302,7 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
         //画数值
         for (ILineDataSet iSet : sets) {
             LineDataSet set = (LineDataSet) iSet;
-            set.setDrawValues(false);
+            set.setDrawValues(true);
             set.setColor(Color.WHITE);
         }
 
@@ -313,12 +324,14 @@ public class AccountDetailActivity extends BaseActivity implements AccountDetail
                 chart.getData().getDataSetCount() > 0) {
             set1 = (LineDataSet) chart.getData().getDataSetByIndex(0);
             set1.setValues(values);
+            set1.setValueTextColor(Color.WHITE);
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
             set1.notifyDataSetChanged();
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
         } else {
             set1 = new LineDataSet(values, "");
+            set1.setValueTextColor(Color.WHITE);
             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);   //更改直线的方式
             set1.setDrawIcons(false);
             set1.setColor(getResources().getColor(R.color.white));

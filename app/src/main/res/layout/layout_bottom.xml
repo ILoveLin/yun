@@ -19,15 +19,14 @@
         //54
 
         <LinearLayout
-            android:background="@mipmap/bg_under140"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="@mipmap/bg_under140"
             android:orientation="vertical">
 
         </LinearLayout>
 
         <LinearLayout
-            android:background="@color/white_85"
             android:id="@+id/layout_bottom_lin"
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -35,6 +34,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
+            android:background="@color/white_85"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -59,7 +59,11 @@
             <!--<item name="android:textColor">@drawable/selector_color_tab_main</item>-->
             <!--<item name="android:textSize">@dimen/text_font_12</item>-->
 
-
+            <!--<TextView-->
+            <!--android:id="@+id/tv_tab_yun"-->
+            <!--style="@style/TabMain"-->
+            <!--android:drawableTop="@drawable/selector_tab_regional"-->
+            <!--android:text="@string/main_tab_yidi" />-->
             <TextView
                 android:id="@+id/tv_tab_yun"
                 style="@style/TabMain"

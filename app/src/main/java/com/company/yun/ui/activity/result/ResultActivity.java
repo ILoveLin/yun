@@ -1,8 +1,6 @@
 package com.company.yun.ui.activity.result;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -76,7 +74,6 @@ public class ResultActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("result====", "response======" + response);
                         showContent();
                         ResultBean resultBean = new ResultBean();
                         resultBean.getAllData(response);
@@ -91,8 +88,8 @@ public class ResultActivity extends BaseActivity {
     }
 
     private void initView() {
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
-        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+        StatusBarUtils.setColor(getActivity(), getResources().getColor(R.color.statue_bar), 0);
+        StatusBarUtil.darkMode(getActivity(), false);  //设置了状态栏文字的颜色
         setPageStateView();
         mAdapter = new ResultViewPagerAdapter(getSupportFragmentManager(), tabString);
         viewpager.setAdapter(mAdapter);

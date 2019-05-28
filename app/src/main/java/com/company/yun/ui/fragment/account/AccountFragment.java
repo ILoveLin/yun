@@ -108,12 +108,19 @@ public class AccountFragment extends BaseFragment implements AccountView {
         switch (requestType) {
             case "refresh":
                 mDataList.clear();
-                mDataList.addAll(userList);
+                if (userList != null && userList.size() != 0) {
+                    mDataList.addAll(userList);
+                }
                 mSmartRefresh.finishRefresh();
                 mAdapter.notifyDataSetChanged();
                 break;
             case "loadMore":
-                mDataList.addAll(userList);
+                if (null != userList) {
+                    mDataList.addAll(userList);
+                    mSmartRefresh.setNoMoreData(false);
+                } else {
+                    mSmartRefresh.setNoMoreData(true);
+                }
                 mSmartRefresh.finishLoadMore();
                 mAdapter.notifyDataSetChanged();
                 break;
@@ -128,8 +135,6 @@ public class AccountFragment extends BaseFragment implements AccountView {
         setTitleLeftBtnVisibility(View.GONE);
         setTitleName("账户管理");
         setPageStateView();
-
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);

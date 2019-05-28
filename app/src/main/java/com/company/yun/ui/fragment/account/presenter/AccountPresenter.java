@@ -79,7 +79,6 @@ public class AccountPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("Account======", "response=======" + response);
                         mBean = new AccountBean();
                         mBean.getAllData(response);
                         if ("0".equals(mBean.getStatus())) {

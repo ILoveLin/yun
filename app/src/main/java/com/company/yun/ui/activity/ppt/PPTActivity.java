@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.company.yun.R;
 import com.company.yun.base.BaseActivity;
@@ -13,9 +11,6 @@ import com.company.yun.bean.PPTBean;
 import com.company.yun.ui.activity.ppt.adapter.PPTAdapter;
 import com.company.yun.ui.activity.ppt.presenter.PPTPresenter;
 import com.company.yun.ui.activity.ppt.presenter.PPTView;
-import com.company.yun.ui.fragment.account.adapter.AccountAdapter;
-import com.joanzapata.pdfview.PDFView;
-import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.yun.common.utils.StatusBarUtil;
 import com.yun.common.utils.StatusBarUtils;
 
@@ -28,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Lovelin on 2019/5/21
  * <p>
- * Describe:pdf在线观看
+ * Describe:PPT
  */
 public class PPTActivity extends BaseActivity implements PPTView {
 
@@ -57,7 +52,7 @@ public class PPTActivity extends BaseActivity implements PPTView {
     }
 
     private void initView() {
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
         StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
         setTitleBarVisibility(View.VISIBLE);
         setTitleLeftBtnVisibility(View.VISIBLE);

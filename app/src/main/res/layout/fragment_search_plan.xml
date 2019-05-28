@@ -82,6 +82,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/shape_yun_bar"
                     android:hint="请输入关键字"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
                     android:text="" />
 
 

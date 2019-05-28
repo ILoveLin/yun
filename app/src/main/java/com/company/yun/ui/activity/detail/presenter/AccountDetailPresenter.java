@@ -81,23 +81,28 @@ public class AccountDetailPresenter {
                                 switch (i) {
                                     case 0:
                                         totalBean.setText("总消费");
+                                        totalBean.setTextid("consume");
                                         totalBean.setData(data.getConsume());
                                         totalBean.setSelected(true);
                                         break;
                                     case 1:
                                         totalBean.setText("总展现");
+                                        totalBean.setTextid("shows");
                                         totalBean.setData(data.getShows());
                                         break;
                                     case 2:
                                         totalBean.setText("总点击");
+                                        totalBean.setTextid("click");
                                         totalBean.setData(data.getClick());
                                         break;
                                     case 3:
                                         totalBean.setText("总点击率");
+                                        totalBean.setTextid("click_rate");
                                         totalBean.setData(formatClick_rate);
                                         break;
                                     case 4:
                                         totalBean.setText("总平均点击价格");
+                                        totalBean.setTextid("click_price");
                                         totalBean.setData(formatClick_price + "%");
                                         break;
 
@@ -155,7 +160,6 @@ public class AccountDetailPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e("哈哈哈", "response=====" + response);
                         DetailLineBean detailLineBean = new DetailLineBean();
                         detailLineBean.getAllData(response);
                         String status = detailLineBean.getStatus();

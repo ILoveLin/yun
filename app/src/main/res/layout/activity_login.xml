@@ -8,6 +8,77 @@
     android:orientation="vertical"
     tools:context=".ui.activity.LoginActivity">
 
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/padding_54"
+        android:orientation="vertical">
+        <!--android:background="@color/color_f7f7f7"-->
+
+
+        <ImageButton
+            android:id="@+id/ib_left"
+            style="@style/ww"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="@dimen/padding_10"
+            android:src="@drawable/selector_titlebar_left"
+            android:textColor="@color/color_ffffff" />
+
+        <ImageButton
+            android:id="@+id/ib_left_1"
+            style="@style/ww"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="@dimen/padding_10"
+            android:textColor="@color/color_ffffff"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/ww"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/padding_20"
+            android:layout_marginRight="@dimen/padding_20"
+            android:ellipsize="end"
+            android:ems="8"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="标题"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_font_17" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            style="@style/ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:paddingLeft="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_10"
+            android:paddingRight="@dimen/padding_10"
+            android:paddingBottom="@dimen/padding_10"
+            android:text="哈哈"
+            android:textColor="@color/title_bar_right_color"
+            android:textSize="@dimen/text_font_16"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/ib_right"
+            style="@style/ww"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:padding="@dimen/padding_10" />
+
+        <View
+            android:id="@+id/v_title_line"
+            style="@style/LineItemStyleE0E0E0"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
 
     <com.company.yun.view.widget.SquareImageView
         android:id="@+id/iv_login_logo"
@@ -29,9 +100,9 @@
         android:maxLines="1" />
 
     <View
-        style="@style/HorizontalLineStyle"
+        android:layout_marginRight="@dimen/padding_20"
         android:layout_marginLeft="@dimen/padding_20"
-        android:layout_marginRight="@dimen/padding_20" />
+        style="@style/LineStyleE5E5E5" />
 
     <com.company.yun.view.widget.ClearEditText
         android:id="@+id/et_login_password"
@@ -47,12 +118,10 @@
         android:maxLines="1" />
 
     <View
-        style="@style/HorizontalLineStyle"
-        android:layout_marginLeft="@dimen/padding_40"
-        android:layout_marginRight="@dimen/padding_40" />
-
+        android:layout_marginRight="@dimen/padding_20"
+        android:layout_marginLeft="@dimen/padding_20"
+        style="@style/LineStyleE5E5E5" />
     <TextView
-        android:visibility="invisible"
         android:id="@+id/tv_login_forget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +130,8 @@
         android:layout_marginTop="@dimen/padding_15"
         android:layout_marginRight="@dimen/padding_60"
         android:text="忘记密码"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/btn_login_commit"

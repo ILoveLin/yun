@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.company.yun.R;
@@ -41,6 +42,10 @@ public class LoginActivity extends BaseActivity {
     TextView tvLoginForget;
     @BindView(R.id.btn_login_commit)
     Button btnLoginCommit;
+    @BindView(R.id.ib_left)
+    ImageButton ib_left;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
     private String username;
     private String password;
     private LoginBean mBean;
@@ -53,8 +58,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void init() {
         initView();
-        etLoginPhone.setText("test");
-        etLoginPassword.setText("123456");
         responseListener();
 
     }
@@ -62,10 +65,11 @@ public class LoginActivity extends BaseActivity {
     private void initView() {
         StatusBarUtils.setColor(this, getResources().getColor(R.color.transparent), 0);
         StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
-        setTitleBarVisibility(View.VISIBLE);
+        setTitleBarVisibility(View.GONE);
         setTitleLeftBtnVisibility(View.GONE);
+        ib_left.setVisibility(View.GONE);
+        tv_title.setText("登入");
         setPageStateView();
-        setTitleName("登入");
     }
 
 
@@ -101,16 +105,17 @@ public class LoginActivity extends BaseActivity {
                         String status = mBean.getStatus();  //0 成功   1失败
                         if ("0".equals(status)) {
                             showContent();
-                            Log.e("Net", "login==response===" + response);
-                            Log.e("Net", "login==response===" + mBean.getData().getToken());
-                            Log.e("Net", "login==response===" + "android");
+//                            Log.e("Net", "login==response===" + response);
+//                            Log.e("Net", "login==response===" + mBean.getData().getToken());
+//                            Log.e("Net", "login==response===" + "android");
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Is_Logined, true);
                             SharePreferenceUtil.put(LoginActivity.this, Constants.ID, mBean.getData().getId());
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Token, mBean.getData().getToken());
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Device, "android");
                             SharePreferenceUtil.put(LoginActivity.this, Constants.UserName, mBean.getData().getUsername());
-                            showToast("登入成功");
                             openActivity(MainActivity.class);
+                            showToast("登入成功");
+
                         } else {
                             showError();
 

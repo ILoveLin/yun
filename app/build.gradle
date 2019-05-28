@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "1" //一般与versionCode相同
     }
     buildTypes {
         release {
@@ -23,6 +24,9 @@ android {
         }
     }
 }
+
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -45,14 +49,9 @@ dependencies {
     //表格
     implementation 'com.github.huangyanbin:SmartTable:2.2.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
-
-    //查看pdf
-    implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
     //百度地图sdk依赖
     implementation files('libs\\BaiduLBS_Android.jar')
-
     implementation 'com.github.bumptech.glide:glide:4.3.1'
-//    implementation 'com.allenliu.versionchecklib:library:2.0.0'
 
 
 }

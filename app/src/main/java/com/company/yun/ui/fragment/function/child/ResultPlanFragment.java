@@ -1,6 +1,9 @@
 package com.company.yun.ui.fragment.function.child;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import com.company.yun.ui.activity.plan.ResultPlanActivity;
 import com.company.yun.view.widget.ClearEditText;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.yun.common.utils.KeyBoardUtils;
+import com.yun.common.utils.StatusBarUtil;
+import com.yun.common.utils.StatusBarUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -37,6 +42,13 @@ public class ResultPlanFragment extends BaseFragment {
     SmartRefreshLayout smartRefresh;
     Unbinder unbinder;
     private CheckBean checkBean;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Toast.makeText(getContext(),"该关键字不支持搜索",Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     public int getContentViewId() {
@@ -52,9 +64,11 @@ public class ResultPlanFragment extends BaseFragment {
     }
 
     private void initView() {
+
         setTitleBarVisibility(View.GONE);
         setTitleLeftBtnVisibility(View.GONE);
         setPageStateView();
+
     }
 
     private void responseListener() {
@@ -83,6 +97,7 @@ public class ResultPlanFragment extends BaseFragment {
             showToast("关键字不能未空");
             return;
         }
+        showLoading();
         OkHttpUtils.post()
                 .url(HttpConstants.Plan_Check)
                 .addParams("keyword", keyword)
@@ -90,7 +105,8 @@ public class ResultPlanFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                       showContent();
+                        showError();
+                        showToast("数据返回错误");
                     }
 
                     @Override
@@ -105,8 +121,7 @@ public class ResultPlanFragment extends BaseFragment {
                             openActivity(ResultPlanActivity.class, bundle);
                         } else {
                             showContent();
-                            Toast.makeText(getContext(),"该关键字不支持搜索",Toast.LENGTH_SHORT).show();
-
+                            mHandler.sendEmptyMessageDelayed(1,1000);
                         }
 
                     }
