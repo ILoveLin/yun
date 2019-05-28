@@ -100,9 +100,9 @@
         android:maxLines="1" />
 
     <View
-        android:layout_marginRight="@dimen/padding_20"
+        style="@style/LineStyleE5E5E5"
         android:layout_marginLeft="@dimen/padding_20"
-        style="@style/LineStyleE5E5E5" />
+        android:layout_marginRight="@dimen/padding_20" />
 
     <com.company.yun.view.widget.ClearEditText
         android:id="@+id/et_login_password"
@@ -118,9 +118,10 @@
         android:maxLines="1" />
 
     <View
-        android:layout_marginRight="@dimen/padding_20"
+        style="@style/LineStyleE5E5E5"
         android:layout_marginLeft="@dimen/padding_20"
-        style="@style/LineStyleE5E5E5" />
+        android:layout_marginRight="@dimen/padding_20" />
+
     <TextView
         android:id="@+id/tv_login_forget"
         android:layout_width="wrap_content"
@@ -135,7 +136,7 @@
 
     <Button
         android:id="@+id/btn_login_commit"
-        style="@style/ButtonStyle"
+        style="@style/ButtonStyle_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_40"

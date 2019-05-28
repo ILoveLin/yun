@@ -66,6 +66,7 @@ public class AccountPresenter {
     }
 
     public void sendRequest(int pager, final String requestType) {
+        mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Account)
                 .addParams("page", pager + "")

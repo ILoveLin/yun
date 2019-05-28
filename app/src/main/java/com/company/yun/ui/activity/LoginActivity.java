@@ -69,6 +69,11 @@ public class LoginActivity extends BaseActivity {
         setTitleLeftBtnVisibility(View.GONE);
         ib_left.setVisibility(View.GONE);
         tv_title.setText("登入");
+
+        String Remeber_Name = (String) SharePreferenceUtil.get(this, Constants.Remeber_Name, "");
+        String Remeber_passwore = (String) SharePreferenceUtil.get(this, Constants.Remeber_passwore, "");
+        etLoginPhone.setText(Remeber_Name + "");
+        etLoginPassword.setText(Remeber_passwore + "");
         setPageStateView();
     }
 
@@ -104,7 +109,6 @@ public class LoginActivity extends BaseActivity {
                         mBean.getAllData(response);
                         String status = mBean.getStatus();  //0 成功   1失败
                         if ("0".equals(status)) {
-                            showContent();
 //                            Log.e("Net", "login==response===" + response);
 //                            Log.e("Net", "login==response===" + mBean.getData().getToken());
 //                            Log.e("Net", "login==response===" + "android");
@@ -113,6 +117,9 @@ public class LoginActivity extends BaseActivity {
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Token, mBean.getData().getToken());
                             SharePreferenceUtil.put(LoginActivity.this, Constants.Device, "android");
                             SharePreferenceUtil.put(LoginActivity.this, Constants.UserName, mBean.getData().getUsername());
+
+                            SharePreferenceUtil.put(LoginActivity.this, Constants.Remeber_Name, etLoginPhone.getText().toString().trim());
+                            SharePreferenceUtil.put(LoginActivity.this, Constants.Remeber_passwore, etLoginPassword.getText().toString().trim());
                             openActivity(MainActivity.class);
                             showToast("登入成功");
 
@@ -143,8 +150,10 @@ public class LoginActivity extends BaseActivity {
         password = etLoginPassword.getText().toString().trim();
         if ("".equals(username) && TextUtils.isEmpty(username)) {
             showToast("用户名--不能为空哦~");
+            return;
         } else if ("".equals(password) && TextUtils.isEmpty(password)) {
             showToast("密码--不能为空哦~");
+            return;
         } else {
             sendRequest();
         }

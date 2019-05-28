@@ -19,6 +19,9 @@ public class Constants {
     public static final String Token = "token";
     public static final String Device = "android";
     public static final String UserName = "username";
+    public static final String Remeber_Name = "Remeber_Name";
+    public static final String Remeber_passwore = "Remeber_passwore";
+
 
     public static final int[] MATERIAL_COLORS_01 = {
             rgb("#21ac90")

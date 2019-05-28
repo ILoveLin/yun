@@ -149,6 +149,7 @@ public class YunPresenter {
 
 
     public void sendRequest() {
+        mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Yun_Daday_Data)
                 .build()
@@ -220,6 +221,7 @@ public class YunPresenter {
     //请求三个圆形图
 
     private void sendPicChartRequest(String day, String type) {     //默认给的  7天    1:展现人数
+        mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Yun_User_Data)
                 .addParams("day", day)
