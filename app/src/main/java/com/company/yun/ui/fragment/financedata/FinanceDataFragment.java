@@ -403,7 +403,7 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
         float start = 1f;
         ArrayList<BarEntry> values = new ArrayList<>();
         for (int i = 0; i < floats.length; i++) {
-            values.add(new BarEntry(i, floats[i]));
+            values.add(new BarEntry(i, floats[floats.length-1-i]));
 
         }
 
@@ -519,8 +519,12 @@ public class FinanceDataFragment extends BaseFragment implements FinanceDataView
 
     public void setChartLineData(LineChart chart, float[] floats) {
         ArrayList<Entry> values = new ArrayList<>();
+//        for (int i = 0; i < floats.length; i++) {
+//            values.add(new Entry(i, floats[i]));
+//        }
+
         for (int i = 0; i < floats.length; i++) {
-            values.add(new Entry(i, floats[i]));
+            values.add(new Entry(i, floats[floats.length-1-i]));
         }
         LineDataSet set1;
 

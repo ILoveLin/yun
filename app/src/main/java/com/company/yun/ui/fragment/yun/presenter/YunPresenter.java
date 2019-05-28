@@ -64,7 +64,6 @@ public class YunPresenter {
                             mView.getUnderDays().setText("" + text);
                             setCurrentDayStr(text);
                             selectParams(getCurrentDayStr(), getCurrentTypeStr());
-
                             sendPicChartRequest(currentDayNum, currentTypeNum);   //默认给的  7天    1:展现人数
                         }
 //                        mView.showToast("位置：" + position + "，文本：" + text);
@@ -118,9 +117,38 @@ public class YunPresenter {
 
     }
 
+    public void sendTimeRequest(){
+        OkHttpUtils.post()
+                .url(HttpConstants.Yun_Daday_Data)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        mView.showErrorView();
+                        mView.showToast("请求返回错误");
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        try {
+                            mView.showContentView();
+                            TodayBean todayDataBean = new TodayBean();
+                            todayDataBean.getAllData(response);
+                            refreshTodayData(todayDataBean);
+                            sendChartDataRequest("time");
+//                            sendChartDataRequest("time");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                });
+    }
+
 
     public void sendRequest() {
-        mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Yun_Daday_Data)
                 .build()
@@ -139,6 +167,7 @@ public class YunPresenter {
                             todayDataBean.getAllData(response);
                             refreshTodayData(todayDataBean);
                             sendChartDataRequest("alone");
+//                            sendChartDataRequest("time");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -236,19 +265,21 @@ public class YunPresenter {
     }
 
     private void refreshTodayData(TodayBean bean) {
+
+
         mView.getTotal().setText(bean.getClick_rate() + "%");
         setBGDrawable(mView.getTotal(), bean.getClick_rate());
-        mView.getTotalRate().setText(bean.getClick() + "");
+        mView.getTotalRate().setText(bean.getClick() + "次");
 
-        mView.getShow().setText(bean.getShows() + "");
+        mView.getShow().setText(bean.getShows() + "次");
         setBGDrawable(mView.getDrableIcon01(), bean.getShow_rate());
         mView.getShowRate().setText(bean.getShow_rate() + "%");
 
-        mView.getConsume().setText(bean.getConsume() + "");
+        mView.getConsume().setText(bean.getConsume() + "元");
         mView.getConsumeRate().setText(bean.getConsume_rate() + "%");
         setBGDrawable(mView.getDrableIcon02(), bean.getConsume_rate());
 
-        mView.getShowPeople().setText(bean.getShow_people() + "");
+        mView.getShowPeople().setText(bean.getShow_people() + "人");
         mView.getShowPeopleRate().setText(bean.getShow_people_rate() + "%");
         setBGDrawable(mView.getDrableIcon03(), bean.getShow_people_rate());
     }

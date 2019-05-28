@@ -26,7 +26,6 @@ public class PortBean {
     public void getAllData(String response) {
         try {
             JSONObject object = new JSONObject(response);
-
             setStatus(object.getString("status"));
             setInfo(object.getString("info"));
             DataEntity dataEntity = new DataEntity();
@@ -71,7 +70,6 @@ public class PortBean {
         private List<String> category;
 
         public void getData(JSONObject data) {
-
             try {
                 JSONArray barData = data.getJSONArray("barData");
                 ArrayList<String> barDataList = new ArrayList<>();

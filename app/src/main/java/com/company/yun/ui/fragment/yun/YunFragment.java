@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -130,7 +133,8 @@ public class YunFragment extends BaseFragment implements YunView {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            mPresenter.sendChartDataRequest("times");
+            mPresenter.sendTimeRequest();
+
         }
     };
 
@@ -184,8 +188,8 @@ public class YunFragment extends BaseFragment implements YunView {
 
     @Override
     public void refreshLineBarUIData(List<String> xList, List<String> todayDataList, List<String> yesterdayDataList) {
+        Collections.sort(xList);
         initChart01(xList, DataUtils.toFloat(todayDataList), DataUtils.toString(xList));
-
         initChart02(xList, DataUtils.toFloat(yesterdayDataList), DataUtils.toString(xList));
 
     }
@@ -427,7 +431,7 @@ public class YunFragment extends BaseFragment implements YunView {
     private void setChart02Data(float[] floats) {
         ArrayList<BarEntry> values = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            values.add(new BarEntry(i, floats[i]));
+            values.add(new BarEntry(i, floats[5 - 1 - i]));
         }
         BarDataSet set1;
         if (mChart02.getData() != null &&
@@ -461,7 +465,7 @@ public class YunFragment extends BaseFragment implements YunView {
     public void setChartLineData(LineChart chart, float[] floats) {
         ArrayList<Entry> values = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            values.add(new Entry(i, floats[i]));
+            values.add(new Entry(i, floats[5 - 1 - i]));
         }
         LineDataSet set1;
         if (chart.getData() != null &&

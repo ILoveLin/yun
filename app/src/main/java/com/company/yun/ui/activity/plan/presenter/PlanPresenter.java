@@ -80,6 +80,7 @@ public class PlanPresenter {
                         mView.showContentView();
                         portBean = new PortBean();
                         portBean.getAllData(response);
+                        Log.e("搜索结果=====端口=======", "" + response);
                         if (portBean.getStatus().equals("0")) {
                             sendChannelRequest(keyword);
                         } else {
@@ -108,6 +109,8 @@ public class PlanPresenter {
                     public void onResponse(String response, int id) {
                         channelBean = new ChannelBean();
                         channelBean.getAllData(response);
+                        Log.e("搜索结果======渠道======", "" + response);
+
                         if (channelBean.getStatus().equals("0")) {
                             sendAreaRequest(keyword);
                         } else {
@@ -136,6 +139,7 @@ public class PlanPresenter {
                     public void onResponse(String response, int id) {
                         areaBean = new AreaBean();
                         areaBean.getAllData(response);
+                        Log.e("搜索结果======区域分布======", "" + response);
                         if (areaBean.getStatus().equals("0")) {
                             mView.showContentView();
                             mView.refreshData(portBean, channelBean, areaBean);
