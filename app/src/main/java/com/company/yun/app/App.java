@@ -63,37 +63,9 @@ public class App extends Application {
 
         OkHttpUtils.initClient(okHttpClientBuilder.build());
 
-
-        /**
-         * 百度地图
-         */
-//        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-//        SDKInitializer.initialize(this);
-//        //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
-//        //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
-//        SDKInitializer.setCoordType(CoordType.BD09LL);
-
-        getChannel(this);
-
     }
 
 
-    /**
-     * 获取项目的渠道号
-     *
-     * @return
-     */
-    public static String getChannel(Context context) {
-        ApplicationInfo ai = null;
-        try {
-            ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            Bundle bundle = ai.metaData;
-            return bundle.getString("APP_CHANNEL");
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
 
 }
 
