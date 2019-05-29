@@ -52,6 +52,7 @@ dependencies {
     //百度地图sdk依赖
     implementation files('libs\\BaiduLBS_Android.jar')
     implementation 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
 
 
 }

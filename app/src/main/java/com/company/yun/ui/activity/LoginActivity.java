@@ -63,8 +63,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void initView() {
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.transparent), 0);
-        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
+        StatusBarUtil.darkMode(this, false);  //设置了状态栏文字的颜色
         setTitleBarVisibility(View.GONE);
         setTitleLeftBtnVisibility(View.GONE);
         ib_left.setVisibility(View.GONE);

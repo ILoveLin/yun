@@ -30,6 +30,7 @@ import com.company.yun.ui.fragment.financedata.FinanceDataFragment;
 import com.company.yun.ui.fragment.function.FunctionFragment;
 import com.company.yun.ui.fragment.mine.MineFragment;
 import com.company.yun.ui.fragment.yun.YunFragment;
+import com.company.yun.utils.eye.Eyes;
 import com.yun.common.contant.Contants;
 import com.yun.common.utils.CommonUtils;
 import com.yun.common.utils.CustomToast;
@@ -107,9 +108,9 @@ public class MainActivity extends BaseActivity {
         SharePreferenceUtil.put(this, SharePreferenceUtil.DYNAMIC_SWITCH_TAB, index);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         hideFragments(transaction);
+//        Eyes.translucentStatusBar(MainActivity.this, true);
         StatusBarUtils.setColor(this, getResources().getColor(R.color.statue_bar), 0);
-        StatusBarUtil.darkMode(this, false);  //设置了状态栏文字的颜色
-
+        StatusBarUtil.darkMode(this, true);  //设置了状态栏文字的颜色
         switch (index) {
             case Contants.TAB_HOME:   //财务数据--0
 //                StatusBarUtils.setColor(this, getResources().getColor(R.color.color_transparent), 0);

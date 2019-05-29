@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/statusbar_view_height"
         android:background="@color/colorPrimary" />
+<!--63-->
+    <!--android:layout_height="@dimen/padding_54"-->
 
     <RelativeLayout
         android:background="@mipmap/bg_top"

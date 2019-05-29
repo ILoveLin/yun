@@ -125,7 +125,6 @@ public class YunPresenter {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         mView.showErrorView();
-                        mView.showToast("请求返回错误");
                     }
 
                     @Override

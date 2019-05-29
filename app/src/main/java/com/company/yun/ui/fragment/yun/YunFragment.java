@@ -619,10 +619,20 @@ public class YunFragment extends BaseFragment implements YunView {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+        time = 0;
+        unbinder.unbind();
+        handler = null;
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         timer.cancel();
         time = 0;
         unbinder.unbind();
+        handler = null;
     }
 }

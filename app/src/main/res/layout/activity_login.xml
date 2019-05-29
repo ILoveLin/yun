@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:gravity="center_horizontal"
+    android:background="@mipmap/bg"
     android:orientation="vertical"
     tools:context=".ui.activity.LoginActivity">
 
@@ -17,6 +17,7 @@
 
 
         <ImageButton
+            android:visibility="invisible"
             android:id="@+id/ib_left"
             style="@style/ww"
             android:layout_alignParentLeft="true"
@@ -27,6 +28,7 @@
             android:textColor="@color/color_ffffff" />
 
         <ImageButton
+
             android:id="@+id/ib_left_1"
             style="@style/ww"
             android:layout_alignParentLeft="true"
@@ -46,7 +48,7 @@
             android:ems="8"
             android:gravity="center"
             android:singleLine="true"
-            android:text="标题"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_font_17" />
 
@@ -74,6 +76,7 @@
             android:padding="@dimen/padding_10" />
 
         <View
+            android:visibility="invisible"
             android:id="@+id/v_title_line"
             style="@style/LineItemStyleE0E0E0"
             android:layout_alignParentBottom="true" />
@@ -90,6 +93,9 @@
     <com.company.yun.view.widget.ClearEditText
         android:id="@+id/et_login_phone"
         style="@style/EditTextStyle"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_20"
@@ -107,12 +113,15 @@
     <com.company.yun.view.widget.ClearEditText
         android:id="@+id/et_login_password"
         style="@style/EditTextStyle"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_20"
         android:layout_marginTop="@dimen/padding_10"
         android:layout_marginRight="@dimen/padding_20"
         android:hint="请输入密码"
+        android:textColorHint="@color/white"
+
         android:inputType="textPassword"
         android:maxLength="20"
         android:maxLines="1" />
