@@ -3,7 +3,6 @@ package com.company.yun.ui.activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -17,7 +16,6 @@ import com.amap.api.maps.model.MultiPointItem;
 import com.amap.api.maps.model.MultiPointOverlay;
 import com.amap.api.maps.model.MultiPointOverlayOptions;
 import com.company.yun.R;
-import com.company.yun.base.BaseActivity;
 import com.yun.common.utils.StatusBarUtil;
 import com.yun.common.utils.StatusBarUtils;
 
@@ -29,19 +27,17 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by Lovelin on 2019/5/22
  * <p>
- * Describe:
+ * Describe:高德地图
  */
 public class YunMapActivity extends AppCompatActivity {
     private MapView mapView;
     private AMap aMap;
 
     Marker marker = null;
+
     /**
      * 初始化AMap对象
      */
@@ -52,6 +48,7 @@ public class YunMapActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +68,7 @@ public class YunMapActivity extends AppCompatActivity {
 
         MultiPointOverlayOptions overlayOptions = new MultiPointOverlayOptions();
         overlayOptions.icon(bitmapDescriptor);
-        overlayOptions.anchor(0.5f,0.5f);
+        overlayOptions.anchor(0.5f, 0.5f);
 
         final MultiPointOverlay multiPointOverlay = aMap.addMultiPointOverlay(overlayOptions);
         aMap.setOnMultiPointClickListener(new AMap.OnMultiPointClickListener() {
@@ -79,7 +76,7 @@ public class YunMapActivity extends AppCompatActivity {
             public boolean onPointClick(MultiPointItem pointItem) {
                 android.util.Log.i("amap ", "onPointClick");
 
-                if(marker.isRemoved()) {
+                if (marker.isRemoved()) {
                     //调用amap clear之后会移除marker，重新添加一个
                     marker = aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                 }
@@ -106,14 +103,14 @@ public class YunMapActivity extends AppCompatActivity {
                     inputStream = YunMapActivity.this.getResources().openRawResource(R.raw.point10w);
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                     String line = "";
-                    while((line = bufferedReader.readLine()) != null) {
-                        if(isDestroy) {
+                    while ((line = bufferedReader.readLine()) != null) {
+                        if (isDestroy) {
                             //已经销毁地图了，退出循环
                             return;
                         }
 
                         String[] str = line.split(",");
-                        if(str == null) {
+                        if (str == null) {
                             continue;
                         }
                         double lat = Double.parseDouble(str[1].trim());
@@ -140,7 +137,7 @@ public class YunMapActivity extends AppCompatActivity {
                     }
                 }
 
-                if(multiPointOverlay != null) {
+                if (multiPointOverlay != null) {
                     multiPointOverlay.setItems(list);
                     multiPointOverlay.setEnable(true);
                 }
@@ -154,12 +151,11 @@ public class YunMapActivity extends AppCompatActivity {
     }
 
 
-
     boolean isDestroy = false;
 
 
-
     private ProgressDialog progDialog = null;// 添加海量点时
+
     /**
      * 显示进度框
      */
