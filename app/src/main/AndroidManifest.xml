@@ -31,12 +31,20 @@
             </intent-filter>
         </activity>
         <!--适配9.0-->
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
         <!--百度地图AppKey-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="EhKgsmD1AmvBz9G0ZoGdmDZbKlSKKOcH"/>
-
+            android:value="EhKgsmD1AmvBz9G0ZoGdmDZbKlSKKOcH" />
+        <!--MD5: E1:88:84:72:74:16:B2:DA:EC:A6:4C:57:DD:51:08:CE-->
+        <!--SHA1: 70:9F:51:5E:93:16:21:98:64:1C:DE:9B:7E:F9:1F:25:05:A9:8F:B0-->
+        <!--SHA-256: C9:9B:1D:B8:D6:C6:7A:6B:1D:1B:C5:6B:57:70:36:00:A6:23:F2:2B:62:D0:37:B4:EA:4A:60:4E:0C:8B:7A:D4-->
+        <!--高德地图-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="	a8113b56d4c9cdb603abf61520f69a2e"/>
         <!--版本更新的service 和provider-->
         <service
             android:name="com.yun.common.utils.updateutils.UpdateIntentService"
@@ -62,7 +70,7 @@
         <activity android:name=".ui.activity.YunMapActivity" />
         <activity android:name=".ui.activity.person.ResultPersonActivity" />
         <activity android:name=".ui.activity.plan.ResultPlanActivity" />
-        <activity android:name=".ui.activity.detail.AccountDetailActivity"/>
+        <activity android:name=".ui.activity.detail.AccountDetailActivity" />
     </application>
 
 
