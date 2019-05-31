@@ -57,7 +57,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
         FinanceDataBean.DataBean.Recharge_companys_listEntity bean = datas.get(position);
 
 
-//        viewHolder.mTextView.setText(datas.get(position));
+//      viewHolder.mTextView.setText(datas.get(position));
 
         viewHolder.tv_company_name.setText(bean.getCompany_name());
 
