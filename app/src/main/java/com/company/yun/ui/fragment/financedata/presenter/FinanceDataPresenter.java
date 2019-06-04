@@ -11,9 +11,14 @@ import com.company.yun.utils.NumberUtils;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.yun.common.utils.GetJsonDataUtil;
 import com.yun.common.utils.SharePreferenceUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.lang.reflect.Type;
 
 import okhttp3.Call;
 
@@ -52,8 +57,12 @@ public class FinanceDataPresenter implements OnChartValueSelectedListener {
                     @Override
                     public void onResponse(String response, int id) {
                         try {
-                            FinanceDataBean bean = new FinanceDataBean();
-                            bean.getAllData(response);
+//                            FinanceDataBean bean = new FinanceDataBean();
+                            Gson gson = new Gson();
+                            Type type = new TypeToken<FinanceDataBean>() {
+                            }.getType();
+                            FinanceDataBean bean = gson.fromJson(response, type);
+//                            bean.getAllData(response);
                             if ("".equals(bean.getStatus())) {
                                 mView.showEmptyView();
                             } else {
