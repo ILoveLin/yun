@@ -7,13 +7,9 @@ import com.company.yun.base.Constants;
 import com.company.yun.base.HttpConstants;
 import com.company.yun.bean.account.AccountBean;
 import com.company.yun.utils.NumberUtils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.yun.common.utils.SharePreferenceUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
-import java.lang.reflect.Type;
 
 import okhttp3.Call;
 
@@ -51,13 +47,8 @@ public class AccountPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-//                        AccountBean mBean = new AccountBean();
-//                        Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<AccountBean>(){}.getType();
-                        AccountBean mBean = gson.fromJson(response, type);
-
-//                        mBean.getAllData(response);
+                        AccountBean mBean = new AccountBean();
+                        mBean.getAllData(response);
                         if ("0".equals(mBean.getStatus())) {
                             mView.showContentView();
                             AccountBean.DataBean dataBean = mBean.getData();
@@ -75,7 +66,7 @@ public class AccountPresenter {
     }
 
     public void sendRequest(int pager, final String requestType) {
-        mView.showLoadingView();
+//        mView.showLoadingView();
         OkHttpUtils.post()
                 .url(HttpConstants.Account)
                 .addParams("page", pager + "")
@@ -89,12 +80,8 @@ public class AccountPresenter {
 
                     @Override
                     public void onResponse(String response, int id) {
-//                        mBean = new AccountBean();
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<AccountBean>() {
-                        }.getType();
-                        AccountBean mBean = gson.fromJson(response, type);
-//                        mBean.getAllData(response);
+                        mBean = new AccountBean();
+                        mBean.getAllData(response);
                         if ("0".equals(mBean.getStatus())) {
                             mView.showContentView();
                             AccountBean.DataBean dataBean = mBean.getData();
