@@ -4,7 +4,11 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.company.yun"
-        minSdkVersion 15
+        minSdkVersion 17
+//        minSdkVersion 15
+//        在我们开发app 的时候，我们的最低sdk版本就可以定为17了,minSdkVersion=17，
+//        也就是我们的app不会考虑4.2以下版本的用户了。其实很多公司的新app已经将最低版本定为4.4（API level 19)
+//        甚至是5.0（API Level 21)。这根据app的定位和用户人群相关。
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
